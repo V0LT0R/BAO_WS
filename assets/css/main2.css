@@ -1,0 +1,149 @@
+body {
+    margin: 0;
+    padding: 0;
+
+
+ }
+ img{ 
+    pointer-events: none; 
+    -moz-user-select: none; 
+    -webkit-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none;
+}
+
+a{
+    text-decoration: none;
+ }
+
+ @font-face { 
+    font-family: 'Montserrat'; 
+    font-weight: 800;
+    src: url('../fonts/montserrat/Montserrat-ExtraBold.ttf'); 
+ }
+
+ .head-bg{
+    background: linear-gradient(57deg, #14213D -4.46%, #000 105.01%);
+ }
+
+.block-1{
+    
+    color: aliceblue;
+    padding-top: 100px;
+    font-family: "Montserrat";
+    font-weight: 800;
+}
+
+
+
+.block-1-hr{
+    margin: 15px 0px;
+    width: 90%;
+    border-width: 3px;
+    color: aliceblue;
+}
+
+
+.block-2-bg{
+    position: absolute;
+    margin-top: 30px;
+    margin-left: 18%;
+    z-index: -1;
+    width: 570px;
+    height: 570px;
+    border-radius: 30px;
+    border: 4px solid #192B4E;
+    background: #FFF;
+}
+
+.block-2-unik{
+    font-family: 'Montserrat';
+    font-weight: 800;
+    height: 300px;
+    border-radius: 30px;
+    background: linear-gradient(107deg, #192B4F 8.25%, #010C23 90.44%);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: #FFF;
+    text-align: center;
+    margin-top: 80px;   
+}
+
+.block-2-unik h2{
+    height: 300px;
+    display: table-cell;
+    vertical-align: middle;
+    width: 525px;
+}
+
+
+
+.block-2-uni-img{
+    margin-top: 80px;
+    min-width: 436px;
+}
+
+
+.block-3-bg{
+    background: #14213D;
+}
+
+.block-3-row-1{
+    display: flex;
+    padding-top: 100px;
+}
+
+.block-3-row-1 p{
+color: #FFF;
+font-family: 'Montserrat';
+font-size: 50px;
+font-style: normal;
+font-weight: 800;
+line-height: normal;
+padding-left: 15px;
+}
+
+
+
+
+
+@media (max-width: 991px) {
+    .block-1{
+        text-align:center;
+    }
+    .block-1-hr{
+        margin: 15px auto;
+        width: 80%;
+        border-width: 3px;
+        color: aliceblue;
+    }
+
+    .block-2-unik h2{
+        width: 720px;
+    }
+
+    .block-2-bg{
+        display: none;
+    }
+
+    .block-2-uni-img{
+        margin-top: 10px;
+        width: 300px;
+        min-width: 300px;
+    }
+    
+    .block-2-unik{
+        margin-top: 10px;   
+    }
+    .block-2-uni-img img{
+        max-width: 100%;
+        height: auto;
+    }
+
+}
+
+@media (max-width: 767px) {
+    .block-2-uni-img{
+        
+        min-width: 440px;
+    }
+}
