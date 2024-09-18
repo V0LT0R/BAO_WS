@@ -85,10 +85,11 @@ a{
 
 .block-3-bg{
     background: #14213D;
+    height: 1000px;
 }
 
 .block-3-row-1{
-    display: flex;
+    
     padding-top: 100px;
 }
 
@@ -99,9 +100,104 @@ font-size: 50px;
 font-style: normal;
 font-weight: 800;
 line-height: normal;
-padding-left: 15px;
+
 }
 
+.block-3-linebg-1{
+    position: absolute;
+    width: 450px;
+    height: 180px;
+    border-width: 3px 3px 3px 0px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 0px 30px 30px 0px;
+    margin-top: 70px;
+    margin-left: 36%;
+    z-index: 1;
+}
+.block__3_linebg_2{
+    position: absolute;
+    width: 250px;
+    height: 180px;
+    border-width: 3px 0px 0px 0px;
+    border-style: solid;
+    border-color: white;
+    margin-top: 130px;
+    margin-left: 20%;
+    z-index: 1;
+}
+.block__3_linebg_3{
+    position: absolute;
+    width: 250px;
+    height: 240px;
+    border-width: 3px 0px 3px 3px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 30px 0px 0px 30px;
+    margin-top: 120px;
+    z-index: 1;
+    margin-left: -80px;
+}
+.block__3_linebg_4{
+    position: absolute;
+    width: 250px;
+    height: 240px;
+    border-width: 3px 0px 0px 0px;
+    border-style: solid;
+    border-color: white;
+    margin-top: 150px;
+    z-index: 1;
+    margin-left: 25%;
+}
+.block__3_linebg_5{
+    position: absolute;
+    width: 450px;
+    height: 250px;
+    border-width: 3px 3px 3px 0px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 0px 30px 30px 0px;
+    margin-top: 150px;
+    z-index: 1;
+    margin-left: 35%;
+}
+
+.block-3-p{
+    color: #FFF;
+    font-family: 'Montserrat';
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    padding-top: 45px;
+}
+
+
+.block-3-col{
+  
+    display: flex;
+    height: 150px;
+    
+    border-radius: 30px;
+    background: #FFF;
+    z-index: 2;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.block-3-col-p{
+    color: #000;
+    font-family: 'Montserrat';
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    padding-left: 20px;
+    text-align: center;
+    
+    
+}
 
 
 
