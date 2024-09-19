@@ -106,13 +106,13 @@ line-height: normal;
 .block-3-linebg-1{
     position: absolute;
     width: 450px;
-    height: 180px;
+    height: 240px;
     border-width: 3px 3px 3px 0px;
     border-style: solid;
     border-color: white;
     border-radius: 0px 30px 30px 0px;
     margin-top: 70px;
-    margin-left: 36%;
+    margin-left: 790px;
     z-index: 1;
 }
 .block__3_linebg_2{
@@ -122,8 +122,8 @@ line-height: normal;
     border-width: 3px 0px 0px 0px;
     border-style: solid;
     border-color: white;
-    margin-top: 130px;
-    margin-left: 20%;
+    margin-top: 155px;
+    margin-left: 25%;
     z-index: 1;
 }
 .block__3_linebg_3{
@@ -136,7 +136,7 @@ line-height: normal;
     border-radius: 30px 0px 0px 30px;
     margin-top: 120px;
     z-index: 1;
-    margin-left: -80px;
+    margin-left: 0px;
 }
 .block__3_linebg_4{
     position: absolute;
@@ -189,7 +189,7 @@ line-height: normal;
 .block-3-col-p{
     color: #000;
     font-family: 'Montserrat';
-    font-size: 32px;
+    
     font-style: normal;
     font-weight: 700;
     line-height: normal;
