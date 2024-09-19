@@ -85,7 +85,7 @@ a{
 
 .block-3-bg{
     background: #14213D;
-    height: 1000px;
+    height: 1500px;
 }
 
 .block-3-row-1{
@@ -189,13 +189,10 @@ line-height: normal;
 .block-3-col-p{
     color: #000;
     font-family: 'Montserrat';
-    
     font-style: normal;
-    font-weight: 700;
     line-height: normal;
     padding-left: 20px;
     text-align: center;
-    
     
 }
 
