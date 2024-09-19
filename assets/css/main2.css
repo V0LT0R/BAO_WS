@@ -85,7 +85,8 @@ a{
 
 .block-3-bg{
     background: #14213D;
-    height: 1500px;
+    height: 1100px;
+    margin-top: 50px;
 }
 
 .block-3-row-1{
@@ -134,7 +135,7 @@ line-height: normal;
     border-style: solid;
     border-color: white;
     border-radius: 30px 0px 0px 30px;
-    margin-top: 120px;
+    margin-top: 155px;
     z-index: 1;
     margin-left: 0px;
 }
@@ -145,9 +146,9 @@ line-height: normal;
     border-width: 3px 0px 0px 0px;
     border-style: solid;
     border-color: white;
-    margin-top: 150px;
+    margin-top: -70px;
     z-index: 1;
-    margin-left: 25%;
+    margin-left: 550px;
 }
 .block__3_linebg_5{
     position: absolute;
@@ -157,9 +158,9 @@ line-height: normal;
     border-style: solid;
     border-color: white;
     border-radius: 0px 30px 30px 0px;
-    margin-top: 150px;
+    margin-top: -70px;
     z-index: 1;
-    margin-left: 35%;
+    margin-left: 780px;
 }
 
 .block-3-p{
@@ -194,6 +195,79 @@ line-height: normal;
     padding-left: 20px;
     text-align: center;
     
+}
+
+
+.block-4{
+    height: 400px;
+}
+
+
+.block-4-header{
+    margin-top: 10px;
+    margin-left: 20px;
+    color: #192B4F;
+    text-align: center;
+    font-family: 'Montserrat';
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+
+.block-4-text{
+    color: #FCA311;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    margin-left: 20px;
+}
+
+
+.block-5{
+    background: #14213D;
+    height: 1000px;
+}
+
+
+.block-5-square{
+    
+    height: 410px;
+    border-radius: 40px;
+    background: #1A2B50;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    padding: 30px 2% 0px;
+    margin: 50px 25px 0px;
+    -webkit-transition: all 0.3s ease;;
+    -moz-transition: all 0.3s ease;;
+    -o-transition: all 0.3s ease;;
+    transition: all 0.3s ease;
+}
+
+
+.block-5-square:hover{
+    box-shadow: 3px 7px 4px 0px #3E3E68;
+    transform: translate(-7px, -4px);
+
+}
+
+.block-5-header-text{
+    color: #FFF;
+    font-family: 'Montserrat';
+    
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+
+.block-5-inner-text{
+    color: #FFF;
+    font-family: 'Montserrat';
+    font-style: normal;
+    line-height: normal;
+    margin-top: 10px;
 }
 
 
