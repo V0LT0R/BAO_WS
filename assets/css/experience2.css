@@ -64,13 +64,15 @@ body {
 }
 .block-2-bg{
     background: #14213D;
-    height: 1000px;
+
+}
+.block__2{
+    font-family: 'Montserrat';
 }
 
 .block__2_header{
     color: #FFF;
     text-shadow: 25px 20px 0px rgba(148, 148, 148, 0.28);
-    font-family: 'Montserrat';
     font-size: 3rem;
     font-style: normal;
     font-weight: 800;
@@ -84,13 +86,7 @@ body {
     height: 3px;
     background: #C6C5C9;
 }
-.block__2_text{
-    font-size: 1.2rem;
-    font-family: 'Montserrat';
-}
-.block__2_education{
-    margin-top: 20px;
-    }
+
 
 
 
