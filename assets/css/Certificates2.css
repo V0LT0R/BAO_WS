@@ -1,0 +1,59 @@
+body {
+    margin: 0;
+    padding: 0;
+
+
+ }
+ img{ 
+    pointer-events: none; 
+    -moz-user-select: none; 
+    -webkit-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none;
+}
+
+a{
+    text-decoration: none;
+ }
+
+ @font-face { 
+    font-family: 'Montserrat'; 
+    font-weight: 800;
+    src: url('../fonts/montserrat/Montserrat-ExtraBold.ttf'); 
+ }
+
+
+.head-bg{
+    background: linear-gradient(57deg, #14213D -4.46%, #000 105.01%);
+    min-height: 600px;
+}
+
+.block-1{
+    color: aliceblue;
+    padding-top: 180px;
+    font-family: "Montserrat";
+    font-weight: 800;
+    text-align: center;
+}
+
+.block-1-secondary-text{
+    color: #DC9F27;
+    margin-top: 60px;
+}
+
+.block-2{
+    background: #14213D;
+    min-height: 1000px;
+    color: aliceblue;
+
+    font-family: "Montserrat";
+    font-weight: 800;
+}
+
+.block-2-hr{
+    margin: 0px auto;
+    width: 100%;
+    border: 1px solid #ffffff;
+    background-color: #ffffff;   
+}
+

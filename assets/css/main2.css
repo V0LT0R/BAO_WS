@@ -92,7 +92,7 @@ margin-left:10px;
     background: #14213D;
     min-height: 1100px;
     margin-top: 50px;
-    padding-bottom: 20px;
+    padding-bottom: 80px;
 }
 
 .block-3-row-1{
@@ -185,10 +185,8 @@ line-height: normal;
 
 
 .block-3-col{
-  
     display: flex;
     height: 150px;
-    
     border-radius: 30px;
     background: #FFF;
     z-index: 2;
