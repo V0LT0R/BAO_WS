@@ -21,6 +21,11 @@ a{
     font-weight: 800;
     src: url('../fonts/montserrat/Montserrat-ExtraBold.ttf'); 
  }
+ @font-face { 
+    font-family: 'Montserrat'; 
+    font-weight: 600;
+    src: url('../fonts/montserrat/Montserrat-Bold.ttf'); 
+ }
 
  .head-bg{
     background: linear-gradient(57deg, #14213D -4.46%, #000 105.01%);
@@ -295,13 +300,14 @@ line-height: normal;
 .footer{
     background: #14213D;
     min-height: 600px;
-    padding-top: 50px
+
 }
 
 .footer-hr{
     margin: 0px auto;
     width: 100%;
     border: 2px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
     background-color: #ffffff;   
 }
 
