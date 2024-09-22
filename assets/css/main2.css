@@ -256,11 +256,10 @@ line-height: normal;
 
 .block-5-square{
     
-    height: 410px;
-    border-radius: 40px;
+    min-height: 310px;
+    border-radius: 30px;
     background: #1A2B50;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    padding: 30px 2% 0px;
     margin: 50px 25px 0px;
     -webkit-transition: all 0.3s ease;;
     -moz-transition: all 0.3s ease;;
