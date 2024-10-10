@@ -374,10 +374,88 @@
                     </p>
                 </div>
             </div>
+            <hr class="block__2_line my-5">
             
         </div>
     
     </div>
+
+
+<div class="container-fluid form-bg">
+    <div class="container">
+        <div class="row justify-content-center" style="flex-direction: column;">
+            <h2 class="h2" style="width: 400px; margin: 20px auto;">Form Validation Example</h2>
+            <form style="width:600px; margin: 0px auto;" id="myForm" onsubmit="return validateForm()">
+                <div >
+                    <label  >Email:</label>
+                    <input type="text" id="email" name="email">
+                    <span id="emailError" class="error"></span>
+                </div>
+                <div class="mt-4">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password">
+                    <span id="passwordError" class="error"></span>
+                </div>
+                <div class="mt-4">
+                    <label for="confirmPassword">Confirm Password:</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword">
+                    <span id="confirmPasswordError" class="error"></span>
+                </div>
+                <input type="submit" class="btn btn-outline-primary mt-4" value="Submit">
+            </form>
+        </div>
+    </div>
+</div>
+
+    <script>
+        function validateForm() {
+            let email = document.getElementById('email').value;
+            let password = document.getElementById('password').value;
+            let confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Clear previous error messages
+            document.getElementById('emailError').innerText = '';
+            document.getElementById('passwordError').innerText = '';
+            document.getElementById('confirmPasswordError').innerText = '';
+
+            let valid = true;
+
+            // Email validation (required and must be in valid email format)
+            if (email === '') {
+                document.getElementById('emailError').innerText = 'Email is required.';
+                valid = false;
+            } else if (!validateEmail(email)) {
+                document.getElementById('emailError').innerText = 'Please enter a valid email address.';
+                valid = false;
+            }
+
+            // Password validation (required and at least 8 characters)
+            if (password === '') {
+                document.getElementById('passwordError').innerText = 'Password is required.';
+                valid = false;
+            } else if (password.length < 8) {
+                document.getElementById('passwordError').innerText = 'Password must be at least 8 characters long.';
+                valid = false;
+            }
+
+            // Confirm password validation (must match password)
+            if (confirmPassword === '') {
+                document.getElementById('confirmPasswordError').innerText = 'Please confirm your password.';
+                valid = false;
+            } else if (confirmPassword !== password) {
+                document.getElementById('confirmPasswordError').innerText = 'Passwords do not match.';
+                valid = false;
+            }
+
+            return valid; // Prevent form submission if there are validation errors
+        }
+
+        // Function to validate email format using regex
+        function validateEmail(email) {
+            const emailPattern = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+            return emailPattern.test(email);
+        }
+    </script>
 
 
     <footer class="container-fluid footer pt-5" id="footer">

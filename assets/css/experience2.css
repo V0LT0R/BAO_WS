@@ -76,6 +76,7 @@ hr{
 }
 .block-2-bg{
     background: #14213D;
+    padding-bottom: 15px;
 
 }
 .block__2{
@@ -102,6 +103,7 @@ hr{
 .block__2 p{
     font-size: 1.3rem;
 }
+
 
 /* FOOTER CSS CODE */
 
@@ -159,6 +161,11 @@ hr{
 .footer-row{
     margin-top: 100px; 
     justify-content: space-evenly; 
+}
+
+.form-bg{
+    background: #14213D;
+
 }
 
 
