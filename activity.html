@@ -22,17 +22,21 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link"  href="Index2.html">Home</a>
+                    <a class="nav-link"  href="Index.html">Home</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="Experience2.html">Experience</a>
+                    <a class="nav-link" href="Experience.html">Experience</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="activity.html">Activity</a>
                   </li>
                   
                   <li class="nav-item">
-                    <a class="nav-link" href="Certificates2.html">Certificates</a>
+                    <a class="nav-link" href="certificates.html">Certificates</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="FAQs.html">FAQs</a>
                   </li>
                   
                   <li class="nav-item">
@@ -413,14 +417,12 @@
             let password = document.getElementById('password').value;
             let confirmPassword = document.getElementById('confirmPassword').value;
 
-            // Clear previous error messages
             document.getElementById('emailError').innerText = '';
             document.getElementById('passwordError').innerText = '';
             document.getElementById('confirmPasswordError').innerText = '';
 
             let valid = true;
 
-            // Email validation (required and must be in valid email format)
             if (email === '') {
                 document.getElementById('emailError').innerText = 'Email is required.';
                 valid = false;
@@ -429,7 +431,6 @@
                 valid = false;
             }
 
-            // Password validation (required and at least 8 characters)
             if (password === '') {
                 document.getElementById('passwordError').innerText = 'Password is required.';
                 valid = false;
@@ -438,7 +439,6 @@
                 valid = false;
             }
 
-            // Confirm password validation (must match password)
             if (confirmPassword === '') {
                 document.getElementById('confirmPasswordError').innerText = 'Please confirm your password.';
                 valid = false;
@@ -447,7 +447,7 @@
                 valid = false;
             }
 
-            return valid; // Prevent form submission if there are validation errors
+            return valid; 
         }
 
         // Function to validate email format using regex
@@ -464,17 +464,21 @@
             <div class="row footer-row">
                 <div class="col-md-3 col-10 footer-col">
                     <div class="footer-text ">
-                        <a href="Index2.html"><h6>Home</h6></a>
+                        <a href="index.html"><h6>Home</h6></a>
                     </div>
                     
                     <div class="footer-text ">
-                        <a href="Certificates2.html"><h6>Certificates</h6></a>
+                        <a href="certificates.html"><h6>Certificates</h6></a>
+                    </div>
+
+                    <div class="footer-text ">
+                        <a href="FAQs.html"><h6>FAQs</h6></a>
                     </div>
                 </div>
                 <div class="col-md-3 col-10 footer-col">
     
                     <div class="footer-text ">
-                        <a href="Experience2.html"><h6>Experience</h6></a>
+                        <a href="Experience.html"><h6>Experience</h6></a>
                     </div>  
     
                     <div class="footer-text ">

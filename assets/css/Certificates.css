@@ -1,3 +1,13 @@
+@font-face { 
+    font-family: 'Montserrat'; 
+    font-weight: 800;
+    src: url('../fonts/montserrat/Montserrat-ExtraBold.ttf'); 
+ }
+ @font-face { 
+    font-family: 'Montserrat'; 
+    font-weight: 600;
+    src: url('../fonts/montserrat/Montserrat-Bold.ttf'); 
+ }
 body {
     margin: 0;
     padding: 0;
@@ -14,12 +24,6 @@ body {
 
 a{
     text-decoration: none;
- }
-
- @font-face { 
-    font-family: 'Montserrat'; 
-    font-weight: 800;
-    src: url('../fonts/montserrat/Montserrat-ExtraBold.ttf'); 
  }
 
 
