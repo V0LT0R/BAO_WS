@@ -9,11 +9,18 @@
     src: url('../fonts/montserrat/Montserrat-Bold.ttf'); 
  }
 
-
+	
 body {
     background-color: #0d1117;
     color: white;
 }
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
 .head-bg{
     background: linear-gradient(57deg, #14213D -4.46%, #000 105.01%);
  }
@@ -66,11 +73,7 @@ hr{
     max-width: 600px;
     
 }
-.block-2-bg{
-    background: #14213D;
-    padding-bottom: 15px;
 
-}
 .block__2{
     font-family: 'Montserrat';
 }
