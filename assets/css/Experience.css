@@ -74,6 +74,11 @@ hr{
     
 }
 
+#block-2-bg{
+    background-color: #14213D;
+    padding-bottom: 15px;
+}
+
 .block__2{
     font-family: 'Montserrat';
 }

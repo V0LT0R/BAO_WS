@@ -1,21 +1,9 @@
 // Array of predefined colors
-const colors = ["#87CEFA", "#00BFFF", "#1E90FF", "#4169E1"];
 
 // Function to change the background color of .block-2-bg
-function changeBlockColor() {
-    // Select a random color from the array
-    const randomIndex = Math.floor(Math.random() * colors.length);
-    const randomColor = colors[randomIndex];
-    
-    // Set the background color of the .block-2-bg element
-    const blockElement = document.querySelector('.block-2-bg');
-    if (blockElement) {
-        blockElement.style.backgroundColor = randomColor;
-    }
-}
 
 // Get the button and add an event listener
-document.getElementById('colorButton').addEventListener('click', changeBlockColor);
+// document.getElementById('colorButton').addEventListener('click', changeBlockColor);
 
 
 //task 6 
