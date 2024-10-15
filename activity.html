@@ -389,7 +389,13 @@
     <div class="container">
         <div class="row justify-content-center" style="flex-direction: column;">
             <h2 class="h2" style="width: 400px; margin: 20px auto;">Form Validation Example</h2>
-            <form style="width:600px; margin: 0px auto;" id="myForm" onsubmit="return validateForm()">
+            
+            <div class="container show-the-form-trigger" id="pop-up">
+                <button class="pop-up-btn" type="button" onclick="toggleForm()"><h2>Show the form-></h2></button>
+            </div>
+            
+            <form class="form-trigger" style="width:600px; margin: 0px auto;" id="myForm" onsubmit="return validateForm()">
+                <button class="close-button" onclick="closeForm()">X</button>
                 <div >
                     <label  >Email:</label>
                     <input type="text" id="email" name="email">
@@ -413,6 +419,8 @@
 
     <script>
         function validateForm() {
+            let formBlock = document.getElementById('myForm');
+            let popUpText = document.getElementById('pop-up');
             let email = document.getElementById('email').value;
             let password = document.getElementById('password').value;
             let confirmPassword = document.getElementById('confirmPassword').value;
@@ -454,6 +462,15 @@
         function validateEmail(email) {
             const emailPattern = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
             return emailPattern.test(email);
+        }
+
+        function toggleForm(){
+            document.getElementById('myForm').style.display = "block";
+            document.getElementById('pop-up').style.display = "none";
+        }
+        function closeForm(){
+            document.getElementById('myForm').style.display = "none";
+            document.getElementById('pop-up').style.display = "block";
         }
     </script>
 

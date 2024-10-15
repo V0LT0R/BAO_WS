@@ -74,7 +74,7 @@ hr{
     
 }
 
-#block-2-bg{
+.block-2-bg{
     background-color: #14213D;
     padding-bottom: 15px;
 }
@@ -166,6 +166,33 @@ hr{
 .form-bg{
     background: #14213D;
 
+}
+
+.form-trigger{
+    display: none;
+}
+
+.show-the-form-trigger{
+    display: block;
+    text-align: center;
+    border: 1px solid red;
+    border-radius: 10px;
+    width: 400px;
+    cursor: pointer;
+    padding: 0;
+}
+
+.pop-up-btn{
+    width: 100%;
+    background-color: transparent;
+    border-radius: 10px;
+    color: #fff;
+}
+.close-button{
+    background-color: transparent;
+    border-radius: 10px;
+    color: #fff;
+    margin-left: 80%;
 }
 
 
