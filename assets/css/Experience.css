@@ -8,21 +8,25 @@
     font-weight: 600;
     src: url('../fonts/montserrat/Montserrat-Bold.ttf'); 
  }
-
+ 
 	
 body {
     background-color: #0d1117;
     color: white;
 }
 
-#container {
+/* #container {
     position: absolute;
     width: 200px;
     height: 200px;
     margin: auto;
     transform: rotate(45deg);
     top: 0; bottom: 0; left: 0; right: 0;
-  }
+  } */
+  #container {
+    display: flex; 
+    margin-top: 20px;
+}
 
 button {
     padding: 10px 20px;
