@@ -386,7 +386,7 @@
 
 
 <div class="container-fluid form-bg">
-    <div class="container">
+    <div class="container pb-2">
         <div class="row justify-content-center" style="flex-direction: column;">
             <h2 class="h2" style="width: 400px; margin: 20px auto;">Form Validation Example</h2>
             
@@ -414,6 +414,17 @@
                 <input type="submit" class="btn btn-outline-primary mt-4" value="Submit">
             </form>
         </div>
+
+        <h2 class="h2" style="width: 400px; margin: 20px auto;">Form Validation Example</h2>
+        <div class="rating mt-5">
+            <span class="star mx-2" data-value="1">★</span>
+            <span class="star mx-2" data-value="2">★</span>
+            <span class="star mx-2" data-value="3">★</span>
+            <span class="star mx-2" data-value="4">★</span>
+            <span class="star mx-2" data-value="5">★</span>
+        </div>
+        
+
     </div>
 </div>
 
@@ -470,6 +481,25 @@
         function closeForm(){
             document.getElementById('myForm').style.display = "none";
         }
+
+
+
+        // JavaScript to handle rating
+        const stars = document.querySelectorAll('.star');
+        stars.forEach((star, index) => {
+            star.addEventListener('click', () => {
+                stars.forEach(star => {
+                    star.classList.add('star-shadow');
+                });
+                // Reset the color of all stars
+                stars.forEach(s => s.style.color = 'gray');
+                // Set the color of the selected star and all previous stars
+                for (let i = 0; i <= index; i++) {
+                    stars[i].style.color = 'gold';
+                }
+            });
+        });
+
     </script>
 
 
