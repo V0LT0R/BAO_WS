@@ -58,9 +58,12 @@
                 <div class="col-lg-5">
                     <img src="assets/images/experience_block__1_1.png" alt="Personal Image" class="img-fluid">
                 </div>
-                <div class="col-lg-7 header-text">
+                <div class="col-lg-6 header-text ">
                     <h1 class="display-4" id="tmp-text"><strong>Personal Experience</strong></h1>
                     <p>Reflections on Life's Path: A Unique Journey of Growth and Learning</p>
+                   
+                </div>
+                <div class="col-lg-1 justify-self-center">
                     <canvas id="container" width="200" height="200"></canvas>
                 </div>
             </div>
@@ -75,6 +78,7 @@
             </div>
 
             <hr class="block__2_line my-5">
+            
 
             <div class="row justify-content-center align-items-center ">
                 <div class="col-4 text-center">
@@ -220,6 +224,15 @@
                     </p>
                 </div>
             </div>
+            <hr class="block__2_line my-5">
+
+            <div class="row align-items-center">
+                <div class="col-10">
+                    <div id="publications">
+                        <h3 class="mb-5">Last publications:</h3>
+                    </div>
+                </div>
+            </div>
             
 
         </div>
@@ -297,7 +310,7 @@
 <script>
     const colors = ["#87CEFA", "#00BFFF", "#1E90FF", "#4169E1"];
     const audio = new Audio("assets/sound/123.mp3");
-    
+
     function changeBlockColor() {
         const randomIndex = Math.floor(Math.random() * colors.length);
         const randomColor = colors[randomIndex];
