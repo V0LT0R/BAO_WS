@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let formattedDate = day + " " + month + " " + year + ", " + hour + ":" + min;
     document.getElementById("f1f").innerHTML = formattedDate;
 
-
     const points = []; // Массив для хранения объектов Point
     const velocity2 = 5;
     const canvas = document.getElementById('container');
@@ -23,7 +22,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const boundaryX = 200;
     const boundaryY = 200;
     const numberOfPoints = 30;
-
+    
+    // Hide the canvas initially
+    canvas.style.display = 'none';
     
     // Класс для точек
     class Point {
@@ -35,13 +36,13 @@ document.addEventListener('DOMContentLoaded', function () {
             let vy2 = velocity2 - vx2;
             this.vy = Math.sqrt(vy2) * (Math.random() * 2 - 1);
         }
-
+    
         // Метод для обновления позиции точки
         updatePosition() {
             this.x += this.vx;
             this.y += this.vy;
         }
-
+    
         // Метод для сброса скорости
         resetVelocity(axis, dir) {
             if (axis == 'x') {
@@ -56,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 this.vx = Math.sqrt(vx2) * (Math.random() * 2 - 1);
             }
         }
-
+    
         // Метод для рисования круга
         draw() {
             context.beginPath();
@@ -65,8 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
             context.fill();
         }
     }
-    init(); 
-
+    
     function init() {
         // Создаём точки
         for (let i = 0; i < numberOfPoints; i++) {
@@ -78,14 +78,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         animate();
     }
-
     
     function draw() {
         for (let point of points) {
             point.updatePosition(); // Обновляем позицию точки
             point.draw(); // Рисуем точку
             drawLine(point.x, point.y, point.buddy.x, point.buddy.y); // Рисуем линию
-
+    
             // Проверяем границы и сбрасываем скорость
             if (point.x < radius) {
                 point.resetVelocity('x', 1);
@@ -98,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
-
+    
     function drawLine(x1, y1, x2, y2) {
         context.beginPath();
         context.moveTo(x1, y1);
@@ -106,13 +105,25 @@ document.addEventListener('DOMContentLoaded', function () {
         context.strokeStyle = '#8ab2d8';
         context.stroke();
     }
-
+    
     function animate() {
         context.clearRect(0, 0, boundaryX, boundaryY);
         draw();
         requestAnimationFrame(animate);
     }
-
+    
+    // Show canvas and start animation on button click
+    document.getElementById('showAnimation').addEventListener('click', () => {
+        // Show the canvas
+        canvas.style.display = 'block';
+        
+        // Hide the button
+        document.getElementById('showAnimation').style.display = 'none';
+        
+        // Initialize the animation
+        init();
+    });
+    
     // API ----------------------------- \|/
 
     const orcidID = '0000-0001-9548-1959'; 
