@@ -118,6 +118,23 @@ hr{
     font-size: 1.3rem;
 }
 
+.rating{
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+
+}
+
+.star{
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.star-shadow {
+    text-shadow: 10px 10px 5px rgba(255, 255, 255, 0.5);
+}
+
+
 
 /* FOOTER CSS CODE */
 
