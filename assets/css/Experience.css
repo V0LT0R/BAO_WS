@@ -130,6 +130,36 @@ hr{
     text-shadow: 10px 10px 5px rgba(255, 255, 255, 0.5);
 }
 
+.change-theme-btn-night{
+    width: 50px;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 30px;
+    display: flex;
+    justify-content: start;
+    padding: 3px;
+    background-color: #000;
+    transition: all 0.3s ease;
+}
+
+.change-theme-btn-day{
+    width: 50px;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 30px;
+    display: flex;
+    justify-content: end;
+    padding: 3px;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+#theme-btn{
+    margin-left: 90%;
+}
+
+.change-theme{
+    color: #ffffff;
+    background: #14213D;
+}
 
 
 /* FOOTER CSS CODE */

@@ -384,10 +384,11 @@
     
     </div>
 
-
-<div class="container-fluid form-bg">
+<!-- Assignment div -->
+<div class="container-fluid change-theme" id="change-theme">
     <div class="container pb-2">
         <div class="row justify-content-center" style="flex-direction: column;">
+            <!-- Form Example -->
             <h2 class="h2" style="width: 400px; margin: 20px auto;">Form Validation Example</h2>
             
             <div class="container show-the-form-trigger" id="pop-up">
@@ -414,8 +415,8 @@
                 <input type="submit" class="btn btn-outline-primary mt-4" value="Submit">
             </form>
         </div>
-
-        <h2 class="h2" style="width: 400px; margin: 20px auto;">Form Validation Example</h2>
+        <!-- Rating example -->
+        <h2 class="h2 mt-5" style="display: flex; justify-content: center;">Rating Example</h2>
         <div class="rating mt-5">
             <span class="star mx-2" data-value="1">★</span>
             <span class="star mx-2" data-value="2">★</span>
@@ -424,9 +425,26 @@
             <span class="star mx-2" data-value="5">★</span>
         </div>
         
+        <!-- Change theme -->
+        <h2 class="h2 mt-5" style="display: flex; justify-content: center;">Day Night theme Example</h2>
+        <button id="theme-btn" class="change-theme-btn-night" onclick="ChangeTheme()">🌕</button>
+
+        <!-- ReadMore/less -->
+        <h2 class="h2 mt-5" style="display: flex; justify-content: center;">Read More/Less Example</h2>
+        <p id="moreText" style="display:none;">This is additional content that can be shown or hidden.</p>
+        <button id="readMoreBtn">Read More</button>
+
+        <!-- Show Time -->
+        <h2 class="h2 mt-5" style="display: flex; justify-content: center;">Show Time Example</h2>
+        <button id="showTimeBtn">Show Current Time</button>
+        <p id="timeDisplay">The current time will be displayed here.</p>
+        
 
     </div>
 </div>
+
+<!-- Assignment div -->
+
 
     <script>
         function validateForm() {
@@ -485,7 +503,7 @@
 
 
         // JavaScript to handle rating
-        const stars = document.querySelectorAll('.star');
+        let stars = document.querySelectorAll('.star');
         stars.forEach((star, index) => {
             star.addEventListener('click', () => {
                 stars.forEach(star => {
@@ -499,6 +517,51 @@
                 }
             });
         });
+
+        let changeTheme = 1;
+        let changeThemeBtn = document.getElementById('theme-btn');
+        let changeThemeBlock = document.getElementById('change-theme');
+        function ChangeTheme(){
+            if (changeTheme == 1){
+                changeThemeBtn.classList = '';
+                changeThemeBtn.classList.toggle('change-theme-btn-day');
+                changeThemeBlock.style.color = 'black';
+                changeThemeBlock.style.background = '#fff'
+                changeTheme = 0;
+            } else {
+                changeThemeBtn.classList = '';
+                changeThemeBtn.classList.toggle('change-theme-btn-night');
+                changeThemeBlock.style.color = 'white';
+                changeThemeBlock.style.background = '#14213D'
+                changeTheme = 1;
+            }
+        }
+
+        // JavaScript to toggle visibility
+        const readMoreBtn = document.getElementById('readMoreBtn');
+        const moreText = document.getElementById('moreText');
+
+        readMoreBtn.addEventListener('click', () => {
+            if (moreText.style.display === 'none') {
+                moreText.style.display = 'block';
+                readMoreBtn.textContent = 'Read Less';
+            } else {
+                moreText.style.display = 'none';
+                readMoreBtn.textContent = 'Read More';
+            }
+        });
+
+
+        // JavaScript to display the current time
+        const showTimeBtn = document.getElementById('showTimeBtn');
+        const timeDisplay = document.getElementById('timeDisplay');
+
+        showTimeBtn.addEventListener('click', () => {
+            const currentTime = new Date().toLocaleTimeString();
+            timeDisplay.textContent = `Current Time: ${currentTime}`;
+        });
+
+
 
     </script>
 
