@@ -77,6 +77,7 @@ hr{
 .block-2-bg{
     background-color: #14213D;
     padding-bottom: 15px;
+    transition: all 0.3s ease;
 }
 
 .block__2{
@@ -170,6 +171,11 @@ hr{
 
 .form-trigger{
     display: none;
+    position: absolute;
+    left:30%;
+    background-color: #252525;
+    border-radius: 10px;
+    padding: 10px;
 }
 
 .show-the-form-trigger{

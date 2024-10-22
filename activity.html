@@ -394,19 +394,19 @@
                 <button class="pop-up-btn" type="button" onclick="toggleForm()"><h2>Show the form-></h2></button>
             </div>
             
-            <form class="form-trigger" style="width:600px; margin: 0px auto;" id="myForm" onsubmit="return validateForm()">
+            <form class="form-trigger" style="width:600px;" id="myForm" onsubmit="return validateForm()">
                 <button class="close-button" onclick="closeForm()">X</button>
-                <div >
-                    <label  >Email:</label>
+                <div class="mt-4" style="margin: 0 90px;">
+                    <label>Email:</label>
                     <input type="text" id="email" name="email">
                     <span id="emailError" class="error"></span>
                 </div>
-                <div class="mt-4">
+                <div class="mt-4" style="margin: 0 90px">
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="password">
                     <span id="passwordError" class="error"></span>
                 </div>
-                <div class="mt-4">
+                <div class="mt-4" style="margin: 0 90px">
                     <label for="confirmPassword">Confirm Password:</label>
                     <input type="password" id="confirmPassword" name="confirmPassword">
                     <span id="confirmPasswordError" class="error"></span>
@@ -466,11 +466,9 @@
 
         function toggleForm(){
             document.getElementById('myForm').style.display = "block";
-            document.getElementById('pop-up').style.display = "none";
         }
         function closeForm(){
             document.getElementById('myForm').style.display = "none";
-            document.getElementById('pop-up').style.display = "block";
         }
     </script>
 

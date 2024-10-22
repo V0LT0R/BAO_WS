@@ -316,9 +316,8 @@ let hour = currentTime.getHours();
 let min = currentTime.getMinutes();
 
 // Add leading zero to minutes if less than 10
-if (min < 10) {
-    min = "0" + min;
-}
+(min < 10) ?  min = "0" + min : min=0;
+
 
 // Format the string
 let formattedDate = day + " " + month + " " + year + ", " + hour + ":" + min;
