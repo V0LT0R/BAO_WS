@@ -15,63 +15,88 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("f1f").innerHTML = formattedDate;
 
 
-    var points = [],
-        velocity2 = 5, 
-        canvas = document.getElementById('container'),
-        context = canvas.getContext('2d'),
-        radius = 5,
-        boundaryX = 200,
-        boundaryY = 200,
-        numberOfPoints = 30;
+    const points = []; // Массив для хранения объектов Point
+    const velocity2 = 5;
+    const canvas = document.getElementById('container');
+    const context = canvas.getContext('2d');
+    const radius = 5;
+    const boundaryX = 200;
+    const boundaryY = 200;
+    const numberOfPoints = 30;
 
-    init();
+    
+    // Класс для точек
+    class Point {
+        constructor() {
+            this.x = Math.random() * boundaryX;
+            this.y = Math.random() * boundaryY;
+            this.vx = (Math.floor(Math.random()) * 2 - 1) * Math.random();
+            let vx2 = Math.pow(this.vx, 2);
+            let vy2 = velocity2 - vx2;
+            this.vy = Math.sqrt(vy2) * (Math.random() * 2 - 1);
+        }
+
+        // Метод для обновления позиции точки
+        updatePosition() {
+            this.x += this.vx;
+            this.y += this.vy;
+        }
+
+        // Метод для сброса скорости
+        resetVelocity(axis, dir) {
+            if (axis == 'x') {
+                this.vx = dir * Math.random();
+                let vx2 = Math.pow(this.vx, 2);
+                let vy2 = velocity2 - vx2;
+                this.vy = Math.sqrt(vy2) * (Math.random() * 2 - 1);
+            } else {
+                this.vy = dir * Math.random();
+                let vy2 = Math.pow(this.vy, 2);
+                let vx2 = velocity2 - vy2;
+                this.vx = Math.sqrt(vx2) * (Math.random() * 2 - 1);
+            }
+        }
+
+        // Метод для рисования круга
+        draw() {
+            context.beginPath();
+            context.arc(this.x, this.y, radius, 0, 2 * Math.PI, false);
+            context.fillStyle = '#97badc';
+            context.fill();
+        }
+    }
+    init(); 
 
     function init() {
-        for (var i = 0; i < numberOfPoints; i++) {
-            createPoint();
+        // Создаём точки
+        for (let i = 0; i < numberOfPoints; i++) {
+            points.push(new Point());
         }
-        for (var i = 0, l = points.length; i < l; i++) {
-            var point = points[i];
-            if (i == 0) {
-                points[i].buddy = points[points.length - 1];
-            } else {
-                points[i].buddy = points[i - 1];
-            }
+        // Устанавливаем связи между точками
+        for (let i = 0; i < points.length; i++) {
+            points[i].buddy = points[i === 0 ? points.length - 1 : i - 1];
         }
         animate();
     }
 
-    function createPoint() {
-        var point = {}, vx2, vy2;
-        point.x = Math.random() * boundaryX;
-        point.y = Math.random() * boundaryY;
-        point.vx = (Math.floor(Math.random()) * 2 - 1) * Math.random();
-        vx2 = Math.pow(point.vx, 2);
-        vy2 = velocity2 - vx2;
-        point.vy = Math.sqrt(vy2) * (Math.random() * 2 - 1);
-        points.push(point);
-    }
+    
+    function draw() {
+        for (let point of points) {
+            point.updatePosition(); // Обновляем позицию точки
+            point.draw(); // Рисуем точку
+            drawLine(point.x, point.y, point.buddy.x, point.buddy.y); // Рисуем линию
 
-    function resetVelocity(point, axis, dir) {
-        var vx, vy;
-        if (axis == 'x') {
-            point.vx = dir * Math.random();
-            vx2 = Math.pow(point.vx, 2);
-            vy2 = velocity2 - vx2;
-            point.vy = Math.sqrt(vy2) * (Math.random() * 2 - 1);
-        } else {
-            point.vy = dir * Math.random();
-            vy2 = Math.pow(point.vy, 2);
-            vx2 = velocity2 - vy2;
-            point.vx = Math.sqrt(vx2) * (Math.random() * 2 - 1);
+            // Проверяем границы и сбрасываем скорость
+            if (point.x < radius) {
+                point.resetVelocity('x', 1);
+            } else if (point.x > boundaryX - radius) {
+                point.resetVelocity('x', -1);
+            } else if (point.y < radius) {
+                point.resetVelocity('y', 1);
+            } else if (point.y > boundaryY - radius) {
+                point.resetVelocity('y', -1);
+            }
         }
-    }
-
-    function drawCircle(x, y) {
-        context.beginPath();
-        context.arc(x, y, radius, 0, 2 * Math.PI, false);
-        context.fillStyle = '#97badc';
-        context.fill();
     }
 
     function drawLine(x1, y1, x2, y2) {
@@ -82,27 +107,8 @@ document.addEventListener('DOMContentLoaded', function () {
         context.stroke();
     }
 
-    function draw() {
-        for (var i = 0, l = points.length; i < l; i++) {
-            var point = points[i];
-            point.x += point.vx;
-            point.y += point.vy;
-            drawCircle(point.x, point.y);
-            drawLine(point.x, point.y, point.buddy.x, point.buddy.y);
-            if (point.x < 0 + radius) {
-                resetVelocity(point, 'x', 1);
-            } else if (point.x > boundaryX - radius) {
-                resetVelocity(point, 'x', -1);
-            } else if (point.y < 0 + radius) {
-                resetVelocity(point, 'y', 1);
-            } else if (point.y > boundaryY - radius) {
-                resetVelocity(point, 'y', -1);
-            }
-        }
-    }
-
     function animate() {
-        context.clearRect(0, 0, 200, 200);
+        context.clearRect(0, 0, boundaryX, boundaryY);
         draw();
         requestAnimationFrame(animate);
     }
@@ -137,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function () {
     .catch(error => {
         console.error('Error fetching works from ORCID:', error);
     });
-    
+
     // API ----------------------------- /|\
 
 });
