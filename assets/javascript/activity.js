@@ -88,7 +88,7 @@ function ChangeTheme(){
     }
 }
 
-// JavaScript to toggle visibility
+
 const readMoreBtn = document.getElementById('readMoreBtn');
 const moreText = document.getElementById('moreText');
 
