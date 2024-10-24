@@ -114,8 +114,9 @@ showTimeBtn.addEventListener('click', () => {
 
 
 // JavaScript for keyboard navigation
-let activityItems = document.querySelectorAll('.activities');
 let currentIndex = 0;
+let activityItems = document.querySelectorAll('.activities');
+
 
 activityItems[currentIndex].focus();
 
