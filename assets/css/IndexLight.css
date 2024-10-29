@@ -1,0 +1,24 @@
+:root{
+    --back-color: aliceblue;
+    --block-1-color: #14213D;
+    --block-1-hr: #14213D;
+    --block-3-bg: aliceblue;
+    --block-3-img-inverse: 1;
+    --block-3-row-1-p: #14213D;
+    --block-3-line-bg: #14213D;
+    --block-3-col-p: #fff;
+
+    --block-5-square-bg: rgb(159, 203, 241); 
+    --block-5-square-shadow:0px 4px 4px 0px rgb(255, 255, 255);
+    --block-5-hower-shadow: 3px 7px 4px 0px #bdbcbc;
+
+
+    --footer-bg: aliceblue;
+    --footer-hr-border:  2px solid #14213D;
+    --footer-hr-border-bottom:  1px solid #14213D;
+    --footer-bg-color: #14213D;
+    --footer-text-color: #14213D;
+    --navbar-light-img: drop-shadow(0 0 10px rgba(255, 136, 0, 1));
+    --navbar-dark-img: drop-shadow(0 0 10px rgba(55, 0, 255, 0));
+
+}
