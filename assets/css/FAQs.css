@@ -11,14 +11,17 @@
 
 
 body {
-    background-color: #14213D;
-    color: white;
+    background-color: var(--bg-color);
+    color: var(--bg-text-color);
 }
 .head-bg{
-    background: linear-gradient(57deg, #14213D -4.46%, #000 105.01%);
+    background: var(--back-color);
  }
  a{
     text-decoration: none;
+ }
+ p{
+    margin: 0;
  }
 
 .navbar {
@@ -74,7 +77,7 @@ hr{
     
 }
 .block-2-bg{
-    background: #14213D;
+    background: var(--block-was-dark-bg);
     padding-bottom: 15px;
 
 }
@@ -95,7 +98,7 @@ hr{
 
     width: 100%;
     height: 3px;
-    background-color: #ffffff; 
+    background-color: var(--block-was-white); 
 
       
 }
@@ -103,17 +106,17 @@ hr{
     font-size: 1.3rem;
 }
 .question-bg{
-    background-color: #1A2B50;
-    color: white;
+    background-color: var( --question-bg);
+    color: var(--block-was-white);
 }
 .answer-bg{
-    background-color: #1f3769;
+    background-color: var(--answer-bg);
 }
 #faqAccordion button{
-    color: white;
+    color: var(--block-was-white);
 }
 #faqAccordion .card-body{
-    color: white;
+    color: var(--block-was-white);
 }
 .toggle-icon {
     transition: transform 0.3s ease;
@@ -124,14 +127,16 @@ hr{
 .rotate-down {
     transform: rotate(90deg); /* Вниз */
 }
-
+.FAQ-text{
+    color: var(--block-was-white);
+}
 
 
 
 /* FOOTER CSS CODE */
 
 .footer{
-    background: #14213D;
+    background: var(--footer-bg);
     min-height: 600px;
 
 }
@@ -139,14 +144,14 @@ hr{
 .footer-hr{
     margin: 0px auto;
     width: 100%;
-    border: 2px solid white;
-    border-bottom: 1px solid #ffffff;
-    background-color: #ffffff;   
+    border: var(--footer-hr-border);
+    border-bottom: var(--footer-hr-border-bottom);
+    background-color: var(--footer-bg-color);
 }
 
 
 .footer-text a{
-    color: #FFF;
+    color: var(--footer-text-color);
     -webkit-transition: all 0.3s ease;;
     -moz-transition: all 0.3s ease;;
     -o-transition: all 0.3s ease;;
@@ -163,7 +168,7 @@ hr{
     font-weight: 600;
     line-height: normal;
     margin-top: 30px;
-    color: #FFF;
+    color: var(--footer-text-color);
 }
 
 .footer-secondary-text{
@@ -188,7 +193,6 @@ hr{
 
 .form-bg{
     background: #14213D;
-
 }
 
 

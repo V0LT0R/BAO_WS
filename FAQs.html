@@ -6,12 +6,14 @@
     <link rel="stylesheet" href="bootstrap_css/css/bootstrap.css">
 
     <link rel="stylesheet" href="assets/css/FAQs.css">
+    <link rel="stylesheet" media="(prefers-color-scheme: light)" href="assets/css/FAQsLight.css">
+    <link rel="stylesheet" media="(prefers-color-scheme: dark)" href="assets/css/FAQsDark.css">
 
     <title>FAQs</title>
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar">
         <div class="container">
             <a class="navbar-brand" href="#">BAO</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,7 +83,7 @@
                         <h5 class="mb-0">
                             <button class="btn d-flex justify-content-left" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="width: 100%;" >
                                 <div class="row d-flex justify-content-between " style="width: 100%;">
-                                    <div class="col d-flex justify-content-start">
+                                    <div class="col d-flex justify-content-start FAQ-text">
                                         Where I work now?
                                     </div>
                                     <div class="col d-flex justify-content-end">
@@ -93,7 +95,7 @@
                     </div>
                     <div id="collapseOne" class="collapse answer-bg" aria-labelledby="headingOne" >
                         <div class="card-body">
-                            Now I work at Astana IT University. In the position of Vice-Rector for Science and Innovation.
+                            <p class="FAQ-text">Now I work at Astana IT University. In the position of Vice-Rector for Science and Innovation.</p>
                         </div>
                     </div>
                 </div>
@@ -105,7 +107,7 @@
                                 
                                 <div class="row d-flex justify-content-between " style="width: 100%;">
                                     <div class="col d-flex justify-content-start">
-                                        How to contact me?
+                                        <p class="FAQ-text">How to contact me?</p>
                                     </div>
                                     <div class="col d-flex justify-content-end">
                                         <span class="toggle-icon rotate">&gt;</span>
@@ -116,7 +118,7 @@
                     </div>
                     <div id="collapseTwo" class="collapse answer-bg" aria-labelledby="headingTwo" >
                         <div class="card-body">
-                            Go to the footer section by clicking on the <code>Contact</code> in the navigation menu.
+                            <p class="FAQ-text">Go to the footer section by clicking on the <code>Contact</code> in the navigation menu.</p>
                         </div>
                     </div>
                 </div>
@@ -128,7 +130,7 @@
                                 
                                 <div class="row d-flex justify-content-between " style="width: 100%;">
                                     <div class="col d-flex justify-content-start">
-                                        What languages ​​do I know?
+                                        <p class="FAQ-text">What languages ​​do I know?</p>
                                     </div>
                                     <div class="col d-flex justify-content-end">
                                         <span class="toggle-icon rotate">&gt;</span>
@@ -139,7 +141,7 @@
                     </div>
                     <div id="collapseThree" class="collapse answer-bg" aria-labelledby="headingThree" >
                         <div class="card-body">
-                            <ul class="h">
+                            <ul class="h FAQ-text">
                                 <li class="my-1">
                                     Russian
                                 </li>
@@ -161,7 +163,7 @@
                                 
                                 <div class="row d-flex justify-content-between " style="width: 100%;">
                                     <div class="col d-flex justify-content-start">
-                                        Didn't find your question?
+                                        <p class="FAQ-text">Didn't find your question?</p>
                                     </div>
                                     <div class="col d-flex justify-content-end">
                                         <span class="toggle-icon rotate">&gt;</span>
@@ -172,7 +174,7 @@
                     </div>
                     <div id="collapseFour" class="collapse answer-bg" aria-labelledby="headingThree" >
                         <div class="card-body">
-                            Write me an email and I will answer you.
+                            <p class="FAQ-text">Write me an email and I will answer you.</p>
                         </div>
                     </div>
                 </div>
