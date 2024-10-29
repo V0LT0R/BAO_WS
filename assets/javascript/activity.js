@@ -88,7 +88,7 @@ function ChangeTheme(){
     }
 }
 
-// JavaScript to toggle visibility
+
 const readMoreBtn = document.getElementById('readMoreBtn');
 const moreText = document.getElementById('moreText');
 
@@ -114,8 +114,9 @@ showTimeBtn.addEventListener('click', () => {
 
 
 // JavaScript for keyboard navigation
-let activityItems = document.querySelectorAll('.activities');
 let currentIndex = 0;
+let activityItems = document.querySelectorAll('.activities');
+
 
 activityItems[currentIndex].focus();
 
