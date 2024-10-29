@@ -79,7 +79,7 @@ a{
 .active-link {
     text-decoration: underline;
     font-weight: bold;
-    color: #ffffff;
+    color: var(--block-was-white);
     font-size: 21px;
     transition: color 0.3s, font-size 0.3s;
 }
