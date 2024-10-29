@@ -28,7 +28,7 @@ a{
 
 
 .head-bg{
-    background: linear-gradient(57deg, #14213D -4.46%, #000 105.01%);
+    background: var(--back-color);
     min-height: 600px;
 }
 
@@ -54,7 +54,7 @@ a{
 }
 
 .block-1{
-    color: aliceblue;
+    color: var(--block-was-white);
     padding-top: 180px;
     font-family: "Montserrat";
     font-weight: 800;
@@ -67,9 +67,9 @@ a{
 }
 
 .block-2{
-    background: #14213D;
+    background: var(--block-was-dark-bg);
     min-height: 1000px;
-    color: aliceblue;
+    color: var(--block-was-aliceblue);
 
     font-family: "Montserrat";
     font-weight: 800;
@@ -78,9 +78,9 @@ a{
 .block-2-hr{
     margin: 0px auto;
     width: 100%;
-    border: 2px solid #ffffff;
-    border-bottom: 1px solid #ffffff;
-    background-color: #ffffff;   
+    border: var(--footer-hr-border);
+    border-bottom:var(--footer-hr-border-bottom);
+    background-color: var(--footer-bg-color);   
 }
 .carousel-item{
     align-items: center;
@@ -89,7 +89,7 @@ a{
 /* FOOTER CSS CODE */
 
 .footer{
-    background: #14213D;
+    background: var(--footer-bg);
     min-height: 600px;
 
 }
@@ -97,14 +97,14 @@ a{
 .footer-hr{
     margin: 0px auto;
     width: 100%;
-    border: 2px solid #ffffff;
-    border-bottom: 1px solid #ffffff;
-    background-color: #ffffff;   
+    border: var(--footer-hr-border);
+    border-bottom: var(--footer-hr-border-bottom);
+    background-color: var(--footer-bg-color);
 }
 
 
 .footer-text a{
-    color: #FFF;
+    color: var(--footer-text-color);
     -webkit-transition: all 0.3s ease;;
     -moz-transition: all 0.3s ease;;
     -o-transition: all 0.3s ease;;
@@ -121,7 +121,7 @@ a{
     font-weight: 600;
     line-height: normal;
     margin-top: 30px;
-    color: #FFF;
+    color: var(--footer-text-color);
 }
 
 .footer-secondary-text{

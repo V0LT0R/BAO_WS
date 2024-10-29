@@ -1,0 +1,17 @@
+:root{
+    --bg-color:#14213D;
+    --bg-text-color: white;
+    --back-color:linear-gradient(57deg, #14213D -4.46%, #000 105.01%);
+    --block-was-dark-bg: #14213D;
+    --block-was-white: white;
+    --block-was-aliceblue: aliceblue;
+    
+
+    --footer-bg: #14213D;
+    --footer-hr-border:  2px solid #ffffff;
+    --footer-hr-border-bottom:  1px solid #ffffff;
+    --footer-bg-color: #ffffff;
+    --footer-text-color: #fff;
+    --navbar-light-img: drop-shadow(0 0 10px rgba(255, 136, 0, 0));
+    --navbar-dark-img: drop-shadow(0 0 10px rgba(55, 0, 255, 1));
+}

@@ -1,0 +1,17 @@
+:root{
+    --bg-color:white;
+    --back-color: aliceblue;
+    --bg-text-color: #14213D;
+    --block-was-dark-bg: white;
+    --block-was-white: #14213D;
+    --block-was-aliceblue: #14213D;
+
+
+    --footer-bg: aliceblue;
+    --footer-hr-border:  2px solid #14213D;
+    --footer-hr-border-bottom:  1px solid #14213D;
+    --footer-bg-color: #14213D;
+    --footer-text-color: #14213D;
+    --navbar-light-img: drop-shadow(0 0 10px rgba(255, 136, 0, 1));
+    --navbar-dark-img: drop-shadow(0 0 10px rgba(55, 0, 255, 0));
+}
