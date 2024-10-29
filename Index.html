@@ -6,12 +6,15 @@
     <title>BAO</title>
     <link rel="stylesheet" href="bootstrap_css/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" media="(prefers-color-scheme: light)" href="assets/css/IndexLight.css">
+    <link rel="stylesheet" media="(prefers-color-scheme: dark)" href="assets/css/IndexDark.css">
+
 
 </head>
 
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar">
         <div class="container">
             <a class="navbar-brand" href="#">BAO</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,12 +45,20 @@
                   </li>
                   
               </div>
+              <fieldset class="switcher">
+                <input class="switcher__radio switcher__radio--light" type="radio" name="color-scheme" value="light" aria-label="Светлая" id="light">
+                <label for="light" style="display: block;"><img class="navbar-img light-img" src="assets/images/light.svg" alt="light mode"></label>
+                <input class="switcher__radio switcher__radio--dark" type="radio" name="color-scheme" value="dark" aria-label="Тёмная" id="dark" checked="">
+                <label for="dark" style="display: block;"><img class="navbar-img dark-img" src="assets/images/dark.svg" alt = "dark mode"></label>
+                <div class="switcher__status"></div>
+            </fieldset>
+        
         </div>
     </nav>
 
-<header class="container-fluid head-bg" style="min-height: 700px;">
+<header class="container-fluid head-bg" id="head-bg" style="min-height: 700px;">
     <div class="container">
-        <div class="row align-items-center block-1">
+        <div class="row align-items-center block-1" id="block-1">
             <div class="col-lg-7">
                 <h1 class="display-4"><strong>Biloshchytskyi Andrii</strong></h1>
                 <hr class="block-1-hr">
@@ -85,8 +96,8 @@
 <div class="container-fluid block-3-bg">
     <div class="container" >
         <div class="row block-3-row-1">
-            <div style="width: 90px;" >
-                <img class="img-fluid" src="assets/images/block__3_1.png" style="width: 60px;">
+            <div class="block-3-img" style="width: 90px;" >
+                <img class="img-fluid " src="assets/images/block__3_1.png" style="width: 60px;">
             </div>
             <div style="max-width: 300px; padding: 0px;">
                 <p>Expert</p>
@@ -102,7 +113,7 @@
                 </div>
             </div>
             <div class="col-lg-4 col-12 block-3-col">
-                <div >
+                <div class="block-3-img">
                     <img  src="assets/images/block__3_2.png">
                 </div>
                 <h2 class="block-3-col-p">Internet of things</h1>
@@ -116,14 +127,14 @@
         
         <div class="row block-3-rows" style="justify-content: center;">
             <div class="col-lg-4 col-12 block-3-col">
-                <div>
-                    <img  src="assets/images/block__3_3.png">
+                <div class="block-3-img">
+                    <img src="assets/images/block__3_3.png">
                 </div>
                 <h2 class="block-3-col-p">Creation and apply software</h2>
             </div>
 
             <div class="col-lg-5 col-12 block-3-col block-3-col-right">
-                <div>
+                <div class="block-3-img">
                     <img src="assets/images/block__3_4.png">
                 </div>
                 <h2 class="block-3-col-p">Creation of analytical and control equipment</h2>
@@ -132,14 +143,14 @@
 
         <div class="row block-3-rows" style=" justify-content: center;">
             <div class="col-lg-5 col-12 block-3-col">
-                <div>
+                <div class="block-3-img">
                     <img  src="assets/images/block__3_5.png">
                 </div>
                 <h2 class="block-3-col-p">Development and implementation of information systems</h2>
             </div>
 
             <div class="col-lg-4 col-12 block-3-col block-3-col-right">
-                <div>
+                <div class="block-3-img">
                     <img src="assets/images/block__3_6.png">
                 </div>
                 <h2 class="block-3-col-p">Geoinformation systems</h2>
@@ -150,7 +161,7 @@
         
         <div class="row block-3-rows" >
             <div class="col-lg-7 col-12 block-3-col block-3-col-last">
-                <div>
+                <div class="block-3-img">
                     <img  src="assets/images/block__3_7.png">
                 </div>
                 <h2 class="block-3-col-p">In-depth knowledge of the principles<br> of building computer networks and<br> the operation of server equipment</h2>
@@ -287,6 +298,7 @@
 
 
 
+<script src="assets/javascript/darkLightMode.js"></script>
 <script src="bootstrap_css/js/bootstrap.js"></script>
 </body>
 
