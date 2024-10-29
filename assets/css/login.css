@@ -27,10 +27,10 @@ a{
  }
 
  .block-1-bg{
-    background: #14213D;
+    background: var(--block-was-dark-bg);
 }
 .block-1{
-    color: #FFF;
+    color: var(--bg-text-color);
     font-family: 'Montserrat';
 }
 
@@ -57,15 +57,15 @@ a{
 .form-control {
     height: 50px; 
     font-size: 16px;
-    background-color: rgb(33, 37, 41);
-    color: white; 
+    background-color: var(--form-control-bg);
+    color: var(--block-was-white); 
 }
 .form-control:focus {
-    background-color: rgb(33, 37, 41); 
-    color: white; 
+    background-color: var(--form-control-bg); 
+    color: var(--block-was-white); 
 }
 .form-floating label {
-    color: rgb(206, 206, 206) !important; 
+    color: var(--form-floating-label); 
   }
     
 .form-floating label::before, .form-floating label::after {
@@ -73,7 +73,7 @@ a{
 }
 
 .form-floating .form-control:focus ~ label {
-    color: rgb(194, 194, 194) !important; 
+    color: var(--form-floating-label-focus); 
 }
 
 .active-link {
@@ -86,8 +86,8 @@ a{
 
  /* FOOTER CSS CODE */
 
-.footer{
-    background: #14213D;
+ .footer{
+    background: var(--footer-bg);
     min-height: 600px;
 
 }
@@ -95,14 +95,14 @@ a{
 .footer-hr{
     margin: 0px auto;
     width: 100%;
-    border: 2px solid #ffffff;
-    border-bottom: 1px solid #ffffff;
-    background-color: #ffffff;   
+    border: var(--footer-hr-border);
+    border-bottom: var(--footer-hr-border-bottom);
+    background-color: var(--footer-bg-color);
 }
 
 
 .footer-text a{
-    color: #FFF;
+    color: var(--footer-text-color);
     -webkit-transition: all 0.3s ease;;
     -moz-transition: all 0.3s ease;;
     -o-transition: all 0.3s ease;;
@@ -119,7 +119,7 @@ a{
     font-weight: 600;
     line-height: normal;
     margin-top: 30px;
-    color: #FFF;
+    color: var(--footer-text-color);
 }
 
 .footer-secondary-text{
