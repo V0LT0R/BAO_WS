@@ -49,6 +49,27 @@ button {
 .navbar-brand img {
     height: 50px;
 }
+
+.switcher{
+    display: flex;
+}
+
+.switcher__radio{
+    opacity: 0;
+}
+
+
+.navbar-img{
+    width: 30px;
+
+}
+
+.light-img{
+    filter: var(--navbar-light-img);
+}
+.dark-img{
+    filter: var(--navbar-dark-img);
+}
 hr{
     opacity: 1;
 }

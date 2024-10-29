@@ -41,6 +41,13 @@
                 <a class="nav-link" href="#footer">Contact</a>
               </li>
             </ul>
+            <fieldset class="switcher">
+              <input class="switcher__radio switcher__radio--light" type="radio" name="color-scheme" value="light" aria-label="Светлая" id="light">
+              <label for="light" style="display: block;"><img class="navbar-img light-img" src="assets/images/light.svg" alt="light mode"></label>
+              <input class="switcher__radio switcher__radio--dark" type="radio" name="color-scheme" value="dark" aria-label="Тёмная" id="dark" checked="">
+              <label for="dark" style="display: block;"><img class="navbar-img dark-img" src="assets/images/dark.svg" alt = "dark mode"></label>
+              <div class="switcher__status"></div>
+          </fieldset>
           </div>
     </div>
   </nav>  
@@ -163,5 +170,6 @@
   </footer>
 
   <script src="assets/javascript/login.js"></script>
+  <script src="assets/javascript/darkLightMode.js"></script>
 </body>
 </html>
