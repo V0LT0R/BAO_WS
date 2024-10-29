@@ -1,0 +1,139 @@
+@font-face { 
+    font-family: 'Montserrat'; 
+    font-weight: 800;
+    src: url('../fonts/montserrat/Montserrat-ExtraBold.ttf'); 
+ }
+ @font-face { 
+    font-family: 'Montserrat'; 
+    font-weight: 600;
+    src: url('../fonts/montserrat/Montserrat-Bold.ttf'); 
+ }
+body {
+    margin: 0;
+    padding: 0;
+
+
+ }
+ img{ 
+    pointer-events: none; 
+    -moz-user-select: none; 
+    -webkit-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none;
+}
+
+a{
+    text-decoration: none ;
+ }
+
+ .block-1-bg{
+    background: #14213D;
+}
+.block-1{
+    color: #FFF;
+    font-family: 'Montserrat';
+}
+.form-control {
+    height: 50px; 
+    font-size: 16px;
+    background-color: rgb(33, 37, 41);
+    color: white; 
+}
+.form-control:focus {
+    background-color: rgb(33, 37, 41); 
+    color: white; 
+}
+.form-floating label {
+    color: rgb(206, 206, 206) !important; 
+  }
+    
+.form-floating label::before, .form-floating label::after {
+    background-color: transparent !important; 
+}
+
+.form-floating .form-control:focus ~ label {
+    color: rgb(194, 194, 194) !important; 
+}
+
+.active-link {
+    text-decoration: underline;
+    font-weight: bold;
+    
+}
+
+
+
+ /* FOOTER CSS CODE */
+
+.footer{
+    background: #14213D;
+    min-height: 600px;
+
+}
+
+.footer-hr{
+    margin: 0px auto;
+    width: 100%;
+    border: 2px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+    background-color: #ffffff;   
+}
+
+
+.footer-text a{
+    color: #FFF;
+    -webkit-transition: all 0.3s ease;;
+    -moz-transition: all 0.3s ease;;
+    -o-transition: all 0.3s ease;;
+    transition: all 0.3s ease;
+}
+
+.footer-text a:hover{
+    color:#6D7BFB;
+}
+
+.footer-text{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-top: 30px;
+    color: #FFF;
+}
+
+.footer-secondary-text{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-top: 30px;
+    color: #b4b4b4;
+}
+
+.authors{
+    margin: 50px 80px 0px;
+    display: flex;
+    vertical-align: middle;
+}
+
+.footer-row{
+    margin-top: 100px; 
+    justify-content: space-evenly; 
+}
+
+
+
+@media (max-width:767px){
+    .footer-row{
+        flex-direction: column;
+        justify-content: center;
+        margin: 100px auto 0px;
+        text-align: center;
+    }
+
+    .footer-col{
+        margin: 0px auto;
+    }
+}
+
+/* FOOTER CSS CODE END */

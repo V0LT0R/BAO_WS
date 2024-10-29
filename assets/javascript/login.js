@@ -5,13 +5,25 @@ window.onload = () => {
       showWelcomeMessage(storedUsername);
     } else {
       document.getElementById("registerForm").style.display = "block";
+      document.getElementById("registerLink").classList.add("active-link");
     }
   };
   
   // Переключение между формами
   function toggleForms(form) {
-    document.getElementById("registerForm").style.display = form === 'register' ? "block" : "none";
-    document.getElementById("loginForm").style.display = form === 'login' ? "block" : "none";
+      document.getElementById("registerForm").style.display = form === 'register' ? "block" : "none";
+      document.getElementById("loginForm").style.display = form === 'login' ? "block" : "none";
+
+      const loginLink = document.getElementById("loginLink");
+      const registerLink = document.getElementById("registerLink");
+
+      if (form === 'login') {
+          loginLink.classList.add("active-link");
+          registerLink.classList.remove("active-link");
+      } else {
+          registerLink.classList.add("active-link");
+          loginLink.classList.remove("active-link");
+  }
   }
   
   // Регистрация пользователя
@@ -51,15 +63,15 @@ window.onload = () => {
   // Выход пользователя
   function logout() {
     localStorage.removeItem("username");
-    document.getElementById("welcome").style.display = "none";
-    document.getElementById("loginForm").style.display = "block";
+    document.location.href = 'index.html'
   }
   
   // Показать приветствие
   function showWelcomeMessage(username) {
-    document.getElementById("registerForm").style.display = "none";
-    document.getElementById("loginForm").style.display = "none";
-    document.getElementById("welcome").style.display = "block";
-    document.getElementById("welcomeMessage").textContent = `Добро пожаловать, ${username}!`;
+    if (username === "admin" && window.location.pathname !== "/admin.html") {
+      document.location.href = 'admin.html';
+  } else if (username !== "admin" && window.location.pathname !== "/user.html") {
+      document.location.href = 'user.html';
+  }
   }
   
