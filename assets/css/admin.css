@@ -25,6 +25,16 @@ body {
 a{
     text-decoration: none ;
  }
+ .block-1-bg{
+    background: #14213D;
+}
+.block-1{
+    color: white;
+}
+.block-1-user{
+    display: flex;
+}
+
 
 /* FOOTER CSS CODE */
 
@@ -59,3 +69,12 @@ a{
 }
 
 /* FOOTER CSS CODE END */
+@media (max-width:576px) {
+    .block-1-user{
+        display: block;
+    }
+    .block-1-user .col{
+        display: flex;
+        justify-content: center;
+    }
+}

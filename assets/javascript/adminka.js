@@ -12,5 +12,5 @@ function logout() {
   }
 
 function showWelcomeMessage(username) {
-    document.getElementById("welcomeMessage").textContent = `Добро пожаловать, ${username}!`;
+    document.getElementById("welcomeMessage").textContent += ` ${username}!`;
 }
