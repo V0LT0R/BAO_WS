@@ -32,6 +32,27 @@ a{
     min-height: 600px;
 }
 
+.switcher{
+    display: flex;
+}
+
+.switcher__radio{
+    opacity: 0;
+}
+
+
+.navbar-img{
+    width: 30px;
+
+}
+
+.light-img{
+    filter: var(--navbar-light-img);
+}
+.dark-img{
+    filter: var(--navbar-dark-img);
+}
+
 .block-1{
     color: aliceblue;
     padding-top: 180px;
