@@ -36,7 +36,21 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#footer">Contact</a>
                     </li>
-                </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Register</a>
+                      </li>
+                    </ul>
+                    <button type="button" class="btn btn-sm btn-outline-secondary me-5" onclick="document.location='login.html'" >Register</button>
+                  </div>
+                  <fieldset class="switcher">
+                    <input class="switcher__radio switcher__radio--light" type="radio" name="color-scheme" value="light" aria-label="Светлая" id="light">
+                    <label for="light" style="display: block;"><img class="navbar-img light-img" src="assets/images/light.svg" alt="light mode"></label>
+                    <input class="switcher__radio switcher__radio--dark" type="radio" name="color-scheme" value="dark" aria-label="Тёмная" id="dark" checked="">
+                    <label for="dark" style="display: block;"><img class="navbar-img dark-img" src="assets/images/dark.svg" alt = "dark mode"></label>
+                    <div class="switcher__status"></div>
+                </fieldset>
+            
+
             </div>
         </div>
     </nav>
