@@ -6,6 +6,7 @@ window.onload = () => {
     } else {
       document.getElementById("registerForm").style.display = "block";
       document.getElementById("registerLink").classList.add("active-link");
+      document.getElementById("loginLink").classList.add("passive_link");
     }
   };
   
@@ -18,11 +19,16 @@ window.onload = () => {
       const registerLink = document.getElementById("registerLink");
 
       if (form === 'login') {
+          loginLink.classList.remove("passive_link");
           loginLink.classList.add("active-link");
           registerLink.classList.remove("active-link");
+          registerLink.classList.add("passive_link");
+          passive_link
       } else {
+          registerLink.classList.remove("passive_link");
           registerLink.classList.add("active-link");
           loginLink.classList.remove("active-link");
+          loginLink.classList.add("passive_link");
   }
   }
   
