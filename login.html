@@ -45,39 +45,48 @@
     </div>
   </nav>  
 
-  <header class="container-fluid block-1-bg" style="min-height: 700px;"> 
+  <header class="container-fluid block-1-bg" style="min-height: 600px;"> 
     <div class="container block-1 d-flex justify-content-center">
-      <div class="row d-flex justify-content-evenly mt-5">
-        <div class="col-5 d-flex justify-content-center">
-          <a href="#" onclick="toggleForms('login')">logn in</a>
+      <div class="row d-flex justify-content-center mt-5 w-100">
+        <div class="col-3 d-flex justify-content-center">
+          <a href="#" id="loginLink" class="link-offset-3" onclick="toggleForms('login')">Sign in</a>
         </div>
-        <div class="col-5 d-flex justify-content-center">
-          <a href="#" onclick="toggleForms('register')">sign up</a>
+        <div class="col-3 d-flex justify-content-center">
+          <a href="#" id="registerLink" class="link-offset-3" onclick="toggleForms('register')">Sign up</a>
         </div>
-        <div class="col" id="registerForm">
+        <div class="w-100"></div>
+
+        <!--  ----------------Sign up part--------------  -->
+        <div class="col-6" id="registerForm">
           
             <h1 class="display-4 mt-5"><strong>Registration</strong></h1>
-            <h4 class="my-2">Username</h4>
-            <input type="text" id="registerUsername" placeholder="">
-            <h4 class="my-2">Password</h4>
-            <input type="password" id="registerPassword" placeholder="">
+            <div class="form-floating my-5">
+              <input type="text" class="form-control" id="registerUsername" placeholder="Username">
+              <label for="registerUsername">Username</label>
+            </div>
+            <div class="form-floating my-5">
+              <input type="password" class="form-control" id="registerPassword" placeholder="Password">
+              <label for="registerPassword">Password</label>
+            </div>
+            <button type="button" class="btn btn-secondary w-100 p-3" onclick="register()">Register</button>
+          
+        </div>
 
-            <button onclick="register()">Register</button>
-            <!-- <p>Уже есть аккаунт? <a href="#" onclick="toggleForms('login')">Войти</a></p> -->
+        <!--  ----------------Log in part--------------  -->
+        <div class="col-6" id="loginForm">
           
-        </div>
-        <div class="col" id="loginForm">
-          <div >
-            <h1 class="display-4 mt-5"><strong>Log in</strong></h1>
-            <h4 class="my-2">Username</h4>
-            <input type="text" id="registerUsername" placeholder="">
-            <h4 class="my-2">Password</h4>
-            <input type="password" id="registerPassword" placeholder="">
-            <button onclick="login()">Log in</button>
-            <!-- <p>Нет аккаунта? <a href="#" onclick="toggleForms('register')">Зарегистрироваться</a></p> -->
+          <h1 class="display-4 mt-5"><strong>Sign in</strong></h1>
+          <div class="form-floating my-5">
+            <input type="text" class="form-control" id="loginUsername" placeholder="Username">
+            <label for="loginUsername">Username</label>
           </div>
-        </div>
-          
+          <div class="form-floating my-5">
+            <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+            <label for="loginPassword">Password</label>
+          </div>
+          <button type="button" class="btn btn-secondary w-100 p-3" onclick="login()">Sign in</button>
+        
+      </div>
         <div class="col" id="welcome">
           <div >
             <h1 id="welcomeMessage"></h1>
