@@ -35,7 +35,7 @@ window.onload = () => {
       if (localStorage.getItem(username)) {
         alert("Пользователь уже существует!");
       } else {
-        const hashedPassword = btoa(password); // Простое шифрование пароля
+        const hashedPassword = btoa(password); 
         localStorage.setItem(username, hashedPassword);
         alert("Регистрация успешна! Теперь вы можете войти.");
         toggleForms('login');
@@ -60,13 +60,11 @@ window.onload = () => {
     }
   }
   
-  // Выход пользователя
   function logout() {
     localStorage.removeItem("username");
     document.location.href = 'index.html'
   }
   
-  // Показать приветствие
   function showWelcomeMessage(username) {
     if (username === "admin" && window.location.pathname !== "/admin.html") {
       document.location.href = 'admin.html';
