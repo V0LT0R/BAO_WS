@@ -12,21 +12,26 @@
 
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">BAO</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                
-                <button type="button" class="btn btn-sm btn-outline-secondary me-5" onclick="logout()">Log out</button>
-              </div>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container justify-content-">
+            <div class="row w-100">
+                <div class="col-4">
+                    <a class="navbar-brand" href="#">BAO</a>
+
+                </div>
+                <div class="col-4 offset-4 d-flex justify-content-end ">
+                    <button type="button" class="btn btn-sm btn-outline-secondary me-5" onclick="logout()">Log out</button>
+                </div>
+            </div>
         </div>
     </nav>
 
     <main style="min-height: 800px;">
-
+        <div class="col" id="welcome">
+            <div >
+              <h1 id="welcomeMessage"></h1>
+            </div>
+          </div>
     </main>
 
     <footer class="container-fluid footer pt-5" id="footer">
@@ -39,7 +44,8 @@
     </footer>
 
 <script src="bootstrap_css/js/bootstrap.js"></script>
-<script src="assets/javascript/login.js"></script>
+<script src="assets/javascript/adminka.js"></script>
+<script src="assets/javascript/admin_test.js"></script>
 
 </body>
 

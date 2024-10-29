@@ -30,6 +30,8 @@ a{
 
 .footer{
     background: #14213D;
+    min-height: 200px;
+
 }
 
 .footer-hr{
