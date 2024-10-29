@@ -23,7 +23,6 @@ window.onload = () => {
           loginLink.classList.add("active-link");
           registerLink.classList.remove("active-link");
           registerLink.classList.add("passive_link");
-          passive_link
       } else {
           registerLink.classList.remove("passive_link");
           registerLink.classList.add("active-link");
