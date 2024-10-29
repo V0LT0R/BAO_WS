@@ -79,8 +79,17 @@ a{
 .active-link {
     text-decoration: underline;
     font-weight: bold;
-    
+    color: #ffffff;
+    font-size: 21px;
+    transition: color 0.3s, font-size 0.3s;
 }
+.passive_link{
+    font-weight: bold;
+    color: #bbbbbb;
+    font-size: 19px;
+    transition: color 0.3s, font-size 0.3s;
+}
+
 
 
 
