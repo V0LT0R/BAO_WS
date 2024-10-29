@@ -11,8 +11,8 @@
  
 	
 body {
-    background-color: #0d1117;
-    color: white;
+    background-color: var(--bg-color);
+    color: var(--bg-text-color);
 }
 
 /* #container {
@@ -36,7 +36,7 @@ button {
 }
 
 .head-bg{
-    background: linear-gradient(57deg, #14213D -4.46%, #000 105.01%);
+    background: var(--back-color)
  }
  a{
     text-decoration: none;
@@ -110,7 +110,7 @@ hr{
 }
 
 .block-2-bg{
-    background-color: #14213D;
+    background-color: var(--block-was-dark-bg);
     padding-bottom: 15px;
     transition: all 0.3s ease;
 }
@@ -120,7 +120,7 @@ hr{
 }
 
 .block__2_header{
-    color: #FFF;
+    color: var(--block-was-white-bg);
     text-shadow: 25px 20px 0px rgba(148, 148, 148, 0.28);
     font-size: 3rem;
     font-style: normal;
@@ -132,7 +132,7 @@ hr{
 
     width: 100%;
     height: 3px;
-    background-color: #ffffff; 
+    background-color: var(--block-was-white-bg); 
 
       
 }
@@ -152,45 +152,16 @@ hr{
     cursor: pointer;
 }
 
-.star-shadow {
-    text-shadow: 10px 10px 5px rgba(255, 255, 255, 0.5);
-}
-
-.change-theme-btn-night{
-    width: 50px;
-    border: 1px solid rgb(255, 255, 255);
-    border-radius: 30px;
-    display: flex;
-    justify-content: start;
-    padding: 3px;
-    background-color: #000;
-    transition: all 0.3s ease;
-}
-
-.change-theme-btn-day{
-    width: 50px;
-    border: 1px solid rgb(0, 0, 0);
-    border-radius: 30px;
-    display: flex;
-    justify-content: end;
-    padding: 3px;
-    background-color: #ffffff;
-    transition: all 0.3s ease;
-}
-
-#theme-btn{
-    margin-left: 90%;
-}
 
 .change-theme{
-    color: #ffffff;
-    background: #14213D;
+    color: var(--block-was-white-bg);
+    background: var(--block-was-dark-bg);
 }
 
 /* FOOTER CSS CODE */
 
 .footer{
-    background: #14213D;
+    background: var(--footer-bg);
     min-height: 600px;
 
 }
@@ -198,14 +169,14 @@ hr{
 .footer-hr{
     margin: 0px auto;
     width: 100%;
-    border: 2px solid #ffffff;
-    border-bottom: 1px solid #ffffff;
-    background-color: #ffffff;   
+    border: var(--footer-hr-border);
+    border-bottom: var(--footer-hr-border-bottom);
+    background-color: var(--footer-bg-color);
 }
 
 
 .footer-text a{
-    color: #FFF;
+    color: var(--footer-text-color);
     -webkit-transition: all 0.3s ease;;
     -moz-transition: all 0.3s ease;;
     -o-transition: all 0.3s ease;;
@@ -222,7 +193,7 @@ hr{
     font-weight: 600;
     line-height: normal;
     margin-top: 30px;
-    color: #FFF;
+    color: var(--footer-text-color);
 }
 
 .footer-secondary-text{
@@ -246,7 +217,7 @@ hr{
 }
 
 .form-bg{
-    background: #14213D;
+    background: var(--block-was-dark-bg);
 
 }
 
@@ -273,7 +244,7 @@ hr{
     width: 100%;
     background-color: transparent;
     border-radius: 10px;
-    color: #fff;
+    color: var(--block-was-white-bg);
 }
 .close-button{
     background-color: transparent;

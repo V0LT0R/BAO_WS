@@ -1,17 +1,10 @@
 :root{
+    --bg-color:#14213D;
+    --bg-text-color: white;
     --back-color:linear-gradient(57deg, #14213D -4.46%, #000 105.01%);
-    --block-1-color: aliceblue;
-    --block-1-hr: aliceblue;
-    --block-3-bg: #14213D;
-    --block-3-img-inverse: 0;
-    --block-3-row-1-p: #fff;
-    --block-3-line-bg: white;
-    --block-3-col-p: #000;
-
-    --block-5-square-bg: #1A2B50;
-    --block-5-square-shadow:0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    --block-5-hower-shadow: 3px 7px 4px 0px #3E3E68;
-
+    --block-was-dark-bg: #14213D;
+    --block-was-white: white;
+    
 
     --footer-bg: #14213D;
     --footer-hr-border:  2px solid #ffffff;
@@ -21,4 +14,3 @@
     --navbar-light-img: drop-shadow(0 0 10px rgba(255, 136, 0, 0));
     --navbar-dark-img: drop-shadow(0 0 10px rgba(55, 0, 255, 1));
 }
-

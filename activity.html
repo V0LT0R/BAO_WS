@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="bootstrap_css/css/bootstrap.css">
 
     <link rel="stylesheet" href="assets/css/Experience.css">
+    <link rel="stylesheet" media="(prefers-color-scheme: light)" href="assets/css/ExperienceLight.css">
+    <link rel="stylesheet" media="(prefers-color-scheme: dark)" href="assets/css/ExperienceDark.css">
+
     <title>BAO</title>
     
 </head>
@@ -400,86 +403,13 @@
 <div class="container-fluid change-theme" id="change-theme">
     <div class="container pb-2">
         <div class="row justify-content-center" style="flex-direction: column;">
-            <!-- Form Example -->
-            <h2 class="h2" style="width: 400px; margin: 20px auto;">Form Validation Example</h2>
-            
-            <div class="container show-the-form-trigger" id="pop-up">
-                <button class="pop-up-btn" type="button" onclick="toggleForm()"><h2>Show the form-></h2></button>
-            </div>
-            
-            <form class="form-trigger" style="width:600px;" id="myForm" onsubmit="return validateForm()">
-                <button class="close-button" onclick="closeForm()">X</button>
-                <div class="mt-4" style="margin: 0 90px;">
-                    <label>Email:</label>
-                    <input type="text" id="email" name="email">
-                    <span id="emailError" class="error"></span>
-                </div>
-                <div class="mt-4" style="margin: 0 90px">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password">
-                    <span id="passwordError" class="error"></span>
-                </div>
-                <div class="mt-4" style="margin: 0 90px">
-                    <label for="confirmPassword">Confirm Password:</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword">
-                    <span id="confirmPasswordError" class="error"></span>
-                </div>
-                <input type="submit" class="btn btn-outline-primary mt-4" value="Submit">
-            </form>
-        </div>
         <!-- Rating example -->
-        <h2 class="h2 mt-5" style="display: flex; justify-content: center;">Rating Example</h2>
-        <div class="rating mt-5">
+        <div class="rating my-5">
             <span class="star mx-2" data-value="1">★</span>
             <span class="star mx-2" data-value="2">★</span>
             <span class="star mx-2" data-value="3">★</span>
             <span class="star mx-2" data-value="4">★</span>
             <span class="star mx-2" data-value="5">★</span>
-        </div>
-        
-        <!-- Change theme -->
-        <h2 class="h2 mt-5" style="display: flex; justify-content: center;">Day Night theme Example</h2>
-        <button id="theme-btn" class="change-theme-btn-night" onclick="ChangeTheme()">🌕</button>
-
-        <!-- ReadMore/less -->
-        <h2 class="h2 mt-5" style="display: flex; justify-content: center;">Read More/Less Example</h2>
-        <p id="moreText" style="display:none;">This is additional content that can be shown or hidden.</p>
-        <button id="readMoreBtn">Read More</button>
-
-        <!-- Show Time -->
-        <h2 class="h2 mt-5" style="display: flex; justify-content: center;">Show Time Example</h2>
-        <button id="showTimeBtn">Show Current Time</button>
-        <p id="timeDisplay">The current time will be displayed here.</p>
-        
-
-        <!-- Responding to Events with Callbacks -->
-        <h2 class="h2 mt-5" style="display: flex; justify-content: center;">Responding to Events with Callbacks Example</h2>
-        <div class="multi-step-form">
-            <!-- Step 1 -->
-            <div class="form-step" id="step1">
-                <h2>Step 1</h2>
-                <input type="text" id="name" placeholder="Enter your name">
-                <button type="button" id="next1">Next</button>
-            </div>
-
-            <!-- Step 2 -->
-            <div class="form-step" id="step2" style="display: none;">
-                <h2>Step 2</h2>
-                <input type="text" id="email" placeholder="Enter your email">
-                <button type="button" id="back1">Back</button>
-                <button type="button" id="next2">Next</button>
-            </div>
-
-            <!-- Step 3 -->
-            <div class="form-step" id="step3" style="display: none;">
-                <h2>Step 3</h2>
-                <input type="text" id="password" placeholder="Enter your password">
-                <button type="button" id="back2">Back</button>
-                <button type="button" id="submit">Submit</button>
-            </div>
-
-            <!-- Feedback message -->
-            <p id="formFeedback" style="display: none;">Form submitted successfully!</p>
         </div>
 
 
