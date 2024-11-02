@@ -89,7 +89,7 @@ hr{
 .header-content p {
     font-size: 2rem;
     font-weight: 300;
-    color: #f8b400;
+    color: var(--header-text--);
 }
 
 .header-image {
@@ -128,6 +128,11 @@ hr{
     line-height: normal;
     margin-top: 30px;
 }
+.gerb_image{
+    content: var(--gerb-color--);
+}
+
+
 .block__2_line{
 
     width: 100%;

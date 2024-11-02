@@ -62,7 +62,7 @@ a{
 }
 
 .block-1-secondary-text{
-    color: #DC9F27;
+    color: var(--header-text--);
     margin-top: 60px;
 }
 

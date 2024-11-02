@@ -5,6 +5,9 @@
     --block-was-dark-bg: #14213D;
     --block-was-white: white;
     
+    --header-text--:#DC9F27;
+
+    --gerb-color--:url('../images/experience_block__2_1.png');
 
     --footer-bg: #14213D;
     --footer-hr-border:  2px solid #ffffff;
@@ -13,4 +16,6 @@
     --footer-text-color: #fff;
     --navbar-light-img: drop-shadow(0 0 10px rgba(255, 136, 0, 0));
     --navbar-dark-img: drop-shadow(0 0 10px rgba(55, 0, 255, 1));
+
+    
 }

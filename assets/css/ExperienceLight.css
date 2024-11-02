@@ -5,6 +5,9 @@
     --block-was-dark-bg: white; 
     --block-was-white: #14213D;
     
+    --header-text--:#5b0678;
+
+    --gerb-color--:url('../images/gerb_blue.png');
 
     --footer-bg: aliceblue;
     --footer-hr-border:  2px solid #14213D;
