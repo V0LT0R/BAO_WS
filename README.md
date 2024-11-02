@@ -6,8 +6,6 @@
 - [Features](#features)
 - [Usage](#usage)
 - [Project Structure](#project-structure)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Project Overview
 **BAO_WS** is a web application designed for [describe purpose, e.g., "user management and certificate issuance"]. It offers interactive elements, such as user profiles, FAQs, certificates, and administrative functions.
@@ -29,8 +27,4 @@
 - **`bootstrap_css/`**: Bootstrap framework files for responsive design.
 - **`.git/`**: Git tracking for project version control.
 
-## Contributing
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on contributing to this project.
 
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
