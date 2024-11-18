@@ -35,20 +35,32 @@ window.onload = () => {
   function register() {
     const username = document.getElementById("registerUsername").value;
     const password = document.getElementById("registerPassword").value;
-  
+
     if (username && password) {
-      if (localStorage.getItem(username)) {
-        alert("Пользователь уже существует!");
-      } else {
-        const hashedPassword = btoa(password); 
-        localStorage.setItem(username, hashedPassword);
-        alert("Регистрация успешна! Теперь вы можете войти.");
-        toggleForms('login');
-      }
+        // Retrieve the list of users from localStorage
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+
+        // Check if the user already exists
+        if (users.includes(username)) {
+            alert("Пользователь уже существует!");
+        } else {
+            // Store the user's username in the 'users' array
+            users.push(username);
+
+            // Save the users array back to localStorage
+            localStorage.setItem('users', JSON.stringify(users));
+
+            // Store the hashed password (as you were doing previously)
+            const hashedPassword = btoa(password);
+            localStorage.setItem(username, hashedPassword);
+
+            alert("Регистрация успешна! Теперь вы можете войти.");
+            toggleForms('login');
+        }
     } else {
-      alert("Введите имя пользователя и пароль.");
+        alert("Введите имя пользователя и пароль.");
     }
-  }
+}
   
   // Вход пользователя
   function login() {
