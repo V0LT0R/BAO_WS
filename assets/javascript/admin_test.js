@@ -4,6 +4,7 @@ window.onload = () => {
         document.location.href = 'index.html';
     } else {
         displayUsers();
+        showWelcomeMessage(storedUsername);
     }
 };
 function logout() {
@@ -52,4 +53,14 @@ function addUser(username) {
     users.push(username);
     localStorage.setItem('users', JSON.stringify(users)); 
     displayUsers();
+}
+
+function showWelcomeMessage(username) {
+    document.getElementById("welcomeMessage").textContent += ` ${username}`;
+    if(username !== "admin"){
+    document.getElementById("userStatus").textContent += ` user`;
+    }else {
+        document.getElementById("userStatus").textContent += ` admin`;
+    }
+    
 }

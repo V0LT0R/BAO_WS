@@ -19,6 +19,6 @@
     --footer-bg-color: #14213D;
     --footer-text-color: #14213D;
     --navbar-light-img: drop-shadow(0 0 10px rgba(255, 136, 0, 1));
-    --navbar-dark-img: drop-shadow(0 0 10px rgba(55, 0, 255, 0));
+    --navbar-dark-img: drop-shadow(0 0 10px rgba(55, 0, 255, 1));
 
 }

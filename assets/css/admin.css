@@ -43,6 +43,15 @@ a{
     color: #FFF;
 }
 
+.user-text-small{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    font-size: 25px;
+    color: #FFF;
+}
+
 
 /* FOOTER CSS CODE */
 
