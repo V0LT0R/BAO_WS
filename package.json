@@ -1,0 +1,11 @@
+{
+  "name": "bao_ws",
+  "version": "1.0.0",
+  "description": "- [Project Overview](#project-overview)\r - [Features](#features)\r - [Usage](#usage)\r - [Project Structure](#project-structure)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -12,10 +12,5 @@ function logout() {
   }
 
 function showWelcomeMessage(username) {
-    document.getElementById("welcomeMessage").textContent += ` ${username}`;
-    if(username !== "admin"){
-    document.getElementById("userStatus").textContent += ` user`;
-    }else {
-        document.getElementById("userStatus").textContent += ` admin`;
-    }
+    document.getElementById("welcomeMessage").textContent += ` ${username}!`;
 }

@@ -4,8 +4,6 @@ const darkSchemeMedia = matchMedia('(prefers-color-scheme: dark)');
 const switcherRadios = document.querySelectorAll('.switcher__radio');
 const navbar = document.getElementById('navbar');
 
-const navImage = document.querySelectorAll('.navbar-img');
-
 function setupSwitcher() {
     const savedScheme = getSavedScheme();
 
@@ -26,19 +24,11 @@ function setupSwitcher() {
 function setupScheme() {
     const savedScheme = getSavedScheme();
     const systemScheme = getSystemScheme();
-    if(savedScheme =="light"){
-        navImage.forEach(s => s.style.filter = 'invert(0)');
-        navImage[0].style.filter += 'drop-shadow(0 0 10px rgba(255, 136, 0, 1))';
-    }else{
-        navImage.forEach(s => s.style.filter = 'invert(1)');
-        navImage[1].style.filter += 'drop-shadow(0 0 10px rgba(55, 0, 255, 1))';
-    }
 
     if (savedScheme === null) return;
 
     if (savedScheme !== systemScheme) {
         setScheme(savedScheme);
-
     }
 }
 
@@ -49,7 +39,6 @@ function setScheme(scheme) {
         clearScheme();
     } else {
         saveScheme(scheme);
-
     }
 }
 
@@ -63,13 +52,6 @@ function switchMedia(scheme) {
     } else {
         lightMedia = (scheme === 'light') ? 'all' : 'not all';
         darkMedia = (scheme === 'dark') ? 'all' : 'not all';
-        if(scheme =="light"){
-            navImage.forEach(s => s.style.filter = 'invert(0)');
-            navImage[0].style.filter += 'drop-shadow(0 0 10px rgba(255, 136, 0, 1))';
-        }else{
-            navImage.forEach(s => s.style.filter = 'invert(1)');
-            navImage[1].style.filter += 'drop-shadow(0 0 10px rgba(55, 0, 255, 1))';
-        }
     }
 
     [...lightStyles].forEach((link) => {
