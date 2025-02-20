@@ -1,0 +1,19 @@
+{
+  "name": "bao_ws",
+  "version": "1.0.0",
+  "description": "- [Project Overview](#project-overview)\r - [Features](#features)\r - [Usage](#usage)\r - [Project Structure](#project-structure)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "mongoose": "^8.10.1"
+  }
+}
