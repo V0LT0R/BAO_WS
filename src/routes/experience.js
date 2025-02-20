@@ -27,10 +27,10 @@ router.get("/", async (req, res) => {
 // Обновить задачу (PUT)
 router.put("/:id", async (req, res) => {
   try {
-    const { title, description} = req.body;
+    const { year, description} = req.body;
     const updatedExp = await Experience.findByIdAndUpdate(
       req.params.id,
-      { title, description},
+      { year, description},
       { new: true }
     );
     res.json(updatedExp);

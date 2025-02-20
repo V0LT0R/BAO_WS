@@ -11,7 +11,8 @@
 body {
     margin: 0;
     padding: 0;
-
+    background-color: var(--bg-color);
+    color: var(--bg-text-color);
 
  }
  img{ 
@@ -25,11 +26,33 @@ body {
 a{
     text-decoration: none ;
  }
+
+
+ .switcher{
+    display: flex;
+}
+
+.switcher__radio{
+    opacity: 0;
+}
+
+
+.navbar-img{
+    width: 30px;
+
+}
+.light-img{
+    filter: var(--navbar-light-img);
+}
+.dark-img{
+    filter: var(--navbar-dark-img);
+}
+
  .block-1-bg{
-    background: #14213D;
+    background: var(--bg-color);
 }
 .block-1{
-    color: white;
+    color: var(--bg-text-color);
 }
 .block-1-user{
     display: flex;
@@ -40,14 +63,14 @@ a{
     font-weight: 600;
     line-height: normal;
     font-size: 35px;
-    color: #FFF;
+    color: var(--bg-text-color);
 }
 
 .task-item { display: flex; justify-content: space-between; padding: 10px; border: 1px solid #ccc; margin: 5px; }
 /* FOOTER CSS CODE */
 
 .footer{
-    background: #14213D;
+    background: var(--footer-bg);
     min-height: 200px;
 
 }
@@ -55,9 +78,9 @@ a{
 .footer-hr{
     margin: 0px auto;
     width: 100%;
-    border: 2px solid #ffffff;
-    border-bottom: 1px solid #ffffff;
-    background-color: #ffffff;   
+    border: var(--footer-hr-border);
+    border-bottom: var(--footer-hr-border-bottom);
+    background-color: var(--footer-bg-color);  
 }
 
 
@@ -67,7 +90,7 @@ a{
     font-weight: 600;
     line-height: normal;
     margin-top: 30px;
-    color: #FFF;
+    color: var(--footer-text-color);
 }
 
 .authors{
