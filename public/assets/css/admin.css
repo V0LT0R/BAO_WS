@@ -43,7 +43,7 @@ a{
     color: #FFF;
 }
 
-
+.task-item { display: flex; justify-content: space-between; padding: 10px; border: 1px solid #ccc; margin: 5px; }
 /* FOOTER CSS CODE */
 
 .footer{

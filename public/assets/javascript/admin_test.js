@@ -53,3 +53,79 @@ function addUser(username) {
     localStorage.setItem('users', JSON.stringify(users)); 
     displayUsers();
 }
+
+
+// Taking experience from MongoDB
+const API_URL = "http://localhost:5000/api/experience";
+
+        async function fetchExperiences() {
+            const response = await fetch(API_URL);
+            const experiences = await response.json();
+            const expList = document.getElementById("exp-list");
+            expList.innerHTML = "";
+            
+            experiences.forEach(exp => {
+                const li = document.createElement("li");
+                li.className = "task-item";
+                li.innerHTML = `
+                    <div class="row justify-content-center align-items-center ">
+                        <div class="col-4 ">
+                            <h2><strong>${exp.year}</strong></h2>
+                        </div>
+                        <div class="col-7 block__2_text">
+                            <p>
+                                ${exp.description}
+                            </p>
+                        </div>
+                    </div>
+                    <hr class="block__2_line my-5">
+
+                    
+                `;
+                expList.appendChild(li);
+            });
+        }
+
+        async function addExp() {
+            const year = document.getElementById("expYear").value;
+            const description = document.getElementById("expDescription").value;
+
+            await fetch(API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ year, description })
+            });
+
+            document.getElementById("expYear").value = "";
+            document.getElementById("expDescription").value = "";
+            fetchExperiences();
+        }
+
+        async function deleteTask(id) {
+            await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+            fetchExperiences();
+        }
+
+        async function editTask(id, oldTitle, oldDescription) {
+            const newTitle = prompt("Edit Task Title:", oldTitle);
+            const newDescription = prompt("Edit Task Description:", oldDescription);
+            if (newTitle !== null && newDescription !== null) {
+                await fetch(`${API_URL}/${id}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ title: newTitle, description: newDescription })
+                });
+                fetchExperiences();
+            }
+        }
+
+        async function toggleTask(id, completed) {
+            await fetch(`${API_URL}/${id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ completed: !completed })
+            });
+            fetchExperiences();
+        }
+
+        fetchExperiences();
