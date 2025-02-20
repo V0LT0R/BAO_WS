@@ -3,75 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BAO</title>
-    <link rel="stylesheet" href="bootstrap_css/css/bootstrap.css">
-    <link rel="stylesheet" href="assets/css/Index.css">
-    <link rel="stylesheet" media="(prefers-color-scheme: light)" href="assets/css/IndexLight.css">
-    <link rel="stylesheet" media="(prefers-color-scheme: dark)" href="assets/css/IndexDark.css">
-
-
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/bootstrap_css/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/css/Index.css">
+    <link rel="stylesheet" media="(prefers-color-scheme: light)" href="/assets/css/IndexLight.css">
+    <link rel="stylesheet" media="(prefers-color-scheme: dark)" href="/assets/css/IndexDark.css">
 </head>
-
-
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar">
         <div class="container">
             <a class="navbar-brand" href="#">BAO</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-              </button>
+            </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="experience.html">Experience</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="activity.html">Activity</a>
-                  </li>
-                  
-                  <li class="nav-item">
-                    <a class="nav-link" href="certificates.html">Certificates</a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a class="nav-link" href="FAQs.html">FAQs</a>
-                  </li>
-                  
-                  <li class="nav-item">
-                    <a class="nav-link" href="#footer">Contact</a>
-                  </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/experience">Experience</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/activity">Activity</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/certificates">Certificates</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/faqs">FAQs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#footer">Contact</a>
+                    </li>
                 </ul>
-                <button type="button" class="btn btn-sm btn-outline-secondary me-5" onclick="document.location='login.html'" >Register</button>
-              </div>
-              <fieldset class="switcher">
+                <button type="button" class="btn btn-sm btn-outline-secondary me-5" onclick="document.location='/login'">Register</button>
+            </div>
+            <fieldset class="switcher">
                 <input class="switcher__radio switcher__radio--light" type="radio" name="color-scheme" value="light" aria-label="Светлая" id="light">
-                <label for="light" style="display: block;"><img class="navbar-img light-img" src="assets/images/light.svg" alt="light mode"></label>
+                <label for="light" style="display: block;"><img class="navbar-img light-img" src="/assets/images/light.svg" alt="light mode"></label>
                 <input class="switcher__radio switcher__radio--dark" type="radio" name="color-scheme" value="dark" aria-label="Тёмная" id="dark" checked="">
-                <label for="dark" style="display: block;"><img class="navbar-img dark-img" src="assets/images/dark.svg" alt = "dark mode"></label>
+                <label for="dark" style="display: block;"><img class="navbar-img dark-img" src="/assets/images/dark.svg" alt="dark mode"></label>
                 <div class="switcher__status"></div>
             </fieldset>
-        
         </div>
     </nav>
 
-<header class="container-fluid head-bg" id="head-bg" style="min-height: 700px;">
-    <div class="container">
-        <div class="row align-items-center block-1" id="block-1">
-            <div class="col-lg-7">
-                <h1 class="display-4"><strong>Biloshchytskyi Andrii</strong></h1>
-                <hr class="block-1-hr">
-                <h1 class="display-4"><strong>Doctor of techical Science, Full Professor</strong></h1>
-            </div>
-            <div class="col-lg-5">
-                <img  src="assets/images/photo_header.png" class="mx-auto d-block img-fluid" style="margin-bottom: 50px;"></img>
-
+    <header class="container-fluid head-bg" id="head-bg" style="min-height: 700px;">
+        <div class="container">
+            <div class="row align-items-center block-1" id="block-1">
+                <div class="col-lg-7">
+                    <h1 class="display-4"><strong>Biloshchytskyi Andrii</strong></h1>
+                    <hr class="block-1-hr">
+                    <h1 class="display-4"><strong>Doctor of Technical Science, Full Professor</strong></h1>
+                </div>
+                <div class="col-lg-5">
+                    <img src="/assets/images/photo_header.png" class="mx-auto d-block img-fluid" style="margin-bottom: 50px;">
+                </div>
             </div>
         </div>
-    </div>
-</header>
+    </header>
 
 <div class="container">
     <div class="block-2-bg"></div>
@@ -299,12 +290,9 @@
 
 
 
-<script src="assets/javascript/darkLightMode.js"></script>
-<script src="bootstrap_css/js/bootstrap.js"></script>
+    <script src="/assets/javascript/darkLightMode.js"></script>
+    <script src="/bootstrap_css/js/bootstrap.js"></script>
 </body>
-
-
-
 </html>
 
 
