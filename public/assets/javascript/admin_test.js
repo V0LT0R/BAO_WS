@@ -72,7 +72,7 @@ const API_URL = "http://localhost:5000/api/experience";
                             <h2><strong>${exp.year}</strong></h2>
                         </div>
                         <div class="col-6 block__2_text">
-                            <p>
+                            <p style="font-size: 1.3rem;">
                                 ${exp.description}
                             </p>
                         </div>
