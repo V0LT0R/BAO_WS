@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const expRoutes = require("./src/routes/experience");
+const authRoutes = require('./src/routes/user');
 
 const dotenv = require('dotenv');
 dotenv.config();
@@ -26,7 +27,9 @@ mongoose.connect(process.env.MONGODB_URI, {
   .catch((err) => console.error('Failed to connect to MongoDB:', err));
 
 // Маршруты
+app.use('/api/user', authRoutes);
 app.use("/api/experience", expRoutes);
+
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

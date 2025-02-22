@@ -8,10 +8,7 @@
     <link rel="stylesheet" href="assets/css/admin.css">
     <link rel="stylesheet" media="(prefers-color-scheme: light)" href="assets/css/ExperienceLight.css">
     <link rel="stylesheet" media="(prefers-color-scheme: dark)" href="assets/css/ExperienceDark.css">
-
-
 </head>
-
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar">
@@ -31,19 +28,15 @@
                   <li class="nav-item">
                     <a class="nav-link" href="activity.html">Activity</a>
                   </li>
-                  
                   <li class="nav-item">
                     <a class="nav-link" href="certificates.html">Certificates</a>
                   </li>
-
                   <li class="nav-item">
                     <a class="nav-link" href="FAQs.html">FAQs</a>
                   </li>
-                  
                   <li class="nav-item">
                     <a class="nav-link" href="#footer">Contact</a>
                   </li>
-
                 </ul>
                 <button type="button" class="btn btn-sm btn-outline-secondary me-5" onclick="logout()">Log out</button>
               </div>
@@ -54,8 +47,7 @@
                 <label for="dark" style="display: block;"><img class="navbar-img dark-img" src="assets/images/dark.svg" alt = "dark mode"></label>
                 <div class="switcher__status"></div>
             </fieldset>
-                  
-              </div>
+            </div>
         </div>
     </nav>
     <header class="container-fluid block-1-bg" style="min-height: 750px; padding-top: 50px;">
@@ -78,8 +70,21 @@
                     </div>
                 </div>
             </div>
-            
         </div>
+        <div class="container d-flex block-1">
+            <div class="row row-cols-1">
+                <div class="col mt-5">
+                    <input type="text" id="newUsername" placeholder="Username">
+                    <input type="password" id="newPassword" placeholder="Password">
+                    <button onclick="registerUser()">Register User</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="margin-top: 50px; font-family: 'Montserrat';" id="user-list"></div>
+        
+        <div class="footer-hr "></div>
+
         <div class="container d-flex block-1">
             <div class="row row-cols-1">
                 <div class="col mt-5">
@@ -87,7 +92,6 @@
                     <input type="text" id="expDescription" placeholder="Experience description">
                     <button onclick="addExp()">Add Task</button>
                 </div>
-            
             </div>
         </div>
         <div class="container" style="margin-top: 50px; font-family: 'Montserrat';" id="exp-list"></div>
@@ -107,8 +111,4 @@
 <script src="assets/javascript/darkLightMode.js"></script>
 
 </body>
-
 </html>
-
-
-

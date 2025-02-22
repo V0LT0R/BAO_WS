@@ -57,6 +57,7 @@ function addUser(username) {
 
 // Taking experience from MongoDB
 const API_URL = "http://localhost:5000/api/experience";
+const REG_API_URL = "http://localhost:5000/api/user";
 
         async function fetchExperiences() {
             const response = await fetch(API_URL);
@@ -116,18 +117,78 @@ const API_URL = "http://localhost:5000/api/experience";
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({year: newYear, description: newDescription })
                 });
-                console.log(newYear);
                 fetchExperiences();
             }
         }
 
-        async function toggleTask(id, completed) {
-            await fetch(`${API_URL}/${id}`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ completed: !completed })
+        fetchExperiences();
+
+
+
+
+async function fetchUsers() {
+            const response = await fetch(REG_API_URL);
+            const users_reg = await response.json();
+            const UserList = document.getElementById("user-list");
+            UserList.innerHTML = "";
+            
+            users_reg.forEach(user1 => {
+                const div1 = document.createElement("div");
+                div1.className = "row justify-content-center align-items-center";
+                div1.innerHTML = `
+                        <div class="col-3 ">
+                            <h2><strong>${user1.username}</strong></h2>
+                        </div>
+                        <div class="col-6 block__2_text">
+                            <p style="font-size: 1.3rem;">
+                                ${user1.password}
+                            </p>
+                        </div>
+                        <div class="col-3 ">
+                            <button onclick="editUser('${user1._id}', '${user1.username}', '${user1.password}')">Edit</button>
+                            <button onclick="deleteUser('${user1._id}')">Delete</button> 
+                        </div>
+                        
+                `;
+                UserList.appendChild(div1);
             });
-            fetchExperiences();
+        }
+
+        async function registerUser() {
+            const username = document.getElementById("newUsername").value;
+            const password = document.getElementById("newPassword").value;
+        
+            await fetch(REG_API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password }),
+            });
+
+            document.getElementById("newUsername").value = "";
+            document.getElementById("newPassword").value = "";
+        
+
+            fetchUsers()
+        }
+        async function deleteUser(id) {
+            await fetch(`${REG_API_URL}/${id}`, { method: "DELETE" });
+            fetchUsers();
+        }
+
+        async function editUser(id, oldUser, oldPassword) {
+            const newUser = prompt("Edit Username:", oldUser);
+            console.log(newUser);
+            const newPassword = prompt("Edit Password:", oldPassword);
+            if (newUser !== null && newPassword !== null) {
+                await fetch(`${REG_API_URL}/${id}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({username: newUser, password: newPassword })
+                });
+                fetchUsers();
+            }
         }
 
         fetchExperiences();
+
+        fetchUsers()
