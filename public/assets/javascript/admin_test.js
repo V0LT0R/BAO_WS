@@ -1,14 +1,22 @@
-window.onload = () => {
-    const storedUsername = localStorage.getItem("username");
-    if (!storedUsername || storedUsername!='admin') {
-        document.location.href = 'index.html';
-    } else {
-        displayUsers();
+document.addEventListener('DOMContentLoaded', () => {
+    const token = localStorage.getItem('jwtToken');
+    if (!token) window.location.href = '/';
+    
+    const decodedToken = parseJwt(token);
+    if (!decodedToken) {
+      localStorage.removeItem('jwtToken');
+      window.location.href = '/';
+      return;
     }
-};
-function logout() {
-    localStorage.removeItem("username");
-    document.location.href = 'index.html'
+  
+    // Для admin.html проверяем роль
+    if (window.location.pathname.includes('admin.html') && decodedToken.role !== 'admin') {
+      window.location.href = 'user.html';
+    }
+  });
+  function logout() {
+    localStorage.removeItem('jwtToken');
+    window.location.href = 'index.html';
   }
 
 function showWelcomeMessage(username) {
@@ -127,7 +135,7 @@ const REG_API_URL = "http://localhost:5000/api/user";
 
 
 async function fetchUsers() {
-            const response = await fetch(REG_API_URL);
+            const response = await fetch("http://localhost:5000/api/user/users");
             const users_reg = await response.json();
             const UserList = document.getElementById("user-list");
             UserList.innerHTML = "";
@@ -157,19 +165,22 @@ async function fetchUsers() {
         async function registerUser() {
             const username = document.getElementById("newUsername").value;
             const password = document.getElementById("newPassword").value;
+            const role = document.getElementById("newRole").value;
         
-            await fetch(REG_API_URL, {
+            await fetch("http://localhost:5000/api/user/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ username, password }),
+                body: JSON.stringify({ username, password, role }),
             });
 
             document.getElementById("newUsername").value = "";
             document.getElementById("newPassword").value = "";
+            document.getElementById("newRole").value = "";
         
 
             fetchUsers()
         }
+        
         async function deleteUser(id) {
             await fetch(`${REG_API_URL}/${id}`, { method: "DELETE" });
             fetchUsers();

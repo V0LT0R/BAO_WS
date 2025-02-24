@@ -1,21 +1,61 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/Authorization');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const { 
+  registerValidation, 
+  loginValidation, 
+  validate 
+} = require('../middlewares/authValidation');
+
+const generateAccessToken = (id, role) => {
+  const payload = {
+      id,
+      role
+  }
+  return jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: "24h"} )
+}
 
 // Создать задачу (POST)
-router.post("/", async (req, res) => {
+router.post("/register", registerValidation, validate, async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const newUser = new User({ username, password });
-    await newUser.save();
-    res.status(201).json(newUser);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to create user" });
-  }
+    const {username, password, role} = req.body;
+    const candidate = await User.findOne({username})
+    if (candidate) {
+        return res.status(400).json({message: "Пользователь с таким именем уже существует"})
+    }
+    const hashPassword = bcrypt.hashSync(password, 10);
+    const user = new User({username, password: hashPassword, role})
+    await user.save()
+    return res.json({message: "Пользователь успешно зарегистрирован"})
+} catch (e) {
+    console.log(e)
+    res.status(400).json({message: 'Registration error'})
+}
+});
+
+router.post("/login", loginValidation, validate, async (req, res) => {
+  try {
+    const {username, password} = req.body
+    const user = await User.findOne({username})
+    if (!user) {
+        return res.status(400).json({message: `Пользователь ${username} не найден`})
+    }
+    const validPassword = bcrypt.compareSync(password, user.password)
+    if (!validPassword) {
+        return res.status(400).json({message: `Введен неверный пароль`})
+    }
+    const token = generateAccessToken(user._id, user.role)
+    return res.json({token})
+} catch (e) {
+    console.log(e)
+    res.status(400).json({message: 'Login error'})
+}
 });
 
 // Получить все задачи (GET)
-router.get("/", async (req, res) => {
+router.get("/users", async (req, res) => {
   try {
     const users = await User.find();
     res.json(users);

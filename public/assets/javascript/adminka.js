@@ -1,14 +1,22 @@
-window.onload = () => {
-    const storedUsername = localStorage.getItem("username");
-    if (!storedUsername) {
-        document.location.href = 'index.html';
-    } else {
-        showWelcomeMessage(storedUsername);
+document.addEventListener('DOMContentLoaded', () => {
+    const token = localStorage.getItem('jwtToken');
+    if (!token) window.location.href = '/';
+    
+    const decodedToken = parseJwt(token);
+    if (!decodedToken) {
+      localStorage.removeItem('jwtToken');
+      window.location.href = '/';
+      return;
     }
-};
-function logout() {
-    localStorage.removeItem("username");
-    document.location.href = 'index.html'
+  
+    // Для user.html проверяем роль
+    if (window.location.pathname.includes('user.html') && decodedToken.role !== 'user') {
+      window.location.href = 'admin.html';
+    }
+  });
+  function logout() {
+    localStorage.removeItem('jwtToken');
+    window.location.href = 'index.html';
   }
 
 function showWelcomeMessage(username) {
