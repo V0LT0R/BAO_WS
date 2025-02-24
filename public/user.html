@@ -57,23 +57,27 @@
         </div>
     </nav>
 
-    <header class="container-fluid block-1-bg" > 
+    <header class="container-fluid block-1-bg" style="min-height: 750px; padding-top: 50px;"> 
         <div class="container block-1 block-1-user">
-          <div class="row row-cols-1">
-            <div class="col mt-5">
-                <h1 id="">Welcome to your profile</h1>
-            </div>
-    </header>
-
-    <div class="container-fluid block-1-bg" style="min-height:630px; padding-top: 50px;">
-
-        <div class="" >
-            <div class="gif" style="justify-content: center; display: flex;">
-                <img class="img-fluid" src="assets/images/XOsX.gif"  alt="nothing here">
+            <div class="row row-cols-1">
+                <div class="col mt-5">
+                    <h1 id="accName"></h1>
+                </div>
             </div>
         </div>
-   
-    </div>
+        <div class="container d-flex block-1">
+            <div class="row row-cols-1">
+                <div class="col mt-5">
+                    <input type="text" id="expYear" placeholder="Experience year">
+                    <input type="text" id="expDescription" placeholder="Experience description">
+                    <button onclick="addExp()">Add Task</button>
+                </div>
+            </div>
+        </div>
+        <div class="container" style="margin-top: 50px; font-family: 'Montserrat';" id="exp-list"></div>
+    </header>
+
+    
 
     <footer class="container-fluid footer pt-5" id="footer">
         <div class="container">

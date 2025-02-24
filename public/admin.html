@@ -54,23 +54,10 @@
         </div>
     </nav>
     <header class="container-fluid block-1-bg" style="min-height: 750px; padding-top: 50px;">
-        <div class="container" style="background-color: #1f3769; padding: 30px; border-radius: 30px; ">
-            <div class="row">
-                    <div class="row flex-column " style="width: 700px;" >
-                        <h1 id="welcomeMessage" class="user-text-small" style="max-width: 500px;">Your name:</h1>
-                        <h1 id="userStatus" class="user-text-small" style="max-width: 500px;">Your status:</h1>
-                    </div>
-                </div>
-        </div>
-        <div class="container d-flex block-1">
+        <div class="container block-1 block-1-user">
             <div class="row row-cols-1">
                 <div class="col mt-5">
-                    <h1 id="welcomeMessage">List of registered users</h1>
-                </div>
-                <div class="col mt-5" id="usersList">
-                    <div class="spinner-grow" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
+                    <h1 id="accName"></h1>
                 </div>
             </div>
         </div>
@@ -84,8 +71,20 @@
                 </div>
             </div>
         </div>
-
+        <div class="container" style="margin-top: 50px; font-family: 'Montserrat';">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-6 ">
+                    <h2>Username</h2>
+                </div>
+                <div class="col-6 block__2_text">
+                    <h2>
+                        Role
+                    </h2>
+                </div>
+            </div>
+        </div>
         <div class="container" style="margin-top: 50px; font-family: 'Montserrat';" id="user-list"></div>
+        <br>
         
         <div class="footer-hr "></div>
 

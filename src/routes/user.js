@@ -12,9 +12,9 @@ const {
 const generateAccessToken = (id, role) => {
   const payload = {
       id,
-      role
+      role 
   }
-  return jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: "24h"} )
+  return jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: "1h"} )
 }
 
 // Создать задачу (POST)
@@ -59,6 +59,15 @@ router.get("/users", async (req, res) => {
   try {
     const users = await User.find();
     res.json(users);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch user" });
+  }
+});
+
+router.get("/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    res.json(user);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch user" });
   }

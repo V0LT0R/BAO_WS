@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!token) window.location.href = '/';
     
     const decodedToken = parseJwt(token);
+    welcome(decodedToken.id)
     if (!decodedToken) {
       localStorage.removeItem('jwtToken');
       window.location.href = '/';
@@ -12,54 +13,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // Для admin.html проверяем роль
     if (window.location.pathname.includes('admin.html') && decodedToken.role !== 'admin') {
       window.location.href = 'user.html';
-    }
+    };
+    
+
   });
+  async function welcome(id) {
+    USER_API = `http://localhost:5000/api/user/${id}`
+    const response = await fetch(USER_API);
+    const users_reg = await response.json();
+    const welcomeMessage = document.getElementById('accName');
+    welcomeMessage.textContent = `Welcome, ${users_reg.username}!`;
+  }
   function logout() {
     localStorage.removeItem('jwtToken');
     window.location.href = 'index.html';
   }
-
-function showWelcomeMessage(username) {
-    document.getElementById("welcomeMessage").textContent += ` ${username}!`;
-}
-
-function displayUsers() {
-    const usersContainer = document.getElementById("usersList");
-    usersContainer.innerHTML = ''; 
-
-    let users = JSON.parse(localStorage.getItem('users')) || [];
-    if (users.length == 1) {
-        usersContainer.classList.add('user-entry', 'd-flex', 'justify-content-between', 'align-items-center', 'my-4', 'user-text');
-        usersContainer.innerHTML = '<p>No users registered.</p>';
-    } else {
-        users.forEach(user => {
-            if (user != 'admin'){
-                const userDiv = document.createElement('div');
-                userDiv.classList.add('user-entry', 'd-flex', 'justify-content-between', 'align-items-center', 'my-4', 'user-text');
-                userDiv.innerHTML = `
-                    <span>${user}</span>
-                    <button class="btn btn-danger btn-sm ml-5" onclick="deleteUser('${user}')">Delete</button>
-                `;
-            usersContainer.appendChild(userDiv);
-            }
-            
-        });
+  function parseJwt(token) {
+    try {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        return JSON.parse(atob(base64));
+    } catch (e) {
+        console.error('Ошибка парсинга токена:', e);
+        return null;
     }
-}
-
-function deleteUser(username) {
-    let users = JSON.parse(localStorage.getItem('users')) || [];
-    users = users.filter(user => user !== username);
-    localStorage.setItem('users', JSON.stringify(users));
-    localStorage.removeItem(username);
-    displayUsers();
-}
-
-function addUser(username) {
-    let users = JSON.parse(localStorage.getItem('users')) || [];
-    users.push(username);
-    localStorage.setItem('users', JSON.stringify(users)); 
-    displayUsers();
 }
 
 
@@ -144,16 +121,15 @@ async function fetchUsers() {
                 const div1 = document.createElement("div");
                 div1.className = "row justify-content-center align-items-center";
                 div1.innerHTML = `
-                        <div class="col-3 ">
+                        <div class="col-6 ">
                             <h2><strong>${user1.username}</strong></h2>
                         </div>
-                        <div class="col-6 block__2_text">
+                        <div class="col-3 block__2_text">
                             <p style="font-size: 1.3rem;">
-                                ${user1.password}
+                                ${user1.role}
                             </p>
                         </div>
                         <div class="col-3 ">
-                            <button onclick="editUser('${user1._id}', '${user1.username}', '${user1.password}')">Edit</button>
                             <button onclick="deleteUser('${user1._id}')">Delete</button> 
                         </div>
                         
