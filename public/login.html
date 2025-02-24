@@ -60,16 +60,16 @@
       <div class="row d-flex justify-content-center mt-5 w-100">
 
         <!-- ------------ Change sign in / sign up ---------------- -->
-        <div class="col-3 d-flex justify-content-center">
+        <!-- <div class="col-3 d-flex justify-content-center">
           <a href="#" id="loginLink" class="link-offset-3" onclick="toggleForms('login')">Sign in</a>
-        </div>
-        <div class="col-3 d-flex justify-content-center">
+        </div> -->
+        <!-- <div class="col-3 d-flex justify-content-center">
           <a href="#" id="registerLink" class="link-offset-3" onclick="toggleForms('register')">Sign up</a>
-        </div>
-        <div class="w-100"></div> <!-- make enter -->
+        </div> -->
+        <!-- <div class="w-100"></div> make enter -->
 
         <!--  ----------------Sign up part--------------  -->
-        <div class="col-6" id="registerForm">
+        <!-- <div class="col-6" id="registerForm">
           
             <h1 class="display-4 mt-5"><strong>Registration</strong></h1>
             <div class="form-floating my-5">
@@ -82,10 +82,10 @@
             </div>
             <button type="button" class="btn btn-secondary w-100 p-3" onclick="register()">Register</button>
           
-        </div>
+        </div> -->
 
         <!--  ----------------Log in part--------------  -->
-        <div class="col-6" id="loginForm">
+        <div class="col-6" id="">
           
           <h1 class="display-4 mt-5"><strong>Sign in</strong></h1>
           <div class="form-floating my-5">
@@ -96,7 +96,8 @@
             <input type="password" class="form-control" id="loginPassword" placeholder="Password">
             <label for="loginPassword">Password</label>
           </div>
-          <button type="button" class="btn btn-secondary w-100 p-3" onclick="login()">Sign in</button>
+          <button type="button" class="btn btn-secondary w-100 p-3" onclick="loginUser()">Sign in</button>
+          <div id="loginError" style="color: red;"></div>
         
         </div>
           
