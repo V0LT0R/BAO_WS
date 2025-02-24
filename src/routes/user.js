@@ -76,15 +76,30 @@ router.get("/:id", async (req, res) => {
 // Обновить задачу (PUT)
 router.put("/:id", async (req, res) => {
   try {
-    const { username, password} = req.body;
-    const updatedUser = await User.findByIdAndUpdate(
-      req.params.id,
-      { username, password},
-      { new: true }
-    );
-    res.json(updatedUser);
+    const { currentPassword, newPassword, username } = req.body;
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+      return res.status(404).json({ message: "Пользователь не найден" });
+    }
+
+    // Проверка текущего пароля
+    const isValid = await bcrypt.compare(currentPassword, user.password);
+    if (!isValid) {
+      return res.status(400).json({ message: "Неверный пароль" });
+    }
+
+    // Обновление данных
+    if (username) user.username = username;
+    if (newPassword) {
+      user.password = await bcrypt.hash(newPassword, 10);
+    }
+
+    await user.save();
+    res.json({ message: "Данные обновлены", user });
   } catch (error) {
-    res.status(500).json({ error: "Failed to update user" });
+    console.error("Ошибка обновления:", error);
+    res.status(500).json({ error: "Ошибка сервера" });
   }
 });
 

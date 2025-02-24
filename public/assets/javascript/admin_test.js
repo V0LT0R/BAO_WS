@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('jwtToken');
     if (!token) window.location.href = '/';
@@ -22,7 +23,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const response = await fetch(USER_API);
     const users_reg = await response.json();
     const welcomeMessage = document.getElementById('accName');
-    welcomeMessage.textContent = `Welcome, ${users_reg.username}!`;
+    const userEdit = document.getElementById("user_edit");
+    userEdit.innerHTML = "";
+    const div = document.createElement("div");
+    div.className = "row row-cols-1";
+    div.innerHTML = `
+                <div class="col mt-5">
+                    <h1 id="accName">Welcome, ${users_reg.username}!</h1>
+                </div>
+                <div class="col mt-1">
+                    <button  type="button" class="btn btn-light mb-2 border" onclick="editUser('${users_reg._id}', '${users_reg.username}')"><strong>Edit user</strong></button>
+                </div>
+    `;
+    userEdit.appendChild(div);
+    
   }
   function logout() {
     localStorage.removeItem('jwtToken');
@@ -162,18 +176,31 @@ async function fetchUsers() {
             fetchUsers();
         }
 
-        async function editUser(id, oldUser, oldPassword) {
+        async function editUser(id, oldUser) {
             const newUser = prompt("Edit Username:", oldUser);
-            console.log(newUser);
-            const newPassword = prompt("Edit Password:", oldPassword);
-            if (newUser !== null && newPassword !== null) {
-                await fetch(`${REG_API_URL}/${id}`, {
+            const checkPassword = prompt("Your Password: "); 
+            const newPassword = prompt("Edit Password: ");
+        
+            if (newUser && checkPassword && newPassword) {
+                // Отправляем данные на сервер для проверки и хэширования
+                const response = await fetch(`http://localhost:5000/api/user/${id}`, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({username: newUser, password: newPassword })
+                    body: JSON.stringify({
+                        username: newUser,
+                        currentPassword: checkPassword, // Пароль в открытом виде
+                        newPassword: newPassword         // Новый пароль в открытом виде
+                    })
                 });
-                fetchUsers();
+        
+                if (response.ok) {
+                    alert("Данные обновлены!");
+                    welcome(id);
+                } else {
+                    alert("Ошибка: " + (await response.json()).message);
+                }
             }
+            fetchUsers()
         }
 
         fetchExperiences();

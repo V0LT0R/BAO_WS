@@ -17,13 +17,56 @@ document.addEventListener('DOMContentLoaded', () => {
       window.location.href = 'admin.html';
     };
   });
+
+
+
   async function welcome(id) {
     USER_API = `http://localhost:5000/api/user/${id}`
     const response = await fetch(USER_API);
     const users_reg = await response.json();
     const welcomeMessage = document.getElementById('accName');
-    welcomeMessage.textContent = `Welcome, ${users_reg.username}!`;
+    const userEdit = document.getElementById("user_edit");
+    userEdit.innerHTML = "";
+    const div = document.createElement("div");
+    div.className = "row row-cols-1";
+    div.innerHTML = `
+                <div class="col mt-5">
+                    <h1 id="accName">Welcome, ${users_reg.username}!</h1>
+                </div>
+                <div class="col mt-1">
+                    <button  type="button" class="btn btn-light mb-2 border" onclick="editUser('${users_reg._id}', '${users_reg.username}')"><strong>Edit user</strong></button>
+                </div>
+    `;
+    userEdit.appendChild(div);
+    
   }
+
+  async function editUser(id, oldUser) {
+    const newUser = prompt("Edit Username:", oldUser);
+    const checkPassword = prompt("Your Password: "); 
+    const newPassword = prompt("Edit Password: ");
+
+    if (newUser && checkPassword && newPassword) {
+        // Отправляем данные на сервер для проверки и хэширования
+        const response = await fetch(`http://localhost:5000/api/user/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                username: newUser,
+                currentPassword: checkPassword, // Пароль в открытом виде
+                newPassword: newPassword         // Новый пароль в открытом виде
+            })
+        });
+
+        if (response.ok) {
+            alert("Данные обновлены!");
+            welcome(id);
+        } else {
+            alert("Ошибка: " + (await response.json()).message);
+        }
+    }
+}
+
   function logout() {
     localStorage.removeItem('jwtToken');
     window.location.href = 'index.html';
@@ -58,8 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     </p>
                 </div>
                 <div class="col-3 ">
-                    <button onclick="editExp('${exp._id}', '${exp.year}', '${exp.description}')">Edit</button>
-                    <button onclick="deleteExp('${exp._id}')">Delete</button> 
+                    <button class="btn btn-light mb-2 border" onclick="editExp('${exp._id}', '${exp.year}', '${exp.description}')">Edit</button>
+                    <button class="btn btn-light mb-2 border" onclick="deleteExp('${exp._id}')">Delete</button> 
                 </div>
                 
         `;
