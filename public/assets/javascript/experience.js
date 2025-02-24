@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // API ----------------------------- /|\
     
     // all experience from MongoDB
-    const API_URL = "http://localhost:5000/api/experience";
+    const API_URL = "/api/experience";
 
         async function fetchExperiences() {
             const response = await fetch(API_URL);
