@@ -12,7 +12,7 @@ The project is available at the following link: [Bao Web Site](https://bao-ws.on
 
 ```sh
 git clone https://github.com/V0LT0R/BAO_WS
-cd bao-ws
+cd bao_ws
 ```
 
 ### 2. Install Dependencies
