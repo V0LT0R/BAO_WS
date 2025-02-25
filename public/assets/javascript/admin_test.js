@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   });
   async function welcome(id) {
-    USER_API = `http://localhost:5000/api/user/${id}`
+    USER_API = `/api/user/${id}`
     const response = await fetch(USER_API);
     const users_reg = await response.json();
     const welcomeMessage = document.getElementById('accName');
@@ -55,8 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // Taking experience from MongoDB
-const API_URL = "http://localhost:5000/api/experience";
-const REG_API_URL = "http://localhost:5000/api/user";
+const API_URL = "/api/experience";
+const REG_API_URL = "/api/user";
 
         async function fetchExperiences() {
             const response = await fetch(API_URL);
@@ -126,7 +126,7 @@ const REG_API_URL = "http://localhost:5000/api/user";
 
 
 async function fetchUsers() {
-            const response = await fetch("http://localhost:5000/api/user/users");
+            const response = await fetch("/api/user/users");
             const users_reg = await response.json();
             const UserList = document.getElementById("user-list");
             UserList.innerHTML = "";
@@ -157,7 +157,7 @@ async function fetchUsers() {
             const password = document.getElementById("newPassword").value;
             const role = document.getElementById("newRole").value;
         
-            await fetch("http://localhost:5000/api/user/register", {
+            await fetch("/api/user/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username, password, role }),
@@ -183,7 +183,7 @@ async function fetchUsers() {
         
             if (newUser && checkPassword && newPassword) {
                 // Отправляем данные на сервер для проверки и хэширования
-                const response = await fetch(`http://localhost:5000/api/user/${id}`, {
+                const response = await fetch(`/api/user/${id}`, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({

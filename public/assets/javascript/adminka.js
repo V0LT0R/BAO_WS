@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   async function welcome(id) {
-    USER_API = `http://localhost:5000/api/user/${id}`
+    USER_API = `/api/user/${id}`
     const response = await fetch(USER_API);
     const users_reg = await response.json();
     const welcomeMessage = document.getElementById('accName');
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (newUser && checkPassword && newPassword) {
         // Отправляем данные на сервер для проверки и хэширования
-        const response = await fetch(`http://localhost:5000/api/user/${id}`, {
+        const response = await fetch(`/api/user/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  const API_URL = "http://localhost:5000/api/experience";
+  const API_URL = "/api/experience";
   async function fetchExperiences() {
     const response = await fetch(API_URL);
     const experiences = await response.json();
