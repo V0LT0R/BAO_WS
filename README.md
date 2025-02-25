@@ -62,5 +62,7 @@ The server will start at `http://localhost:5000`
 ## Author
 
 [Artem Biloshchytskyi] - [GitHub](https://github.com/Nev1L-69)
+[Yevhenii Biloshchytskyi] - [GitHub]((https://github.com/V0LT0R))
+[Nursaya Batyr] - [GitHub]((https://github.com/Nursaya0))
 
 
