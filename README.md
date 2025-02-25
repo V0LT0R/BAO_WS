@@ -1,31 +1,66 @@
+# Bao Web Service
 
-## Web site Project
+Bao Web site is a web service deployed on the Render platform that provides an information about Biloshchytskyi Andrii Oleksandrovich
 
-## Table of Contents
-- [Project Overview](#project-overview)
-- [Features](#features)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
+## Demo
 
-## Project Overview
-**BAO_WS** is a web application designed for [describe purpose, e.g., "user management and certificate issuance"]. It offers interactive elements, such as user profiles, FAQs, certificates, and administrative functions.
+The project is available at the following link: [Bao Web Site](https://bao-ws.onrender.com/)
 
-## Features
-- **User Login and Profile Management**
-- **Certificate Management and Display**
-- **FAQ Section for User Support**
-- **Admin Dashboard for Management**
+## Installation and Setup
 
-## Usage
-1. **Login:** Visit `login.html` to sign in.
-2. **Dashboard:** After login, access user or admin functionalities.
-3. **Certificates and Experiences:** View achievements and add new entries as applicable.
+### 1. Clone the Repository
 
-## Project Structure
-- **`index.html`**: Main landing page.
-- **`assets/`**: Contains all CSS, JavaScript, fonts, and image resources.
-- **`bootstrap_css/`**: Bootstrap framework files for responsive design.
-- **`.git/`**: Git tracking for project version control.
+```sh
+git clone https://github.com/V0LT0R/BAO_WS
+cd bao-ws
+```
+
+### 2. Install Dependencies
+
+```sh
+npm install
+```
+
+### 3. Configuration
+
+Create a `.env` file and add the required environment variables:
+
+```
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+```
+
+### 4. Start the Server
+
+```sh
+npm start
+```
+
+The server will start at `http://localhost:5000`
+
+## API Endpoints
+
+### Authentication
+- `POST /api/user/register` - User registration
+- `POST /api/user/login` - User login
+
+### Management
+- `GET /api/experience` - Retrieve a list of tasks
+- `POST /api/experience` - Create a new task
+- `PUT /api/experience/:id` - Update a task
+- `DELETE /api/experience/:id` - Delete a task
+
+## Technologies
+
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT (JSON Web Token) for authentication
+
+## Author
+
+[Artem Biloshchytskyi] - [GitHub](https://github.com/Nev1L-69)
 
 
-    
