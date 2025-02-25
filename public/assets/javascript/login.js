@@ -16,7 +16,7 @@
     }
   }
 
-  const REG_API_URL = "http://localhost:5000/api/user";
+  const REG_API_URL = "/api/user";
 
   function parseJwt(token) {
     try {
@@ -34,7 +34,7 @@
     const errorElement = document.getElementById("loginError");
   
     try {
-      const response = await fetch("http://localhost:5000/api/user/login", {
+      const response = await fetch("/api/user/login", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
