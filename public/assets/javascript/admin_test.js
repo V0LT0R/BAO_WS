@@ -203,6 +203,40 @@ async function fetchUsers() {
             fetchUsers()
         }
 
+
+        async function uploadFile() {
+            const formData = new FormData();
+            const fileInput = document.getElementById("fileInput");
+            if (fileInput.files.length === 0) {
+                document.getElementById("message").innerText = "Выберите файл";
+                return;
+            }
+            formData.append("file", fileInput.files[0]);
+
+            const response = await fetch("/api/files/upload", {
+                method: "POST",
+                body: formData
+            });
+            const result = await response.json();
+            document.getElementById("message").innerText = result.message;
+            loadFiles();
+        }
+
+        async function loadFiles() {
+            const response = await fetch("/api/files");
+            const files = await response.json();
+            const gallery = document.getElementById("fileGallery");
+            gallery.innerHTML = "";
+            files.forEach(file => {
+                const img = document.createElement("img");
+                img.src = `/api/files/${file.filename}`;
+                
+                gallery.appendChild(img);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", loadFiles);
+        
         fetchExperiences();
 
         fetchUsers()
