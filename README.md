@@ -12,7 +12,7 @@ The project is available at the following link: [Bao Web Site](https://bao-ws.on
 
 ```sh
 git clone https://github.com/V0LT0R/BAO_WS
-cd bao-ws
+cd bao_ws
 ```
 
 ### 2. Install Dependencies
@@ -61,6 +61,8 @@ The server will start at `http://localhost:5000`
 
 ## Author
 
+[Yevhenii Biloshchytskyi] - [GitHub]((https://github.com/V0LT0R))
 [Artem Biloshchytskyi] - [GitHub](https://github.com/Nev1L-69)
+[Nursaya Batyr] - [GitHub]((https://github.com/Nursaya0))
 
 
