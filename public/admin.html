@@ -103,13 +103,45 @@
             <p id="message"></p>
             <h2>Загруженные файлы</h2>
             <div id="fileGallery"></div>
+
+
+        <hr>
+       <!-- Форма добавления сертификата -->
+<div class="mb-5 border p-3 rounded">
+  <h3>Add New Certificate</h3>
+  <div class="mb-3">
+    <label class="form-label">Date of Issue</label>
+    <textarea class="form-control" id="certDate" rows="1"></textarea>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Description (English)</label>
+    <textarea class="form-control" id="certDescriptionEn" rows="3"></textarea>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Description (Ukrainian)</label>
+    <textarea class="form-control" id="certDescriptionUa" rows="3"></textarea>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Certificate Image (PNG)</label>
+    <input type="file" class="form-control" id="certImage" accept="image/png" required>
+  </div>
+  <button onclick="addCertificate()" class="btn btn-primary">Add Certificate</button>
+</div>
+
+<!-- Форма редактирования сертификата -->
+<div id="edit-cert-form" class="mb-5 border p-3 rounded" style="display: none;"></div>
+
+<!-- Список сертификатов -->
+<div id="cert-list" class="mt-5"></div>
+
+  <hr>
     </header>
 
     <footer class="container-fluid footer pt-5" id="footer">
         <div class="container">
             <div class="footer-hr "></div>
             <div class="footer-text authors">
-                <h6>© 2025 Made by Biloshchytskyi Artem, Biloshchytskyi Yevhenii, Nursaya Batyr.</h6>
+                <h6>© 2025 Made by Biloshchytskyi Artem, Biloshchytskyi Yevhenii.</h6>
             </div>
         </div>
     </footer>

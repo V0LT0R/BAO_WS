@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const path = require('path');
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -34,6 +35,13 @@ mongoose.connect(process.env.MONGODB_URI, {
 app.use('/api/user', authRoutes);
 app.use("/api/experience", expRoutes);
 app.use("/api/files", fileRoutes);
+
+// Раздача папки с картинками сертификатов
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Подключение роутов
+const certificateRoutes = require('./src/routes/certificate');
+app.use('/api/certificates', certificateRoutes);
 
 
 const PORT = process.env.PORT;

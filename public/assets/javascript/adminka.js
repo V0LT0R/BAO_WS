@@ -145,3 +145,121 @@ async function editExp(id, oldYear, oldDescription) {
 }
 
 fetchExperiences();
+
+const CERTIFICATE_API_URL = "/api/certificates";
+
+// Отображение сертификатов
+async function fetchCertificates() {
+  const response = await fetch(CERTIFICATE_API_URL);
+  const certificates = await response.json();
+  const certList = document.getElementById("cert-list");
+  certList.innerHTML = "";
+  
+  certificates.forEach(cert => {
+    const div = document.createElement("div");
+    div.className = "row justify-content-center align-items-center mb-4 p-3 border rounded";
+    div.innerHTML = `
+      <div class="col-md-2">
+        <img src="${cert.imageUrl}"  class="img-fluid" style="max-height: 150px;">
+      </div>
+      <div class="col-md-4">
+        <p>${cert.description}</p>
+      </div>
+      <div class="col-md-3">
+        <button class="btn btn-light mb-2 border" onclick="editCertForm('${cert._id}')">Edit</button>
+        <button class="btn btn-light mb-2 border" onclick="deleteCert('${cert._id}')">Delete</button>
+      </div>
+    `;
+    certList.appendChild(div);
+  });
+}
+
+// Добавление сертификата
+async function addCertificate() {
+  const formData = new FormData();
+  formData.append("date", document.getElementById("certDate").value);
+  formData.append("descriptionEn", document.getElementById("certDescriptionEn").value);
+  formData.append("descriptionUa", document.getElementById("certDescriptionUa").value);
+  formData.append("image", document.getElementById("certImage").files[0]);
+
+  await fetch(CERTIFICATE_API_URL, {
+    method: "POST",
+    body: formData
+  });
+
+  document.getElementById("certDate").value = "";
+  document.getElementById("certDescriptionEn").value = "";
+  document.getElementById("certDescriptionUa").value = "";
+  document.getElementById("certImage").value = "";
+  
+  fetchCertificates();
+}
+
+// Форма редактирования
+function editCertForm(id) {
+  fetch(`${CERTIFICATE_API_URL}/${id}`)
+    .then(res => res.json())
+    .then(cert => {
+      const editForm = document.getElementById("edit-cert-form");
+      editForm.innerHTML = `
+        <h4>Edit Certificate</h4>
+        <div class="mb-3">
+          <label class="form-label">Year</label>
+          <input type="text" class="form-control" id="editCertYear" value="${cert.year}">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Description</label>
+          <textarea class="form-control" id="editCertDescription">${cert.description}</textarea>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">New Image (leave empty to keep current)</label>
+          <input type="file" class="form-control" id="editCertImage">
+        </div>
+        <div class="mb-3">
+          <img src="${cert.imageUrl}" alt="Current image" style="max-height: 100px;">
+        </div>
+        <button class="btn btn-primary" onclick="updateCert('${cert._id}')">Update</button>
+        <button class="btn btn-secondary" onclick="cancelEdit()">Cancel</button>
+      `;
+      editForm.style.display = "block";
+    });
+}
+
+// Обновление сертификата
+async function updateCert(id) {
+  const formData = new FormData();
+  formData.append("title", document.getElementById("editCertTitle").value);
+  formData.append("year", document.getElementById("editCertYear").value);
+  formData.append("description", document.getElementById("editCertDescription").value);
+  
+  const imageFile = document.getElementById("editCertImage").files[0];
+  if (imageFile) {
+    formData.append("image", imageFile);
+  }
+
+  await fetch(`${CERTIFICATE_API_URL}/${id}`, {
+    method: "PUT",
+    body: formData
+  });
+
+  document.getElementById("edit-cert-form").style.display = "none";
+  fetchCertificates();
+}
+
+// Удаление сертификата
+async function deleteCert(id) {
+  if (confirm("Are you sure you want to delete this certificate?")) {
+    await fetch(`${CERTIFICATE_API_URL}/${id}`, { method: "DELETE" });
+    fetchCertificates();
+  }
+}
+
+// Отмена редактирования
+function cancelEdit() {
+  document.getElementById("edit-cert-form").style.display = "none";
+}
+
+// Инициализация
+document.addEventListener("DOMContentLoaded", () => {
+  fetchCertificates();
+});
