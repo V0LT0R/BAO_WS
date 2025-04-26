@@ -75,58 +75,70 @@ document.addEventListener('DOMContentLoaded', () => {
     const expList = document.getElementById("exp-list");
     expList.innerHTML = "";
   
-    experiences.forEach(exp => {
+    experiences.reverse().forEach(exp => {
       const div = document.createElement("div");
-      div.className = "row justify-content-center align-items-center";
+      div.className = "row justify-content-center align-items-center mb-4 p-3 border rounded";
+  
       div.innerHTML = `
-        <div class="col-3">
-          <h2><strong>${exp.year}</strong></h2>
+        <div class="col-md-2">
+          <h4><strong>${exp.year}</strong></h4>
         </div>
-        <div class="col-6 block__2_text">
-          <p style="font-size: 1.3rem;">${exp.description}</p>
+        <div class="col-md-6 block__2_text">
+          <p style="font-size: 1.2rem;">${exp.descriptionEn}</p>
+          <p style="font-size: 1.2rem;">${exp.descriptionUa}</p>
         </div>
-        <div class="col-3">
-          <button onclick="editExp('${exp._id}', '${exp.year}', '${exp.description}')">Edit</button>
-          <button onclick="deleteExp('${exp._id}')">Delete</button>
+        <div class="col-md-3 text-end">
+          <button class="btn btn-light mb-2 border" onclick="editExp('${exp._id}', '${exp.year}', '${exp.descriptionEn}', '${exp.descriptionUa}')">Edit</button>
+          <button class="btn btn-danger mb-2 border" onclick="deleteExp('${exp._id}')">Delete</button>
         </div>
       `;
+  
       expList.appendChild(div);
     });
   }
   
+  
+  
   async function addExp() {
     const year = document.getElementById("expYear").value;
-    const description = document.getElementById("expDescription").value;
+    const descriptionEn = document.getElementById("expDescriptionEn").value;
+    const descriptionUa = document.getElementById("expDescriptionUa").value;
   
     await fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ year, description })
+      body: JSON.stringify({ year, descriptionEn, descriptionUa })
     });
   
     document.getElementById("expYear").value = "";
-    document.getElementById("expDescription").value = "";
+    document.getElementById("expDescriptionEn").value = "";
+    document.getElementById("expDescriptionUa").value = "";
+  
     fetchExperiences();
   }
+  
+  
   
   async function deleteExp(id) {
     await fetch(`${API_URL}/${id}`, { method: "DELETE" });
     fetchExperiences();
   }
   
-  async function editExp(id, oldYear, oldDescription) {
+  async function editExp(id, oldYear, oldDescriptionEn, oldDescriptionUa) {
     const newYear = prompt("Edit Year:", oldYear);
-    const newDescription = prompt("Edit Description:", oldDescription);
+    const newDescriptionEn = prompt("Edit English Description:", oldDescriptionEn);
+    const newDescriptionUa = prompt("Edit Ukrainian Description:", oldDescriptionUa);
   
-    if (newYear !== null && newDescription !== null) {
+    if (newYear !== null && newDescriptionEn !== null && newDescriptionUa !== null) {
       await fetch(`${API_URL}/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ year: newYear, description: newDescription })
+        body: JSON.stringify({ year: newYear, descriptionEn: newDescriptionEn, descriptionUa: newDescriptionUa })
       });
       fetchExperiences();
     }
   }
+  
   
   // ------------------- Работа с пользователями -------------------
   async function fetchUsers() {
@@ -135,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const UserList = document.getElementById("user-list");
     UserList.innerHTML = "";
   
-    users_reg.forEach(user => {
+    users_reg.reverse().forEach(user => {
       const div = document.createElement("div");
       div.className = "row justify-content-center align-items-center";
       div.innerHTML = `
@@ -232,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const projectList = document.getElementById("project-list");
     projectList.innerHTML = "";
   
-    projects.forEach(project => {
+    projects.reverse().forEach(project => {
       const div = document.createElement("div");
       div.className = "row justify-content-center align-items-center mb-4 p-3 border rounded";
       div.innerHTML = `

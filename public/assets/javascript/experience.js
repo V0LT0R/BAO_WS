@@ -34,32 +34,34 @@ document.addEventListener('DOMContentLoaded', function () {
     // API ----------------------------- /|\
     
     // all experience from MongoDB
-    const API_URL = "/api/experience";
-
-        async function fetchExperiences() {
-            const response = await fetch(API_URL);
-            const experiences = await response.json();
-            const expList = document.getElementById("exp-list");
-            expList.innerHTML = "";
-            
-            experiences.forEach(exp => {
-                const div = document.createElement("div");
-                div.className = "row justify-content-center align-items-center";
-                div.innerHTML = `
-                        <div class="col-4 ">
-                            <h2><strong>${exp.year}</strong></h2>
-                        </div>
-                        <div class="col-7 block__2_text">
-                            <p style="font-size: 1.3rem;">
-                                ${exp.description}
-                            </p>
-                        </div>
-                        <hr class="block__2_line my-5">
-                        
-                `;
-                expList.appendChild(div);
-            });
-        }
-        fetchExperiences();
+    async function loadExperiences(lang) {
+        const response = await fetch("/api/experience");
+        const experiences = await response.json();
+        const expList = document.getElementById("exp-list");
+        expList.innerHTML = "";
+    
+        experiences.reverse().forEach(exp => {
+            const div = document.createElement("div");
+            div.className = "row justify-content-center align-items-center";
+            div.innerHTML = `
+                <div class="col-4">
+                    <h2><strong>${exp.year}</strong></h2>
+                </div>
+                <div class="col-7 block__2_text">
+                    <p style="font-size: 1.3rem;">
+                        ${lang === 'ua' ? exp.descriptionUa : exp.descriptionEn}
+                    </p>
+                </div>
+                <hr class="block__2_line my-5">
+            `;
+            expList.appendChild(div);
+        });
+    }
+    
+    // Теперь подключаем к глобальному хук-переменной:
+    window.onLanguageChange = loadExperiences;
+    
+    // И сразу загружаем при старте:
+    loadExperiences(currentLanguage);
 
 });

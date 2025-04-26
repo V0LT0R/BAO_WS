@@ -168,6 +168,60 @@ hr{
     background: var(--block-was-dark-bg);
 }
 
+
+.language-switcher {
+    display: flex;
+    align-items: center;
+    background-color: #1d1f2b; /* Темный фон как у сайта */
+    border-radius: 20px;
+    padding: 2px;
+    position: relative;
+    width: 100px;
+    height: 40px;
+    overflow: hidden;
+}
+
+.language-switcher input[type="radio"] {
+    display: none;
+}
+
+.language-switcher label {
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    color: #b0b3c2; /* Светло-серый текст */
+    z-index: 2;
+    transition: color 0.3s;
+    padding: 8px 0;
+    user-select: none;
+}
+
+.language-switcher::before {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background: #0d6efd; /* Синий акцент */
+    border-radius: 20px;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+.language__radio#lang-en:checked ~ label[for="lang-en"] {
+    color: #fff; /* Белый текст на синем фоне */
+}
+
+.language__radio#lang-ua:checked ~ label[for="lang-ua"] {
+    color: #fff;
+}
+
+.language__radio#lang-ua:checked ~ .language-switcher::before {
+    transform: translateX(100%);
+}
+
+
 /* FOOTER CSS CODE */
 
 .footer{
