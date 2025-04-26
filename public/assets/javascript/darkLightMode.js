@@ -16,12 +16,22 @@ const translations = {
         projects: "Projects",
         faqs: "FAQs",
         contact: "Contact",
+        contacts: "contacts:",
+
         personalExperience: "Personal Experience",
         reflection: "Reflections on Life's Path: A Unique Journey of Growth and Learning",
         lifelongExperience: "Lifelong experience",
         delve: "Delve into the world of a dedicated professor and witness his unwavering pursuit of knowledge and aspirations.",
         educationExperience: "Education experience",
         lastPublications: "Last publications:",
+
+        researchActivites:"Pedagogical, State, Research Activites",
+        activityLifelong: "Lifelong activity",
+        activityDelve: "Delve into the world of a dedicated professor and witness his unwavering pursuit of knowledge and aspirations.",
+        activityPedagogical: "Pedagogical activity",
+        activityResearch: "Research activity",
+        advancingKnowledgeActivities: "Empowering Minds, Shaping Policy, Advancing Knowledge",
+
     },
     ua: {
         home: "Головна",
@@ -30,16 +40,64 @@ const translations = {
         certificates: "Сертифікати",
         projects: "Проєкти",
         faqs: "Питання",
-        contact: "Контакт",
+        contact: "Контакти",
+        contacts: "контакти:",
+
         personalExperience: "Особистий Досвід",
         reflection: "Роздуми над життєвим шляхом: Унікальна подорож зростання та навчання",
         lifelongExperience: "Життєвий досвід",
         delve: "Заглибтеся у світ відданого професора та станьте свідком його невтомного прагнення до знань і цілей.",
         educationExperience: "Освітній досвід",
         lastPublications: "Останні публікації:",
+
+        researchActivites:"Педагогічна, державна, дослідницька діяльність",
+        activityLifelong: "Життєва діяльність",
+        activityDelve: "Заглибтеся у світ відданого професора та станьте свідком його невтомного прагнення до знань і цілей.",
+        activityPedagogical: "Педагогічна діяльність",
+        activityResearch: "Дослідницька діяльність",
+        advancingKnowledgeActivities: "Розширення можливостей розуму, формування політики, поширення знань",
     }
 };
+function updateLanguage(lang) {
+    const dict = translations[lang];
 
+    const elementsToUpdate = [
+        { selector: ".to_home", key: 'home' },
+        { selector: ".to_exp", key: 'experience' },
+        { selector: ".to_act", key: 'activity' },
+        { selector: ".to_cert", key: 'certificates' },
+        { selector: ".to_proj", key: 'projects' },
+        { selector: ".to_faq", key: 'faqs' },
+        { selector: ".to_cont", key: 'contact' },
+        { selector: ".contacts", key: 'contacts' },
+
+        { selector: ".personal_Experience", key: 'personalExperience', isStrong: true },
+        { selector: ".reflection_exp", key: 'reflection' },
+        { selector: "#lifelong_experience", key: 'lifelongExperience' },
+        { selector: ".delve_exp", key: 'delve' },
+        { selector: "#education_experience", key: 'educationExperience' },
+        { selector: "#publications h3", key: 'lastPublications', isStrong: true },
+
+        { selector: ".Research_Activites", key: 'researchActivites', isStrong: true },
+        { selector: ".activity_lifelong", key: 'activityLifelong', isStrong: true },
+        { selector: ".activity_delve", key: 'activityDelve' },
+        { selector: ".activity_pedagogical", key: 'activityPedagogical', isStrong: true },
+        { selector: ".activity_research", key: 'activityResearch', isStrong: true },
+        { selector: ".Advancing_Knowledge_activities", key: 'advancingKnowledgeActivities' },
+        
+    ];
+
+    elementsToUpdate.forEach(item => {
+        const elements = document.querySelectorAll(item.selector);
+        elements.forEach(el => {
+            if (item.isStrong) {
+                el.innerHTML = `<strong>${dict[item.key]}</strong>`;
+            } else {
+                el.textContent = dict[item.key];
+            }
+        });
+    });
+}
 function setupSwitcher() {
     const savedScheme = getSavedScheme();
 
@@ -157,36 +215,8 @@ function getSavedLanguage() {
     return localStorage.getItem('language');
 }
 
-function updateLanguage(lang) {
-    const dict = translations[lang];
 
-    const elementsToUpdate = [
-        { selector: ".nav-link[href='index.html']", key: 'home' },
-        { selector: ".nav-link[href='experience.html']", key: 'experience' },
-        { selector: ".nav-link[href='activity.html']", key: 'activity' },
-        { selector: ".nav-link[href='certificates.html']", key: 'certificates' },
-        { selector: ".nav-link[href='projects.html']", key: 'projects' },
-        { selector: ".nav-link[href='FAQs.html']", key: 'faqs' },
-        { selector: ".nav-link[href='#footer']", key: 'contact' },
-        { selector: "#tmp-text", key: 'personalExperience' },
-        { selector: ".header-text p", key: 'reflection' },
-        { selector: ".block__2_header", key: 'lifelongExperience' },
-        { selector: ".block__2_text p", key: 'delve' },
-        { selector: "#block-2-bg h1:nth-of-type(2)", key: 'educationExperience' },
-        { selector: "#publications h3", key: 'lastPublications' },
-    ];
 
-    elementsToUpdate.forEach(item => {
-        const el = document.querySelector(item.selector);
-        if (el) {
-            if (item.selector === "#tmp-text" || item.selector === "#publications h3") {
-                el.innerHTML = `<strong>${dict[item.key]}</strong>`;
-            } else {
-                el.textContent = dict[item.key];
-            }
-        }
-    });
-}
 
 function updateLanguageSwitcherUI(lang) {
     const switcher = document.querySelector('.language-switcher');

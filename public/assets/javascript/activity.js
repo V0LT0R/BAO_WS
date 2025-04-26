@@ -1,3 +1,34 @@
+document.addEventListener('DOMContentLoaded', function () {
+
+async function loadActivities(lang) {
+    const response = await fetch("/api/activities");
+    const experiences = await response.json();
+    const actList = document.getElementById("act-list");
+    actList.innerHTML = "";
+
+    experiences.reverse().forEach(act => {
+        const div = document.createElement("div");
+        div.className = "row justify-content-center align-items-center";
+        div.innerHTML = `
+            <div class="col-4">
+                <h2><strong>${act.year}</strong></h2>
+            </div>
+            <div class="col-7 block__2_text">
+                <p style="font-size: 1.3rem;">
+                    ${lang === 'ua' ? act.descriptionUa : act.descriptionEn}
+                </p>
+            </div>
+            <hr class="block__2_line my-5">
+        `;
+        actList.appendChild(div);
+    });
+};
+// Теперь подключаем к глобальному хук-переменной:
+window.onLanguageChange = loadActivities;
+    
+// И сразу загружаем при старте:
+loadActivities(currentLanguage);
+});
 function validateForm() {
     let formBlock = document.getElementById('myForm');
     let popUpText = document.getElementById('pop-up');

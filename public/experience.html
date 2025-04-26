@@ -25,33 +25,33 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link" href="index.html">Home</a>
+                    <a class="nav-link to_home" href="index.html">Home</a>
+                </li>
+                  <li class="nav-item">
+                    <a class="nav-link active to_exp" aria-current="page" href="experience.html" >Experience</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="experience.html">Experience</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="activity.html">Activity</a>
+                    <a class="nav-link to_act" href="activity.html"  >Activity</a>
                   </li>
                   
                   <li class="nav-item">
-                    <a class="nav-link" href="certificates.html">Certificates</a>
+                    <a class="nav-link to_cert" href="certificates.html"  >Certificates</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="projects.html">Projects</a>
+                    <a class="nav-link to_proj" href="projects.html" >Projects</a>
                   </li>
 
                   <li class="nav-item">
-                    <a class="nav-link" href="FAQs.html">FAQs</a>
+                    <a class="nav-link to_faq" href="FAQs.html">FAQs</a>
                   </li>
                   
                   <li class="nav-item">
-                    <a class="nav-link" href="#footer">Contact</a>
+                    <a class="nav-link to_cont" href="#footer">Contact</a>
                   </li>
 
                 </ul>
                 <button type="button" class="btn btn-sm btn-outline-secondary me-5" onclick="document.location='login.html'" >Login</button>
-              </div>
+            </div>
               <fieldset class="switcher">
                 <input class="switcher__radio switcher__radio--light" type="radio" name="color-scheme" value="light" aria-label="Светлая" id="light">
                 <label for="light" style="display: block;"><img class="navbar-img light-img" src="assets/images/light.svg" alt="light mode"></label>
@@ -82,8 +82,8 @@
                     <img src="assets/images/experience_block__1_1.png" alt="Personal Image" class="img-fluid">
                 </div>
                 <div class="col-lg-6 header-text ">
-                    <h1 class="display-4" id="tmp-text"><strong>Personal Experience</strong></h1>
-                    <p>Reflections on Life's Path: A Unique Journey of Growth and Learning</p>
+                    <h1 class="display-4 personal_Experience" id="tmp-text"><strong>Personal Experience</strong></h1>
+                    <p class="reflection_exp">Reflections on Life's Path: A Unique Journey of Growth and Learning</p>
                    
                 </div>
                 
@@ -94,7 +94,7 @@
         <div class="container block__2">
             <div class="row">
                 <div class="col">
-                    <h1 class="block__2_header">Lifelong experience</h1>
+                    <h1 class="block__2_header" id="lifelong_experience">Lifelong experience</h1>
                 </div>
             </div>
 
@@ -105,7 +105,7 @@
                 <div class="col-4 text-center">
                     <img class="img-fluid gerb_image" alt="Experience Image">
                 </div>
-                <div class="col-7 block__2_text">
+                <div class="col-7 block__2_text delve_exp">
                     <p>
                         Delve into the world of a dedicated professor
                         and witness his unwavering pursuit of
@@ -118,7 +118,7 @@
 
             <div class="row">
                 <div class="col" style="margin-top: 20px;">
-                    <h1><strong> Education experience</strong></h1>
+                    <h1 id="education_experience"><strong> Education experience</strong></h1>
                 </div>
             </div>
 
@@ -275,30 +275,30 @@
               <button type="button" class="btn btn-outline-primary mt-5" onclick="document.location='certificates.html'" >Certificates</button>
             <div class="row footer-row">
                 <div class="col-md-3 col-10 footer-col">
-                    <div class="footer-text ">
-                        <a href="index.html"><h6>Home</h6></a>
+                    <div class="footer-text">
+                        <a href="index.html" class="to_home"><h6>Home</h6></a>
                     </div>
                     
-                    <div class="footer-text ">
-                        <a href="certificates.html"><h6>Certificates</h6></a>
+                    <div class="footer-text">
+                        <a href="certificates.html" class="to_cert"><h6>Certificates</h6></a>
                     </div>
-
-                    <div class="footer-text ">
-                        <a href="FAQs.html"><h6>FAQs</h6></a>
+                    
+                    <div class="footer-text">
+                        <a href="FAQs.html" class="to_faq"><h6>FAQs</h6></a>
                     </div>
                 </div>
                 <div class="col-md-3 col-10 footer-col">
 
-                    <div class="footer-text ">
-                        <a href="experience.html"><h6>Experience</h6></a>
-                    </div>  
-
-                    <div class="footer-text ">
-                        <a href="projects.html"><h6>Projects</h6></a>
+                    <div class="footer-text">
+                        <a href="experience.html" class="to_exp"><h6>Experience</h6></a>
                     </div>
-
-                    <div class="footer-text ">
-                        <a href="activity.html"><h6>Activity</h6></a>
+                    
+                    <div class="footer-text">
+                        <a href="projects.html" class="to_proj"><h6>Projects</h6></a>
+                    </div>
+                    
+                    <div class="footer-text">
+                        <a href="activity.html" class="to_act"><h6>Activity</h6></a>
                     </div>
                     
                 </div>
@@ -306,7 +306,7 @@
 
 
                     <div class="footer-text  footer_hrefs_text_cont">
-                        <a href="#"><h6>contact: </h6></a>
+                        <a href="#" class="contacts"><h6>contact: </h6></a>
                     </div>
 
                     <div>
