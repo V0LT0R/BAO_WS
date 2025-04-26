@@ -97,12 +97,37 @@
             
         </div>
 
-        <h2>Загрузите файл</h2>
-            <input type="file" name="file" id="fileInput" required>
-            <button onclick="uploadFile()">Загрузить</button>
-            <p id="message"></p>
-            <h2>Загруженные файлы</h2>
-            <div id="fileGallery"></div>
+        <div class="mb-5 border p-3 rounded">
+            <h3>Add New Project</h3>
+            <div class="mb-3">
+              <label class="form-label">Title (English)</label>
+              <textarea class="form-control" id="ProjectTitleEn" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Text (English)</label>
+                <textarea class="form-control" id="ProjectDescriptionEn" rows="3"></textarea>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Title (Ukrainian)</label>
+                <textarea class="form-control" id="ProjectTitleUa" rows="3"></textarea>
+              </div>
+            <div class="mb-3">
+              <label class="form-label">Text (Ukrainian)</label>
+              <textarea class="form-control" id="ProjectDescriptionUa" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Project Image (PNG)</label>
+              <input type="file" class="form-control" id="projectImage" accept="image/png" required>
+            </div>
+            <button onclick="uploadProject()" class="btn btn-primary">Add Project</button>
+          </div>
+
+<!-- Форма редактирования сертификата -->
+<div id="edit-project-form" class="mb-5 border p-3 rounded" style="display: none;"></div>
+
+<!-- Список сертификатов -->
+<div id="project-list" class="mt-5"></div>
+
 
 
         <hr>

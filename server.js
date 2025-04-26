@@ -6,7 +6,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const expRoutes = require("./src/routes/experience");
 const authRoutes = require('./src/routes/user');
-const fileRoutes = require("./src/routes/fileRoutes");
+const projectRoutes = require("./src/routes/project");
 
 
 const dotenv = require('dotenv');
@@ -29,15 +29,15 @@ mongoose.connect(process.env.MONGODB_URI, {
   .then(() => console.log('Connected to MongoDB Atlas'))
   .catch((err) => console.error('Failed to connect to MongoDB:', err));
 
-
+// Раздача папки с картинками сертификатов
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Маршруты
 app.use('/api/user', authRoutes);
 app.use("/api/experience", expRoutes);
-app.use("/api/files", fileRoutes);
+app.use("/api/projects", projectRoutes);
 
-// Раздача папки с картинками сертификатов
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 
 // Подключение роутов
 const certificateRoutes = require('./src/routes/certificate');

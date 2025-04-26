@@ -20,14 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Загружаем начальные данные
     fetchExperiences();
     fetchUsers();
-    loadFiles();
+    fetchProjects();
     fetchCertificates();
   });
   
   // Переменные API
   const API_URL = "/api/experience";
   const REG_API_URL = "/api/user";
-  const FILES_API_URL = "/api/files";
+  const PROJECT_API_URL = "/api/projects";
   const CERTIFICATE_API_URL = "/api/certificates";
   
   // Переменная языка
@@ -202,38 +202,108 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchUsers();
   }
   
-  // ------------------- Работа с файлами -------------------
-  async function uploadFile() {
+  // ------------------- Работа с проектами -------------------
+  async function uploadProject() {
     const formData = new FormData();
-    const fileInput = document.getElementById("fileInput");
-    if (fileInput.files.length === 0) {
-      document.getElementById("message").innerText = "Выберите файл";
-      return;
-    }
-    formData.append("file", fileInput.files[0]);
+    formData.append("titleEn", document.getElementById("ProjectTitleEn").value);
+    formData.append("descriptionEn", document.getElementById("ProjectDescriptionEn").value);
+    formData.append("titleUa", document.getElementById("ProjectTitleUa").value);
+    formData.append("descriptionUa", document.getElementById("ProjectDescriptionUa").value);
+    formData.append("image", document.getElementById("projectImage").files[0]);
   
-    const response = await fetch(`${FILES_API_URL}/upload`, {
+    await fetch(PROJECT_API_URL, {
       method: "POST",
       body: formData
     });
-    const result = await response.json();
-    document.getElementById("message").innerText = result.message;
-    loadFiles();
+  
+    document.getElementById("ProjectTitleEn").value = "";
+    document.getElementById("ProjectDescriptionEn").value = "";
+    document.getElementById("ProjectTitleUa").value = "";
+    document.getElementById("ProjectDescriptionUa").value = "";
+    document.getElementById("projectImage").value = "";
+
+  
+    fetchProjects();
   }
   
-  async function loadFiles() {
-    const response = await fetch(FILES_API_URL);
-    const files = await response.json();
-    const gallery = document.getElementById("fileGallery");
-    gallery.innerHTML = "";
+  async function fetchProjects() {
+    const response = await fetch(PROJECT_API_URL);
+    const projects = await response.json();
+    const projectList = document.getElementById("project-list");
+    projectList.innerHTML = "";
   
-    files.forEach(file => {
-      const img = document.createElement("img");
-      img.src = `/api/files/${file.filename}`;
-      img.className = "img-fluid p-2";
-      gallery.appendChild(img);
+    projects.forEach(project => {
+      const div = document.createElement("div");
+      div.className = "row justify-content-center align-items-center mb-4 p-3 border rounded";
+      div.innerHTML = `
+        <div class="col-md-2">
+          <img src="${project.imageUrl}" alt="Project" class="img-fluid" style="max-height: 150px;">
+        </div>
+        <div class="col-md-4">
+          <h5>${project.titleEn}</h5>
+          <p>${project.descriptionEn}</p>
+           <h5>${project.titleUa}</h5>
+          <p>${project.descriptionUa}</p>
+        </div>
+        <div class="col-md-3">
+          <button class="btn btn-light mb-2 border" onclick="editProjectForm('${project._id}')">Edit</button>
+          <button class="btn btn-danger mb-2 border" onclick="deleteProject('${project._id}')">Delete</button>
+        </div>
+      `;
+      projectList.appendChild(div);
     });
   }
+  
+  async function editProjectForm(id) {
+    const response = await fetch(`${PROJECT_API_URL}/${id}`);
+    const project = await response.json();
+  
+    const editForm = document.getElementById("edit-project-form");
+    editForm.innerHTML = `
+      <h4>Edit Project</h4>
+      <textarea id="editProjectTitleEn" class="form-control mb-2">${project.titleEn}</textarea>
+      <textarea id="editProjectDescriptionEn" class="form-control mb-2">${project.descriptionEn}</textarea>
+      <textarea id="editProjectTitleUa" class="form-control mb-2">${project.titleUa}</textarea>
+      <textarea id="editProjectDescriptionUa" class="form-control mb-2">${project.descriptionUa}</textarea>
+      <input type="file" id="editProjectImage" class="form-control mb-2" accept="image/png">
+      <button class="btn btn-success" onclick="updateProject('${project._id}')">Update</button>
+      <button class="btn btn-secondary" onclick="cancelProjectEdit()">Cancel</button>
+    `;
+    editForm.style.display = "block";
+  }
+  
+  async function updateProject(id) {
+    const formData = new FormData();
+    formData.append("titleEn", document.getElementById("editProjectTitleEn").value);
+    formData.append("descriptionEn", document.getElementById("editProjectDescriptionEn").value);
+    formData.append("titleUa", document.getElementById("editProjectTitleUa").value);
+    formData.append("descriptionUa", document.getElementById("editProjectDescriptionUa").value);
+  
+    const imageFile = document.getElementById("editProjectImage").files[0];
+    if (imageFile) {
+      formData.append("image", imageFile);
+    }
+  
+    await fetch(`${PROJECT_API_URL}/${id}`, {
+      method: "PUT",
+      body: formData
+    });
+  
+    document.getElementById("edit-project-form").style.display = "none";
+    fetchProjects();
+  }
+  
+  async function deleteProject(id) {
+    if (confirm("Are you sure you want to delete this project?")) {
+      await fetch(`${PROJECT_API_URL}/${id}`, { method: "DELETE" });
+      fetchProjects();
+    }
+  }
+  
+  function cancelProjectEdit() {
+    document.getElementById("edit-project-form").style.display = "none";
+  }
+  
   
   // ------------------- Работа с сертификатами -------------------
   async function addCertificate() {
@@ -271,7 +341,8 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         <div class="col-md-4">
           <h5>${cert.date}</h5>
-          <p>${currentLanguage === 'en' ? cert.descriptionEn : cert.descriptionUa}</p>
+          <p>${cert.descriptionEn}</p>
+          <p>${ cert.descriptionUa}</p>
         </div>
         <div class="col-md-3">
           <button class="btn btn-light mb-2 border" onclick="editCertForm('${cert._id}')">Edit</button>
