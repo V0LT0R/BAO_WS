@@ -22,6 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchUsers();
     fetchProjects();
     fetchCertificates();
+    fetchActivities();
+
   });
   
   // Переменные API
@@ -29,6 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const REG_API_URL = "/api/user";
   const PROJECT_API_URL = "/api/projects";
   const CERTIFICATE_API_URL = "/api/certificates";
+  const ACTIVITY_API_URL = "/api/activities"; // <-- твой API для Activity
+
   
   // Переменная языка
   let currentLanguage = localStorage.getItem('language') || 'en';
@@ -117,27 +121,145 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchExperiences();
   }
   
-  
-  
   async function deleteExp(id) {
     await fetch(`${API_URL}/${id}`, { method: "DELETE" });
     fetchExperiences();
   }
   
   async function editExp(id, oldYear, oldDescriptionEn, oldDescriptionUa) {
-    const newYear = prompt("Edit Year:", oldYear);
-    const newDescriptionEn = prompt("Edit English Description:", oldDescriptionEn);
-    const newDescriptionUa = prompt("Edit Ukrainian Description:", oldDescriptionUa);
-  
-    if (newYear !== null && newDescriptionEn !== null && newDescriptionUa !== null) {
-      await fetch(`${API_URL}/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ year: newYear, descriptionEn: newDescriptionEn, descriptionUa: newDescriptionUa })
-      });
-      fetchExperiences();
-    }
+    const editForm = document.getElementById("edit-exp-form");
+    editForm.innerHTML = `
+      <h4>Edit Experience</h4>
+      <div class="mb-3">
+        <label class="form-label">Year</label>
+        <textarea id="editExpYear" class="form-control mb-2">${oldYear}</textarea>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Experience Description English</label>
+        <textarea id="editExpDescriptionEn" class="form-control mb-2">${oldDescriptionEn}</textarea>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Experience Description Ukrainian</label>
+        <textarea id="editExpDescriptionUa" class="form-control mb-2">${oldDescriptionUa}</textarea>
+      </div>
+      <button class="btn btn-success" onclick="updateExp('${id}')">Update</button>
+      <button class="btn btn-secondary" onclick="cancelExpEdit()">Cancel</button>
+    `;
+    editForm.style.display = "block";
   }
+  async function updateExp(id) {
+    const year = document.getElementById("editExpYear").value;
+    const descriptionEn = document.getElementById("editExpDescriptionEn").value;
+    const descriptionUa = document.getElementById("editExpDescriptionUa").value;
+  
+    await fetch(`${API_URL}/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ year, descriptionEn, descriptionUa })
+    });
+  
+    document.getElementById("edit-exp-form").style.display = "none";
+    fetchExperiences();
+  }
+  function cancelExpEdit() {
+    document.getElementById("edit-exp-form").style.display = "none";
+  }
+  
+  
+  // ------------------- Работа с активностями -------------------
+
+async function fetchActivities() {
+  const response = await fetch(ACTIVITY_API_URL);
+  const activities = await response.json();
+  const activityList = document.getElementById("activity-list");
+  activityList.innerHTML = "";
+
+  activities.reverse().forEach(activity => {
+    const div = document.createElement("div");
+    div.className = "row justify-content-center align-items-center mb-4 p-3 border rounded";
+
+    div.innerHTML = `
+      <div class="col-md-2">
+        <h4><strong>${activity.year}</strong></h4>
+      </div>
+      <div class="col-md-6 block__2_text">
+        <p style="font-size: 1.2rem;">${activity.descriptionEn}</p>
+        <p style="font-size: 1.2rem;">${activity.descriptionUa}</p>
+      </div>
+      <div class="col-md-3 text-end">
+        <button class="btn btn-light mb-2 border" onclick="editActivity('${activity._id}', '${activity.year}', '${activity.descriptionEn}', '${activity.descriptionUa}')">Edit</button>
+        <button class="btn btn-danger mb-2 border" onclick="deleteActivity('${activity._id}')">Delete</button>
+      </div>
+    `;
+
+    activityList.appendChild(div);
+  });
+}
+
+async function addActivity() {
+  const year = document.getElementById("activityYear").value;
+  const descriptionEn = document.getElementById("activityDescriptionEn").value;
+  const descriptionUa = document.getElementById("activityDescriptionUa").value;
+
+  await fetch(ACTIVITY_API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ year, descriptionEn, descriptionUa })
+  });
+
+  document.getElementById("activityYear").value = "";
+  document.getElementById("activityDescriptionEn").value = "";
+  document.getElementById("activityDescriptionUa").value = "";
+
+  fetchActivities();
+}
+
+async function deleteActivity(id) {
+  await fetch(`${ACTIVITY_API_URL}/${id}`, { method: "DELETE" });
+  fetchActivities();
+}
+
+async function editActivity(id, oldYear, oldDescriptionEn, oldDescriptionUa) {
+  const editForm = document.getElementById("edit-activity-form");
+  editForm.innerHTML = `
+    <h4>Edit Activity</h4>
+    <div class="mb-3">
+      <label class="form-label">Year</label>
+      <textarea id="editActivityYear" class="form-control mb-2">${oldYear}</textarea>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Activity Description English</label>
+      <textarea id="editActivityDescriptionEn" class="form-control mb-2">${oldDescriptionEn}</textarea>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Activity Description Ukrainian</label>
+      <textarea id="editActivityDescriptionUa" class="form-control mb-2">${oldDescriptionUa}</textarea>
+    </div>
+    <button class="btn btn-success" onclick="updateActivity('${id}')">Update</button>
+    <button class="btn btn-secondary" onclick="cancelActivityEdit()">Cancel</button>
+  `;
+  editForm.style.display = "block";
+}
+
+async function updateActivity(id) {
+  const year = document.getElementById("editActivityYear").value;
+  const descriptionEn = document.getElementById("editActivityDescriptionEn").value;
+  const descriptionUa = document.getElementById("editActivityDescriptionUa").value;
+
+  await fetch(`${ACTIVITY_API_URL}/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ year, descriptionEn, descriptionUa })
+  });
+
+  document.getElementById("edit-activity-form").style.display = "none";
+  fetchActivities();
+}
+
+function cancelActivityEdit() {
+  document.getElementById("edit-activity-form").style.display = "none";
+}
+
   
   
   // ------------------- Работа с пользователями -------------------

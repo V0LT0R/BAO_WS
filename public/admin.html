@@ -53,93 +53,122 @@
             </div>
         </div>
     </nav>
-    <header class="container-fluid block-1-bg" style="min-height: 750px; padding-top: 50px;">
-        <div class="container block-1 block-1-user"id="user_edit">
-            
+<header class="container-fluid block-1-bg" style="min-height: 750px; padding-top: 50px;">
+<div class="container block-1 block-1-user"id="user_edit">
+    
+</div>
+<div class="container mb-4 border p-3 rounded">
+  <div class="row row-cols-1">
+    <h3 >Register New User</h3>
+  </div>
+  
+    <div class="row ">
+        <div class="col mt-5">
+            <input type="text" id="newUsername" placeholder="Username">
+            <input type="password" id="newPassword" placeholder="Password">
+            <input type="text" id="newRole" placeholder="User role">
+            <button onclick="registerUser()">Register User</button>
         </div>
-        <div class="container d-flex block-1">
-            <div class="row row-cols-1">
-                <div class="col mt-5">
-                    <input type="text" id="newUsername" placeholder="Username">
-                    <input type="password" id="newPassword" placeholder="Password">
-                    <input type="text" id="newRole" placeholder="User role">
-                    <button onclick="registerUser()">Register User</button>
-                </div>
-            </div>
+    </div>
+</div>
+<div class="container" style="margin-top: 50px; font-family: 'Montserrat';">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-6 ">
+            <h2>Username</h2>
         </div>
-        <div class="container" style="margin-top: 50px; font-family: 'Montserrat';">
-            <div class="row justify-content-center align-items-center">
-                <div class="col-6 ">
-                    <h2>Username</h2>
-                </div>
-                <div class="col-6 block__2_text">
-                    <h2>
-                        Role
-                    </h2>
-                </div>
-            </div>
+        <div class="col-6 block__2_text">
+            <h2>
+                Role
+            </h2>
         </div>
-        <div class="container" style="margin-top: 50px; font-family: 'Montserrat';" id="user-list"></div>
-        <br>
-        
-        <div class="footer-hr "></div>
+    </div>
+</div>
+<div class="container" style="margin-top: 50px; font-family: 'Montserrat';" id="user-list"></div>
+<br>
 
-        <div class="mb-5 border p-3 rounded">
+<div class="mb-5 border p-3 rounded container">
+    <h3>Add New Experience</h3>
+    <div class="mb-3">
+        <label class="form-label">Year</label>
+        <textarea class="form-control" id="expYear" rows="1"></textarea>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Experience Description English</label>
+      <textarea class="form-control" id="expDescriptionEn" rows="3"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Experience Description Ukrainian</label>
+        <textarea class="form-control" id="expDescriptionUa" rows="3"></textarea>
+    </div>
+    <button onclick="addExp()" class="btn btn-primary">Add Experience</button>
+  </div>
+<div class="container" style="margin-top: 50px; font-family: 'Montserrat';" id="exp-list"></div>
+<div id="edit-exp-form" class="mb-5 border p-3 rounded container" style="display: none;"></div>
 
-            <h3>Add New Project</h3>
-            <div class="mb-3">
-                <label class="form-label">Year</label>
-                <textarea class="form-control" id="expYear" rows="3"></textarea>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Experience Description English</label>
-              <textarea class="form-control" id="expDescriptionEn" rows="3"></textarea>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Experience Description Ukrainian</label>
-                <textarea class="form-control" id="expDescriptionUa" rows="3"></textarea>
-            </div>
-            <button onclick="addExp()" class="btn btn-primary">Add Experience</button>
+<div class="footer-hr container my-5"></div>
 
-          </div>
-        <div class="container" style="margin-top: 50px; font-family: 'Montserrat';" id="exp-list"></div>
+<!-- Форма добавления активностей -->
+<div class="mb-5 border p-3 rounded container">
+  <h3>Add New Activity</h3>
+  <div class="mb-3">
+    <label class="form-label">Year</label>
+    <textarea class="form-control" id="activityYear" rows="1"></textarea>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Activity Description English</label>
+    <textarea class="form-control" id="activityDescriptionEn" rows="3"></textarea>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Activity Description Ukrainian</label>
+    <textarea class="form-control" id="activityDescriptionUa" rows="3"></textarea>
+  </div>
+  <button onclick="addActivity()" class="btn btn-primary">Add Activity</button>
+</div>
 
-        <div class="mb-5 border p-3 rounded">
-            <h3>Add New Project</h3>
-            <div class="mb-3">
-              <label class="form-label">Title (English)</label>
-              <textarea class="form-control" id="ProjectTitleEn" rows="3"></textarea>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Text (English)</label>
-                <textarea class="form-control" id="ProjectDescriptionEn" rows="3"></textarea>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Title (Ukrainian)</label>
-                <textarea class="form-control" id="ProjectTitleUa" rows="3"></textarea>
-              </div>
-            <div class="mb-3">
-              <label class="form-label">Text (Ukrainian)</label>
-              <textarea class="form-control" id="ProjectDescriptionUa" rows="3"></textarea>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Project Image (PNG)</label>
-              <input type="file" class="form-control" id="projectImage" accept="image/png" required>
-            </div>
-            <button onclick="uploadProject()" class="btn btn-primary">Add Project</button>
-          </div>
+<!-- Форма редактирования активности -->
+<div id="edit-activity-form" class="mb-5 border p-3 rounded container" style="display: none;"></div>
 
-<!-- Форма редактирования сертификата -->
-<div id="edit-project-form" class="mb-5 border p-3 rounded" style="display: none;"></div>
+<!-- Список всех активностей -->
+<div id="activity-list" class="mt-5 container"></div>
 
-<!-- Список сертификатов -->
-<div id="project-list" class="mt-5"></div>
+<div class="footer-hr container my-5"></div>
+
+<!-- Форма добавления проектов -->
+<div class="mb-5 border p-3 rounded container">
+  <h3>Add New Project</h3>
+  <div class="mb-3">
+    <label class="form-label">Title (English)</label>
+    <textarea class="form-control" id="ProjectTitleEn" rows="1"></textarea>
+  </div>
+  <div class="mb-3">
+      <label class="form-label">Text (English)</label>
+      <textarea class="form-control" id="ProjectDescriptionEn" rows="3"></textarea>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Title (Ukrainian)</label>
+      <textarea class="form-control" id="ProjectTitleUa" rows="1"></textarea>
+    </div>
+  <div class="mb-3">
+    <label class="form-label">Text (Ukrainian)</label>
+    <textarea class="form-control" id="ProjectDescriptionUa" rows="3"></textarea>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Project Image (PNG)</label>
+    <input type="file" class="form-control" id="projectImage" accept="image/png" required>
+  </div>
+  <button onclick="uploadProject()" class="btn btn-primary">Add Project</button>
+</div>
+
+<!-- Форма редактирования проектов -->
+<div id="edit-project-form" class="mb-5 border p-3 rounded container" style="display: none;"></div>
+
+<!-- Список проектов -->
+<div id="project-list" class="mt-5 container"></div>
 
 
-
-        <hr>
+<div class="footer-hr container my-5"></div>
        <!-- Форма добавления сертификата -->
-<div class="mb-5 border p-3 rounded">
+<div class="mb-5 border p-3 rounded container">
   <h3>Add New Certificate</h3>
   <div class="mb-3">
     <label class="form-label">Date of Issue</label>
@@ -161,12 +190,12 @@
 </div>
 
 <!-- Форма редактирования сертификата -->
-<div id="edit-cert-form" class="mb-5 border p-3 rounded" style="display: none;"></div>
+<div id="edit-cert-form" class="mb-5 border p-3 rounded container" style="display: none;"></div>
 
 <!-- Список сертификатов -->
-<div id="cert-list" class="mt-5"></div>
+<div id="cert-list" class="mt-5 container"></div>
 
-  <hr>
+
     </header>
 
     <footer class="container-fluid footer pt-5" id="footer">

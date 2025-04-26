@@ -7,6 +7,8 @@ const bodyParser = require("body-parser");
 const expRoutes = require("./src/routes/experience");
 const authRoutes = require('./src/routes/user');
 const projectRoutes = require("./src/routes/project");
+const certificateRoutes = require('./src/routes/certificate');
+const actRoutes = require('./src/routes/activity');
 
 
 const dotenv = require('dotenv');
@@ -36,12 +38,8 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/user', authRoutes);
 app.use("/api/experience", expRoutes);
 app.use("/api/projects", projectRoutes);
-
-
-
-// Подключение роутов
-const certificateRoutes = require('./src/routes/certificate');
 app.use('/api/certificates', certificateRoutes);
+app.use('/api/activities', actRoutes);
 
 
 const PORT = process.env.PORT;
