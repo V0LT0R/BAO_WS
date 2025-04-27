@@ -343,8 +343,13 @@ function cancelActivityEdit() {
     formData.append("descriptionEn", document.getElementById("ProjectDescriptionEn").value);
     formData.append("titleUa", document.getElementById("ProjectTitleUa").value);
     formData.append("descriptionUa", document.getElementById("ProjectDescriptionUa").value);
-    formData.append("image", document.getElementById("projectImage").files[0]);
-  
+    
+    // Только если фото выбрано — добавляем его!
+    const imageFile = document.getElementById("projectImage").files[0];
+    if (imageFile) {
+      formData.append("image", imageFile);
+    }
+    
     await fetch(PROJECT_API_URL, {
       method: "POST",
       body: formData
@@ -369,21 +374,25 @@ function cancelActivityEdit() {
     projects.reverse().forEach(project => {
       const div = document.createElement("div");
       div.className = "row justify-content-center align-items-center mb-4 p-3 border rounded";
+  
       div.innerHTML = `
-        <div class="col-md-2">
-          <img src="${project.imageUrl}" alt="Project" class="img-fluid" style="max-height: 150px;">
-        </div>
-        <div class="col-md-4">
+        ${project.imageUrl ? `
+          <div class="col-md-2">
+            <img src="${project.imageUrl}" alt="Project" class="img-fluid" style="max-height: 150px;">
+          </div>
+        ` : ''}
+        <div class="${project.imageUrl ? 'col-md-6' : 'col-md-8'} block__2_text">
           <h5>${project.titleEn}</h5>
           <p>${project.descriptionEn}</p>
-           <h5>${project.titleUa}</h5>
+          <h5>${project.titleUa}</h5>
           <p>${project.descriptionUa}</p>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 text-end">
           <button class="btn btn-light mb-2 border" onclick="editProjectForm('${project._id}')">Edit</button>
           <button class="btn btn-danger mb-2 border" onclick="deleteProject('${project._id}')">Delete</button>
         </div>
       `;
+  
       projectList.appendChild(div);
     });
   }

@@ -56,10 +56,10 @@ router.get('/image/:filename', async (req, res) => {
 });
 
 // Создать новый проект
-router.post('/', upload.single('image'), async (req, res) => {
+router.post("/", upload.single("image"), async (req, res) => {
   try {
     const { titleEn, descriptionEn, titleUa, descriptionUa } = req.body;
-    const imageUrl = `/api/projects/image/${req.file.filename}`;
+    const imageUrl = req.file ? `/api/projects/image/${req.file.filename}` : null;
 
     const newProject = new Project({
       titleEn,
@@ -71,10 +71,12 @@ router.post('/', upload.single('image'), async (req, res) => {
 
     await newProject.save();
     res.status(201).json(newProject);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+  } catch (error) {
+    console.error(error);  // Логируем ошибку
+    res.status(500).json({ message: "Failed to create project" });
   }
 });
+
 
 // Обновить проект
 router.put('/:id', upload.single('image'), async (req, res) => {
