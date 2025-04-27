@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <p style="font-size: 1.2rem;">${lang === 'ua' ? cert.descriptionUa : cert.descriptionEn}</p>
                 </div>
                 <div class="col-12 text-center">
-                    <img src="${cert.imageUrl}" alt="Certificate Image" style="max-width: 100%; height: auto; border: 1px solid #ccc; padding: 5px; border-radius: 10px;">
+                    <img src="${cert.imageUrl}" alt="Certificate Image" style="max-width: 100%; height: auto; ">
                 </div>
                 <hr class="block__2_line my-5">
             `;
