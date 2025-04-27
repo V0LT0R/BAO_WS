@@ -1,14 +1,18 @@
+// ----------------- Тема (Light / Dark) -----------------
 const lightStyles = document.querySelectorAll('link[rel=stylesheet][media*=prefers-color-scheme][media*=light]');
 const darkStyles = document.querySelectorAll('link[rel=stylesheet][media*=prefers-color-scheme][media*=dark]');
 const darkSchemeMedia = matchMedia('(prefers-color-scheme: dark)');
 const switcherRadios = document.querySelectorAll('.switcher__radio');
 const navbar = document.getElementById('navbar');
 
+// ----------------- Язык -----------------
 const languageRadios = document.querySelectorAll('.language__radio');
 let currentLanguage = getSavedLanguage() || 'en';
 
+// ----------------- Переводы -----------------
 const translations = {
     en: {
+        // Навбар и футер
         home: "Home",
         experience: "Experience",
         activity: "Activity",
@@ -16,8 +20,9 @@ const translations = {
         projects: "Projects",
         faqs: "FAQs",
         contact: "Contact",
-        contacts: "contacts:",
+        contacts: "contact:",
 
+        // Experience.html
         personalExperience: "Personal Experience",
         reflection: "Reflections on Life's Path: A Unique Journey of Growth and Learning",
         lifelongExperience: "Lifelong experience",
@@ -25,15 +30,16 @@ const translations = {
         educationExperience: "Education experience",
         lastPublications: "Last publications:",
 
-        researchActivites:"Pedagogical, State, Research Activites",
+        // Activity.html
+        Research_Activites: "Pedagogical, State, Research Activities",
         activityLifelong: "Lifelong activity",
         activityDelve: "Delve into the world of a dedicated professor and witness his unwavering pursuit of knowledge and aspirations.",
         activityPedagogical: "Pedagogical activity",
         activityResearch: "Research activity",
-        advancingKnowledgeActivities: "Empowering Minds, Shaping Policy, Advancing Knowledge",
 
+        // Index.html
         index_name: "Biloshchytskyi Andrii",
-        index_position: "Doctor of techical Science, Full Professor",
+        index_position: "Doctor of technical Science, Full Professor",
         index_university: "Astana IT University",
         index_vicerector: "Vice-Rector for Science and Innovation",
         index_expert: "Expert",
@@ -55,14 +61,21 @@ const translations = {
         index_card_projects: "Responsible projects",
         index_card_projects_desc: "Innovations",
 
+        // Projects.html
+        projects_title: "Responsible Projects",
+        projects_subtitle: "Revolutionizing Industries Through Cutting-Edge Endeavors",
+        projects_main: "Projects",
+
         certificates_title: "Confirming Certificates",
         certificates_subtitle: "Validated and Acknowledged by Esteemed Industry Experts.",
         certificates_scancopies_button: "Scan-copies",
         certificates_certificates_of_honor: "Certificates of honor",
         certificates_part1_photo: "Part 1 - Photo confirming education experience",
 
+
     },
     ua: {
+        // Навбар и футер
         home: "Головна",
         experience: "Досвід",
         activity: "Діяльність",
@@ -72,6 +85,7 @@ const translations = {
         contact: "Контакти",
         contacts: "контакти:",
 
+        // Experience.html
         personalExperience: "Особистий Досвід",
         reflection: "Роздуми над життєвим шляхом: Унікальна подорож зростання та навчання",
         lifelongExperience: "Життєвий досвід",
@@ -79,13 +93,14 @@ const translations = {
         educationExperience: "Освітній досвід",
         lastPublications: "Останні публікації:",
 
-        researchActivites:"Педагогічна, державна, дослідницька діяльність",
+        // Activity.html
+        Research_Activites: "Педагогічна, державна, дослідницька діяльність",
         activityLifelong: "Життєва діяльність",
         activityDelve: "Заглибтеся у світ відданого професора та станьте свідком його невтомного прагнення до знань і цілей.",
         activityPedagogical: "Педагогічна діяльність",
         activityResearch: "Дослідницька діяльність",
-        advancingKnowledgeActivities: "Розширення можливостей розуму, формування політики, поширення знань",
 
+        // Index.html
         index_name: "Білощицький Андрій",
         index_position: "Доктор технічних наук, професор",
         index_university: "Астана IT Університет",
@@ -109,11 +124,17 @@ const translations = {
         index_card_projects: "Відповідальні проєкти",
         index_card_projects_desc: "Інновації",
 
+        // Projects.html
+        projects_title: "Відповідальні проєкти",
+        projects_subtitle: "Революційні зміни у галузях завдяки передовим технологіям",
+        projects_main: "Проєкти",
+
         certificates_title: "Підтвердження сертифікатів",
         certificates_subtitle: "Підтверджено та визнано провідними галузевими експертами.",
         certificates_scancopies_button: "Скан-копії",
         certificates_certificates_of_honor: "Почесні сертифікати",
         certificates_part1_photo: "Частина 1 - Фото підтвердження освітнього досвіду",
+    }
     }
 };
 function updateLanguage(lang) {
@@ -171,6 +192,11 @@ function updateLanguage(lang) {
         { selector: ".certificates_scancopies_button", key: "certificates_scancopies_button" },
         { selector: ".certificates_certificates_of_honor", key: "certificates_certificates_of_honor", isStrong: true },
         { selector: ".certificates_part1_photo", key: "certificates_part1_photo" },
+
+        // Projects
+        { selector: ".projects_title", key: 'projects_title', isStrong: true },
+        { selector: ".projects_subtitle", key: 'projects_subtitle' },
+        { selector: ".projects_main", key: 'projects_main', isStrong: true },
     
         
     ];
@@ -188,7 +214,6 @@ function updateLanguage(lang) {
 }
 function setupSwitcher() {
     const savedScheme = getSavedScheme();
-
     if (savedScheme !== null) {
         const currentRadio = document.querySelector(`.switcher__radio[value=${savedScheme}]`);
         if (currentRadio) currentRadio.checked = true;
@@ -201,30 +226,10 @@ function setupSwitcher() {
     });
 }
 
-function setupLanguageSwitcher() {
-    const savedLanguage = getSavedLanguage();
-
-    if (savedLanguage !== null) {
-        const currentLangRadio = document.querySelector(`.language__radio[value=${savedLanguage}]`);
-        if (currentLangRadio) currentLangRadio.checked = true;
-        currentLanguage = savedLanguage;
-        updateLanguage(savedLanguage);
-        updateLanguageSwitcherUI(savedLanguage);
-    }
-
-    [...languageRadios].forEach((radio) => {
-        radio.addEventListener('change', (event) => {
-            setLanguage(event.target.value);
-        });
-    });
-}
-
 function setupScheme() {
     const savedScheme = getSavedScheme();
     const systemScheme = getSystemScheme();
-
     if (savedScheme === null) return;
-
     if (savedScheme !== systemScheme) {
         setScheme(savedScheme);
     }
@@ -255,7 +260,6 @@ function switchMedia(scheme) {
     [...lightStyles].forEach((link) => {
         link.media = lightMedia;
     });
-
     [...darkStyles].forEach((link) => {
         link.media = darkMedia;
     });
@@ -272,17 +276,36 @@ function getSavedScheme() {
 
 function saveScheme(scheme) {
     localStorage.setItem('color-scheme', scheme);
-    if (navbar.classList.contains('navbar-light')) {
-        navbar.classList.remove('navbar-light', 'bg-light');
-        navbar.classList.add('navbar-dark', 'bg-dark');
-    } else {
-        navbar.classList.remove('navbar-dark', 'bg-dark');
-        navbar.classList.add('navbar-light', 'bg-light');
-    }
 }
 
 function clearScheme() {
     localStorage.removeItem('color-scheme');
+}
+
+// ----------------- Логика смены языка -----------------
+function setupLanguageSwitcher() {
+    const savedLanguage = getSavedLanguage();
+    if (savedLanguage !== null) {
+        const currentLangRadio = document.querySelector(`.language__radio[value=${savedLanguage}]`);
+        if (currentLangRadio) currentLangRadio.checked = true;
+        currentLanguage = savedLanguage;
+        updateLanguage(savedLanguage);
+        updateLanguageSwitcherUI(savedLanguage);
+    }
+
+    [...languageRadios].forEach((radio) => {
+        radio.addEventListener('change', (event) => {
+            setLanguage(event.target.value);
+        });
+    });
+}
+
+function getSavedLanguage() {
+    return localStorage.getItem('language');
+}
+
+function saveLanguage(lang) {
+    localStorage.setItem('language', lang);
 }
 
 function setLanguage(lang) {
@@ -290,21 +313,27 @@ function setLanguage(lang) {
     currentLanguage = lang;
     updateLanguage(lang);
     updateLanguageSwitcherUI(lang);
+
+    // === СЮДА добавляем ===
     if (typeof onLanguageChange === 'function') {
         onLanguageChange(lang);
     }
+    if (typeof onProjectsLanguageChange === 'function') {
+        onProjectsLanguageChange(lang);
+    }
 }
 
-function saveLanguage(lang) {
-    localStorage.setItem('language', lang);
+    elementsToUpdate.forEach(item => {
+        const elements = document.querySelectorAll(item.selector);
+        elements.forEach(el => {
+            if (item.isStrong) {
+                el.innerHTML = `<strong>${dict[item.key]}</strong>`;
+            } else {
+                el.textContent = dict[item.key];
+            }
+        });
+    });
 }
-
-function getSavedLanguage() {
-    return localStorage.getItem('language');
-}
-
-
-
 
 function updateLanguageSwitcherUI(lang) {
     const switcher = document.querySelector('.language-switcher');
@@ -324,6 +353,7 @@ function updateLanguageSwitcherUI(lang) {
     }
 }
 
+// ----------------- Инициализация -----------------
 setupSwitcher();
 setupScheme();
 setupLanguageSwitcher();
