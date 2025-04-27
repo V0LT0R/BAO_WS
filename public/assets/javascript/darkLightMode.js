@@ -55,6 +55,12 @@ const translations = {
         index_card_projects: "Responsible projects",
         index_card_projects_desc: "Innovations",
 
+        certificates_title: "Confirming Certificates",
+        certificates_subtitle: "Validated and Acknowledged by Esteemed Industry Experts.",
+        certificates_scancopies_button: "Scan-copies",
+        certificates_certificates_of_honor: "Certificates of honor",
+        certificates_part1_photo: "Part 1 - Photo confirming education experience",
+
     },
     ua: {
         home: "Головна",
@@ -102,6 +108,12 @@ const translations = {
         index_card_activity_desc: "Історія, вплив, прогрес",
         index_card_projects: "Відповідальні проєкти",
         index_card_projects_desc: "Інновації",
+
+        certificates_title: "Підтвердження сертифікатів",
+        certificates_subtitle: "Підтверджено та визнано провідними галузевими експертами.",
+        certificates_scancopies_button: "Скан-копії",
+        certificates_certificates_of_honor: "Почесні сертифікати",
+        certificates_part1_photo: "Частина 1 - Фото підтвердження освітнього досвіду",
     }
 };
 function updateLanguage(lang) {
@@ -153,6 +165,12 @@ function updateLanguage(lang) {
         { selector: ".index_card_activity_desc", key: 'index_card_activity_desc' },
         { selector: ".index_card_projects", key: 'index_card_projects' },
         { selector: ".index_card_projects_desc", key: 'index_card_projects_desc' },
+
+        { selector: ".certificates_title", key: "certificates_title", isStrong: true },
+        { selector: ".certificates_subtitle", key: "certificates_subtitle" },
+        { selector: ".certificates_scancopies_button", key: "certificates_scancopies_button" },
+        { selector: ".certificates_certificates_of_honor", key: "certificates_certificates_of_honor", isStrong: true },
+        { selector: ".certificates_part1_photo", key: "certificates_part1_photo" },
     
         
     ];

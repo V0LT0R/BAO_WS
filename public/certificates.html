@@ -21,37 +21,48 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="experience.html">Experience</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="activity.html">Activity</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="certificates.html">Certificates</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="projects.html">Projects</a>
-                      </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="FAQs.html">FAQs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#footer">Contact</a>
-                    </li>
-                    </ul>
-                    <button type="button" class="btn btn-sm btn-outline-secondary me-5" onclick="document.location='login.html'" >Login</button>
-                  </div>
-                  <fieldset class="switcher">
-                    <input class="switcher__radio switcher__radio--light" type="radio" name="color-scheme" value="light" aria-label="Светлая" id="light">
-                    <label for="light" style="display: block;"><img class="navbar-img light-img" src="assets/images/light.svg" alt="light mode"></label>
-                    <input class="switcher__radio switcher__radio--dark" type="radio" name="color-scheme" value="dark" aria-label="Тёмная" id="dark" checked="">
-                    <label for="dark" style="display: block;"><img class="navbar-img dark-img" src="assets/images/dark.svg" alt = "dark mode"></label>
-                    <div class="switcher__status"></div>
-                </fieldset>
+                  <li class="nav-item">
+                    <a class="nav-link to_home" href="index.html">Home</a>
+                </li>
+                  <li class="nav-item">
+                    <a class="nav-link to_exp" href="experience.html" >Experience</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link to_act" href="activity.html"  >Activity</a>
+                  </li>
+                  
+                  <li class="nav-item">
+                    <a class="nav-link active to_cert" aria-current="page" href="certificates.html"  >Certificates</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link to_proj" href="projects.html" >Projects</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link to_faq" href="FAQs.html">FAQs</a>
+                  </li>
+                  
+                  <li class="nav-item">
+                    <a class="nav-link to_cont" href="#footer">Contact</a>
+                  </li>
+
+                </ul>
+                <button type="button" class="btn btn-sm btn-outline-secondary me-5" onclick="document.location='login.html'" >Login</button>
+            </div>
+              <fieldset class="switcher">
+                <input class="switcher__radio switcher__radio--light" type="radio" name="color-scheme" value="light" aria-label="Светлая" id="light">
+                <label for="light" style="display: block;"><img class="navbar-img light-img" src="assets/images/light.svg" alt="light mode"></label>
+                <input class="switcher__radio switcher__radio--dark" type="radio" name="color-scheme" value="dark" aria-label="Тёмная" id="dark" checked="">
+                <label for="dark" style="display: block;"><img class="navbar-img dark-img" src="assets/images/dark.svg" alt = "dark mode"></label>
+                <div class="switcher__status"></div>
+            </fieldset>
+            <fieldset class="language-switcher ms-3">
+                <input class="language__radio" type="radio" name="language" value="en" id="lang-en" checked>
+                <label for="lang-en">EN</label>
+            
+                <input class="language__radio" type="radio" name="language" value="ua" id="lang-ua">
+                <label for="lang-ua">UA</label>
+            </fieldset>
             
 
             </div>
@@ -60,15 +71,15 @@
 
     <div class="container-fluid head-bg">
         <div class="container block-1">
-            <h1 class="display-5">Confirming Certificates</h1>
-            <h3 class="secondary block-1-secondary-text">Validated and Acknowledged by Esteemed Industry Experts.</h3>
-            <button type="button" class="btn btn-dark mt-5" onclick="document.location='#carousel'">Scan-copies</button>
+            <h1 class="display-5 certificates_title">Confirming Certificates</h1>
+            <h3 class="secondary block-1-secondary-text certificates_subtitle">Validated and Acknowledged by Esteemed Industry Experts.</h3>
+            <button type="button" class="btn btn-dark mt-5 certificates_scancopies_button" onclick="document.location='#carousel'">Scan-copies</button>
         </div>
     </div>
 
     <div class="container-fluid block-2 pt-5">
         <div class="container pb-5">
-            <h1 class="display-6">Certificates of honor</h1>
+            <!-- <h1 class="display-6">Certificates of honor</h1>
             <h5 class="mt-3">(In section scan-copies part 2)</h5>
 
             <div class="block-2-hr" style="margin-top: 80px;"></div>
@@ -129,14 +140,14 @@
                 <div class="col">
                     <p class="h5">Honorary diploma of the Ministry of Education and Science of the Republic of Kazakhstan And others.</p>
                 </div>
-            </div>
+            </div> -->
 
             <div class="block-2-hr" style="margin: 80px 0px;"></div>
-            <h1 class="display-6">Certificates of honor</h1>
-            <h5 class="mt-5">Part 1 - Photo confirming education experience</h5>
+            <h1 class="display-6 certificates_certificates_of_honor">Certificates of honor</h1>
+            <h5 class="mt-5 certificates_part1_photo">Part 1 - Photo confirming education experience</h5>
             <div class="block-2-hr" style="margin: 80px 0;"></div>
 
-            <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+            <!-- <div id="carousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                     <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -189,56 +200,49 @@
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
-            </div>
+            </div> -->
+            <div class="container" style="margin-top: 50px; font-family: 'Montserrat';" id="cert-list"></div>
         </div>
     </div>
 
     <footer class="container-fluid footer pt-5" id="footer">
         <div class="container">
             <div class="footer-hr "></div>
+              <button type="button" class="btn btn-outline-primary mt-5" onclick="document.location='certificates.html'" >Certificates</button>
             <div class="row footer-row">
                 <div class="col-md-3 col-10 footer-col">
-                    <div class="footer-text ">
-                        <a href="index.html">
-                            <h6>Home</h6>
-                        </a>
+                    <div class="footer-text">
+                        <a href="index.html" class="to_home"><h6>Home</h6></a>
                     </div>
-
-                    <div class="footer-text ">
-                        <a href="certificates.html">
-                            <h6>Certificates</h6>
-                        </a>
+                    
+                    <div class="footer-text">
+                        <a href="certificates.html" class="to_cert"><h6>Certificates</h6></a>
                     </div>
-
-                    <div class="footer-text ">
-                        <a href="FAQs.html">
-                            <h6>FAQs</h6>
-                        </a>
+                    
+                    <div class="footer-text">
+                        <a href="FAQs.html" class="to_faq"><h6>FAQs</h6></a>
                     </div>
                 </div>
                 <div class="col-md-3 col-10 footer-col">
-                    <div class="footer-text ">
-                        <a href="experience.html">
-                            <h6>Experience</h6>
-                        </a>
-                    </div>
 
-                    <div class="footer-text ">
-                        <a href="projects.html"><h6>Projects</h6></a>
+                    <div class="footer-text">
+                        <a href="experience.html" class="to_exp"><h6>Experience</h6></a>
                     </div>
-
-                    <div class="footer-text ">
-                        <a href="activity.html">
-                            <h6>Activity</h6>
-                        </a>
+                    
+                    <div class="footer-text">
+                        <a href="projects.html" class="to_proj"><h6>Projects</h6></a>
                     </div>
-
+                    
+                    <div class="footer-text">
+                        <a href="activity.html" class="to_act"><h6>Activity</h6></a>
+                    </div>
+                    
                 </div>
                 <div class="col-md-3 col-10 footer-col">
+
+
                     <div class="footer-text  footer_hrefs_text_cont">
-                        <a href="#">
-                            <h6>contact: </h6>
-                        </a>
+                        <a href="#" class="contacts"><h6>contact: </h6></a>
                     </div>
 
                     <div>
@@ -255,13 +259,19 @@
                             <h6>www.astanait.edu.kz</h6>
                         </div>
                     </div>
+    
                 </div>
+            
             </div>
-            <div class="footer-hr mt-5"></div>
-
+            <div class="footer-hr mt-5" ></div>
+    
             <div class="footer-text authors">
-                <h6>© 2025 Made by Biloshchytskyi Artem, Biloshchytskyi Yevhenii.</h6>
+                <h6 id="f1f"></h6>
             </div>
+
+	    <div class="footer-text authors">
+            <h6>© 2025 Made by Biloshchytskyi Artem, Biloshchytskyi Yevhenii.</h6>
+                    </div>
         </div>
     </footer>
     <script src="assets/javascript/scripts.js"></script>
