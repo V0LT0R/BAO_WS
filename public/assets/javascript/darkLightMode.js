@@ -31,7 +31,8 @@ const translations = {
         lastPublications: "Last publications:",
 
         // Activity.html
-        Research_Activites: "Pedagogical, State, Research Activities",
+        researchActivites: "Pedagogical, State, Research Activities",
+        advancingKnowledgeActivities: "Empowering Minds, Shaping Policy, Advancing Knowledge",
         activityLifelong: "Lifelong activity",
         activityDelve: "Delve into the world of a dedicated professor and witness his unwavering pursuit of knowledge and aspirations.",
         activityPedagogical: "Pedagogical activity",
@@ -94,7 +95,8 @@ const translations = {
         lastPublications: "Останні публікації:",
 
         // Activity.html
-        Research_Activites: "Педагогічна, державна, дослідницька діяльність",
+        researchActivites: "Педагогічна, державна, дослідницька діяльність",
+        advancingKnowledgeActivities: "Розширення можливостей розуму, формування політики, поширення знань",
         activityLifelong: "Життєва діяльність",
         activityDelve: "Заглибтеся у світ відданого професора та станьте свідком його невтомного прагнення до знань і цілей.",
         activityPedagogical: "Педагогічна діяльність",
