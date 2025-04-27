@@ -135,8 +135,8 @@ const translations = {
         certificates_certificates_of_honor: "Почесні сертифікати",
         certificates_part1_photo: "Частина 1 - Фото підтвердження освітнього досвіду",
     }
-    }
-};
+}
+
 function updateLanguage(lang) {
     const dict = translations[lang];
 
@@ -323,17 +323,6 @@ function setLanguage(lang) {
     }
 }
 
-    elementsToUpdate.forEach(item => {
-        const elements = document.querySelectorAll(item.selector);
-        elements.forEach(el => {
-            if (item.isStrong) {
-                el.innerHTML = `<strong>${dict[item.key]}</strong>`;
-            } else {
-                el.textContent = dict[item.key];
-            }
-        });
-    });
-}
 
 function updateLanguageSwitcherUI(lang) {
     const switcher = document.querySelector('.language-switcher');
