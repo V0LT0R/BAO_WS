@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async function () {
           } else {
               projectBlock.innerHTML = `
                   <div class="row justify-content-center align-items-center">
-                    <div class="col-8 text-center">
+                    <div class="col-12 col-sm-8  text-center">
                       <h2><strong>${title}</strong></h2>
                     </div>
                   </div>
