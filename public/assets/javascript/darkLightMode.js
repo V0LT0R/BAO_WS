@@ -71,7 +71,7 @@ const translations = {
         certificates_subtitle: "Validated and Acknowledged by Esteemed Industry Experts.",
         certificates_scancopies_button: "Scan-copies",
         certificates_certificates_of_honor: "Certificates of honor",
-        certificates_part1_photo: "Part 1 - Photo confirming education experience",
+        certificates_part1_photo: "Photo confirming education experience",
 
 
     },
@@ -135,7 +135,7 @@ const translations = {
         certificates_subtitle: "Підтверджено та визнано провідними галузевими експертами.",
         certificates_scancopies_button: "Скан-копії",
         certificates_certificates_of_honor: "Почесні сертифікати",
-        certificates_part1_photo: "Частина 1 - Фото підтвердження освітнього досвіду",
+        certificates_part1_photo: "Фото підтвердження освітнього досвіду",
     }
 }
 

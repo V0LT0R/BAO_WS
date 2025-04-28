@@ -1,14 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
-    
-    // API ----------------------------- \|/
 
+    // ORCID API (оставляем без изменений)
     const orcidID = '0000-0001-9548-1959'; 
     const apiURL = `https://pub.orcid.org/v3.0/${orcidID}/works`;
 
     fetch(apiURL, {
-        headers: {
-            'Accept': 'application/json'
-        }
+        headers: { 'Accept': 'application/json' }
     })
     .then(response => response.json())
     .then(data => {
@@ -31,16 +28,20 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Error fetching works from ORCID:', error);
     });
 
-    // API ----------------------------- /|\
-    
-    // all experience from MongoDB
-    async function loadExperiences(lang) {
+    // MongoDB Experience ----------------------
+
+    let experiences = [];
+
+    async function fetchExperiences() {
         const response = await fetch("/api/experience");
-        const experiences = await response.json();
+        experiences = await response.json();
+    }
+
+    function renderExperiences(lang) {
         const expList = document.getElementById("exp-list");
         expList.innerHTML = "";
-    
-        experiences.reverse().forEach(exp => {
+
+        [...experiences].reverse().forEach(exp => {
             const div = document.createElement("div");
             div.className = "row justify-content-center align-items-center";
             div.innerHTML = `
@@ -57,11 +58,14 @@ document.addEventListener('DOMContentLoaded', function () {
             expList.appendChild(div);
         });
     }
-    
-    // Теперь подключаем к глобальному хук-переменной:
-    window.onLanguageChange = loadExperiences;
-    
-    // И сразу загружаем при старте:
-    loadExperiences(currentLanguage);
 
+    async function initializeExperiences() {
+        await fetchExperiences();
+        renderExperiences(currentLanguage);
+    }
+
+    // Глобальный хук для смены языка
+    window.onLanguageChange = renderExperiences;
+
+    initializeExperiences();
 });

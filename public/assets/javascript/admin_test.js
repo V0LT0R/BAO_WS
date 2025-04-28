@@ -187,7 +187,7 @@ async function fetchActivities() {
         <p style="font-size: 1.2rem;">${activity.descriptionUa}</p>
       </div>
       <div class="col-md-3 text-end">
-        <button class="btn btn-light mb-2 border" onclick="editActivity('${activity._id}', '${activity.year}', '${activity.descriptionEn}', '${activity.descriptionUa}')">Edit</button>
+        <button class="btn btn-light mb-2 border" onclick="editActivity('${activity._id}', '${activity.year}', decodeURIComponent('${encodeURIComponent(activity.descriptionEn)}'), decodeURIComponent('${encodeURIComponent(activity.descriptionUa)}'))">Edit</button>
         <button class="btn btn-danger mb-2 border" onclick="deleteActivity('${activity._id}')">Delete</button>
       </div>
     `;
@@ -229,11 +229,11 @@ async function editActivity(id, oldYear, oldDescriptionEn, oldDescriptionUa) {
     </div>
     <div class="mb-3">
       <label class="form-label">Activity Description English</label>
-      <textarea id="editActivityDescriptionEn" class="form-control mb-2">${oldDescriptionEn}</textarea>
+      <textarea id="editActivityDescriptionEn" class="form-control mb-2" rows="3">${oldDescriptionEn}</textarea>
     </div>
     <div class="mb-3">
       <label class="form-label">Activity Description Ukrainian</label>
-      <textarea id="editActivityDescriptionUa" class="form-control mb-2">${oldDescriptionUa}</textarea>
+      <textarea id="editActivityDescriptionUa" class="form-control mb-2" rows="3">${oldDescriptionUa}</textarea>
     </div>
     <button class="btn btn-success" onclick="updateActivity('${id}')">Update</button>
     <button class="btn btn-secondary" onclick="cancelActivityEdit()">Cancel</button>
