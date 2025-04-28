@@ -1,71 +1,71 @@
 document.addEventListener('DOMContentLoaded', async function () {
 
-    let projects = [];
+  let projects = [];
 
-    async function fetchProjects() {
-        const response = await fetch('/api/projects');
-        projects = await response.json();
-    }
+  async function fetchProjects() {
+      const response = await fetch('/api/projects');
+      projects = await response.json();
+  }
 
-    async function loadProjects(lang) {
-        const container = document.querySelector('.block__2');
-        if (!container) return;
+  async function loadProjects(lang) {
+      const container = document.querySelector('.block__2');
+      if (!container) return;
 
-        let projectsList = document.getElementById('projects-list');
-        if (projectsList) {
-            projectsList.remove();
-        }
+      let projectsList = document.getElementById('projects-list');
+      if (projectsList) {
+          projectsList.innerHTML = "";
+      } else {
+          projectsList = document.createElement('div');
+          projectsList.id = 'projects-list';
+          container.appendChild(projectsList);
+      }
 
-        projectsList = document.createElement('div');
-        projectsList.id = 'projects-list';
-        container.appendChild(projectsList);
+      [...projects].reverse().forEach(project => {
+          const title = lang === 'ua' ? project.titleUa : project.titleEn;
+          const description = lang === 'ua' ? project.descriptionUa : project.descriptionEn;
 
-        projects.forEach(project => {
-            const title = lang === 'ua' ? project.titleUa : project.titleEn;
-            const description = lang === 'ua' ? project.descriptionUa : project.descriptionEn;
+          const projectBlock = document.createElement('div');
 
-            const projectBlock = document.createElement('div');
-
-            if (project.imageUrl) {
-                projectBlock.innerHTML = `
-                    <div class="row justify-content-center align-items-center">
-                      <div class="col-6 block__2_text align-items-center">
-                        <img src="${project.imageUrl}" alt="Project Image" class="img-fluid">
-                      </div>
-                      <div class="col-6 text-center">
-                        <h2><strong>${title}</strong></h2>
-                      </div>
+          if (project.imageUrl) {
+              projectBlock.innerHTML = `
+                  <div class="row justify-content-center align-items-center">
+                    <div class="col-6 block__2_text align-items-center">
+                      <img src="${project.imageUrl}" alt="Project Image" class="img-fluid">
                     </div>
-                    <div class="row justify-content-center align-items-center">
-                      <div style="margin-top: 50px; line-height: 35px;">
-                        <p>${description}</p>
-                      </div>
+                    <div class="col-6 text-center">
+                      <h2><strong>${title}</strong></h2>
                     </div>
-                    <hr class="block__2_line my-5">
-                `;
-            } else {
-                projectBlock.innerHTML = `
-                    <div class="row justify-content-center align-items-center">
-                      <div class="col-8 text-center">
-                        <h2><strong>${title}</strong></h2>
-                      </div>
+                  </div>
+                  <div class="row justify-content-center align-items-center">
+                    <div style="margin-top: 50px; line-height: 35px;">
+                      <p>${description}</p>
                     </div>
-                    <div class="row justify-content-center align-items-center">
-                      <div style="margin-top: 50px; line-height: 35px;">
-                        <p>${description}</p>
-                      </div>
+                  </div>
+                  <hr class="block__2_line my-5">
+              `;
+          } else {
+              projectBlock.innerHTML = `
+                  <div class="row justify-content-center align-items-center">
+                    <div class="col-8 text-center">
+                      <h2><strong>${title}</strong></h2>
                     </div>
-                    <hr class="block__2_line my-5">
-                `;
-            }
+                  </div>
+                  <div class="row justify-content-center align-items-center">
+                    <div style="margin-top: 50px; line-height: 35px;">
+                      <p>${description}</p>
+                    </div>
+                  </div>
+                  <hr class="block__2_line my-5">
+              `;
+          }
 
-            projectsList.appendChild(projectBlock);
-        });
-    }
+          projectsList.appendChild(projectBlock);
+      });
+  }
 
-    await fetchProjects();
-    loadProjects(currentLanguage);
+  await fetchProjects();
+  loadProjects(currentLanguage);
 
-    // Глобальный хук для смены языка
-    window.onProjectsLanguageChange = loadProjects;
+  // Глобальный хук для смены языка
+  window.onProjectsLanguageChange = loadProjects;
 });
