@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="assets/css/login.css">
     <link rel="stylesheet" media="(prefers-color-scheme: light)" href="assets/css/loginLight.css">
     <link rel="stylesheet" media="(prefers-color-scheme: dark)" href="assets/css/loginDark.css">
-
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
     <style>
       #loginForm, #registerForm, #welcome { display: none; }
     </style>
@@ -40,9 +40,9 @@
                 <a class="nav-link" href="projects.html">Projects</a>
               </li>
 
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link" href="FAQs.html">FAQs</a>
-              </li>
+              </li> -->
               
               <li class="nav-item">
                 <a class="nav-link" href="#footer">Contact</a>
@@ -113,69 +113,75 @@
   
 <!-- footer -->
   <footer class="container-fluid footer pt-5" id="footer">
-    <div class="container">
-        <div class="footer-hr "></div>
-        <div class="row footer-row">
-            <div class="col-md-3 col-10 footer-col">
-                <div class="footer-text ">
-                    <a href="index.html"><h6>Home</h6></a>
+        <div class="container">
+            <div class="footer-hr "></div>
+              <button type="button" class="btn btn-outline-primary mt-5 to_cert" onclick="document.location='certificates.html'" >Certificates</button>
+            <div class="row footer-row">
+                <div class="col-md-3 col-10 footer-col">
+                    <div class="footer-text">
+                        <a href="index.html" class="to_home"><h6>Home</h6></a>
+                    </div>
+                    
+                    <div class="footer-text">
+                        <a href="certificates.html" class="to_cert"><h6>Certificates</h6></a>
+                    </div>
+                    
+                    <!-- <div class="footer-text">
+                        <a href="FAQs.html" class="to_faq"><h6>FAQs</h6></a>
+                    </div> -->
+                    <div class="footer-text">
+                        <a href="activity.html" class="to_act"><h6>Activity</h6></a>
+                    </div>
                 </div>
-                
-                <div class="footer-text ">
-                    <a href="certificates.html"><h6>Certificates</h6></a>
-                </div>
+                <div class="col-md-3 col-10 footer-col">
 
-                <div class="footer-text ">
-                    <a href="FAQs.html"><h6>FAQs</h6></a>
+                    <div class="footer-text">
+                        <a href="experience.html" class="to_exp"><h6>Experience</h6></a>
+                    </div>
+                    
+                    <div class="footer-text">
+                        <a href="projects.html" class="to_proj"><h6>Projects</h6></a>
+                    </div>
+                    
+                    
+                    
                 </div>
+                <div class="col-md-3 col-10 footer-col">
+
+
+                    <div class="footer-text  footer_hrefs_text_cont">
+                        <a href="#" class="contacts"><h6>contact: </h6></a>
+                    </div>
+
+                    <div>
+                        <div class="footer-secondary-text">
+                            <h6>a.b@astanait.edu.kz</h6>
+                        </div>
+                        <div class="footer-secondary-text">
+                            <h6>+7 776 394 99 66</h6>
+                        </div>
+                        <div class="footer-secondary-text">
+                            <h6>+38 093 67 66 888</h6>
+                        </div>
+                        <div class="footer-secondary-text">
+                            <h6>www.astanait.edu.kz</h6>
+                        </div>
+                    </div>
+    
+                </div>
+            
             </div>
-            <div class="col-md-3 col-10 footer-col">
-
-                <div class="footer-text ">
-                    <a href="Experience.html"><h6>Experience</h6></a>
-                </div>  
-
-                <div class="footer-text ">
-                  <a href="projects.html"><h6>Projects</h6></a>
-                </div>
-
-                <div class="footer-text ">
-                    <a href="activity.html"><h6>Activity</h6></a>
-                </div>
-                
+            <div class="footer-hr mt-5" ></div>
+    
+            <div class="footer-text authors">
+                <h6 id="f1f"></h6>
             </div>
-            <div class="col-md-3 col-10 footer-col">
 
-
-                <div class="footer-text  footer_hrefs_text_cont">
-                    <a href="#"><h6>contact: </h6></a>
-                </div>
-
-                <div>
-                    <div class="footer-secondary-text">
-                        <h6>a.b@astanait.edu.kz</h6>
+	    <div class="footer-text authors">
+            <h6>© 2025 Made by Biloshchytskyi Artem, Biloshchytskyi Yevhenii.</h6>
                     </div>
-                    <div class="footer-secondary-text">
-                        <h6>+7 776 394 99 66</h6>
-                    </div>
-                    <div class="footer-secondary-text">
-                        <h6>+38 093 67 66 888</h6>
-                    </div>
-                    <div class="footer-secondary-text">
-                        <h6>www.astanait.edu.kz</h6>
-                    </div>
-                </div>
-
-            </div>
-        
         </div>
-        <div class="footer-hr mt-5" ></div>
-
-        <div class="footer-text authors">
-          <h6>© 2025 Made by Biloshchytskyi Artem, Biloshchytskyi Yevhenii.</h6>
-        </div>
-    </div>
-  </footer>
+    </footer>
 
   <script src="assets/javascript/login.js"></script>
   <script src="bootstrap_css/js/bootstrap.js"></script>
