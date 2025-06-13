@@ -77,6 +77,18 @@ const translations = {
         certificates_part1_photo: "Photo confirming education experience",
 
 
+        //publications.html
+
+        publication_title: "Publications",
+        publication_subtitle:"Reflections on Scientific Discovery: A Personal Journey Through Research and Publication",
+        explore_publications: "Explore the realm of scientific inquiry through the eyes of a devoted researcher, tracing his relentless quest for discovery, innovation, and academic contribution.",
+        publicationsScopusText: "Publications from Scopus:",
+        wos_publicationsText: "Publications from Web of Science:",
+        publicationsOrcidText: "Publications from ORCID:",
+
+        
+
+
     },
     ua: {
         // Навбар и футер
@@ -142,6 +154,16 @@ const translations = {
         certificates_scancopies_button: "Скан-копії",
         certificates_certificates_of_honor: "Почесні сертифікати",
         certificates_part1_photo: "Фото підтвердження освітнього досвіду",
+
+
+        //Publications.html
+
+        publication_title: "Публікації",
+        publication_subtitle:"Роздуми про наукові відкриття: особиста подорож через дослідження та публікації",
+        explore_publications: "Роздуми про наукові відкриття: особиста подорож через дослідження та публікації.",
+        publicationsScopusText: "Публікації зі Scopus::",
+        wos_publicationsText: "Публікації з Web of Science::",
+        publicationsOrcidText: "Публікації з ORCID:",
     }
 }
 
@@ -164,9 +186,9 @@ function updateLanguage(lang) {
         { selector: "#lifelong_experience", key: 'lifelongExperience' },
         { selector: ".delve_exp", key: 'delve' },
         { selector: "#education_experience", key: 'educationExperience' },
-        { selector: "#publicationsOrchid", key: 'publicationsOrcid', isStrong: true },
-        { selector: "#publicationsScopus", key: 'publicationsScopus', isStrong: true },
-        { selector: "#wos-publications", key: 'publicationsWoS', isStrong: true },
+        { selector: ".publicationsOrchidText", key: 'publicationsOrcidText', isStrong: true },
+        { selector: ".publicationsScopusText", key: 'publicationsScopusText', isStrong: true },
+        { selector: ".wos-publicationsText", key: 'wos_publicationsText', isStrong: true },
 
         { selector: ".Research_Activites", key: 'researchActivites', isStrong: true },
         { selector: ".activity_lifelong", key: 'activityLifelong', isStrong: true },
@@ -208,6 +230,12 @@ function updateLanguage(lang) {
         { selector: ".projects_title", key: 'projects_title', isStrong: true },
         { selector: ".projects_subtitle", key: 'projects_subtitle' },
         { selector: ".projects_main", key: 'projects_main', isStrong: true },
+
+
+        { selector: ".publications-text", key: 'publication_title', isStrong: true },
+        { selector: ".reflection_publications", key: 'publication_subtitle' },
+        { selector: ".explore-publications", key: 'explore_publications', isStrong: true },
+
     
         
     ];

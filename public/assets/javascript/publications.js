@@ -19,8 +19,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const title = work['work-summary'][0].title.title.value;
             const year = work['work-summary'][0]['publication-date'].year.value;
 
-            const workElement = document.createElement('p');
+            const workElement = document.createElement('ul');
             workElement.innerHTML = `${title} (${year})`;
+            workElement.style.marginBottom = '20px';
             document.getElementById('publicationsOrchid').appendChild(workElement);
         });
     })
@@ -49,8 +50,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const title = pub['dc:title'] || 'No title';
             const year = pub['prism:coverDate']?.split('-')[0] || 'Unknown';
 
-            const pubElement = document.createElement('p');
+            const pubElement = document.createElement('ul');
             pubElement.innerHTML = `${title} (${year})`;
+            pubElement.style.marginBottom = '20px';
             document.getElementById('publicationsScopus').appendChild(pubElement);
         });
     })
@@ -84,9 +86,10 @@ document.addEventListener('DOMContentLoaded', function () {
             const title = record.static_data.summary?.titles?.title?.find(t => t['type'] === 'item')?.content || 'No title';
             const year = record.static_data.summary.pub_info?.year || 'Unknown';
 
-            const pubElement = document.createElement('p');
-            pubElement.innerHTML = `${title} (${year})`;
-            document.getElementById('wos-publications').appendChild(pubElement);
+            const WebElement = document.createElement('ul');
+            WebElement.innerHTML = `${title} (${year})`;
+            WebElement.style.marginBottom = '20px';
+            document.getElementById('wos-publications').appendChild(WebElement);
         });
     })
     .catch(error => {
