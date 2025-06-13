@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
     .catch(error => {
         console.error('Error fetching works from ORCID:', error);
     });
-    const apiScopusKey = '7043e23276fcf0651f6dabb42483fb72';  // вставь сюда свой Scopus API ключ
+    const apiScopusKey = '602846c74bae196c1bc7b877f39029e7';  // вставь сюда свой Scopus API ключ
     const authorScopusId = '57190487952'; // вставь сюда Scopus ID автора
     const apiScopusIdUrl = `https://api.elsevier.com/content/search/scopus?query=AU-ID(${authorScopusId})&apiKey=${apiScopusKey}`;
 
