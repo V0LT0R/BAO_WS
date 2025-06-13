@@ -21,6 +21,7 @@ const translations = {
         faqs: "FAQs",
         contact: "Contact",
         contacts: "contact:",
+        publications:"Publications",
 
         // Experience.html
         personalExperience: "Personal Experience",
@@ -28,7 +29,9 @@ const translations = {
         lifelongExperience: "Lifelong experience",
         delve: "Delve into the world of a dedicated professor and witness his unwavering pursuit of knowledge and aspirations.",
         educationExperience: "Education experience",
-        lastPublications: "Last publications:",
+        publicationsOrcid: "Publications from ORCID:",
+        publicationsScopus: "Publications from Scopus:",
+        publicationsWoS: "Publications from Web of Science",
 
         // Activity.html
         researchActivites: "Pedagogical, State, Research Activities",
@@ -85,6 +88,7 @@ const translations = {
         faqs: "Питання",
         contact: "Контакти",
         contacts: "контакти:",
+        publications: "Публікації",
 
         // Experience.html
         personalExperience: "Особистий Досвід",
@@ -92,7 +96,9 @@ const translations = {
         lifelongExperience: "Життєвий досвід",
         delve: "Заглибтеся у світ відданого професора та станьте свідком його невтомного прагнення до знань і цілей.",
         educationExperience: "Освітній досвід",
-        lastPublications: "Останні публікації:",
+        publicationsOrcid: "Публікації з ORCID:",
+        publicationsScopus: "Публікації зі Scopus:",
+        publicationsWoS: "Публікації з Web of Science",
 
         // Activity.html
         researchActivites: "Педагогічна, державна, дослідницька діяльність",
@@ -151,13 +157,16 @@ function updateLanguage(lang) {
         { selector: ".to_faq", key: 'faqs' },
         { selector: ".to_cont", key: 'contact' },
         { selector: ".contacts", key: 'contacts' },
+        { selector: ".to_publ", key: 'publications' },
 
         { selector: ".personal_Experience", key: 'personalExperience', isStrong: true },
         { selector: ".reflection_exp", key: 'reflection' },
         { selector: "#lifelong_experience", key: 'lifelongExperience' },
         { selector: ".delve_exp", key: 'delve' },
         { selector: "#education_experience", key: 'educationExperience' },
-        { selector: "#publications h3", key: 'lastPublications', isStrong: true },
+        { selector: "#publicationsOrchid", key: 'publicationsOrcid', isStrong: true },
+        { selector: "#publicationsScopus", key: 'publicationsScopus', isStrong: true },
+        { selector: "#wos-publications", key: 'publicationsWoS', isStrong: true },
 
         { selector: ".Research_Activites", key: 'researchActivites', isStrong: true },
         { selector: ".activity_lifelong", key: 'activityLifelong', isStrong: true },
