@@ -1,99 +1,132 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    // ORCID API (оставляем без изменений)
-    const orcidID = '0000-0001-9548-1959'; 
-    const apiURL = `https://pub.orcid.org/v3.0/${orcidID}/works`;
+    //---------------------------------ORCID API--------------------------
+    const orcidID = '0000-0001-9548-1959';
+const apiURL = `https://pub.orcid.org/v3.0/${orcidID}/works`;
 
-    fetch(apiURL, {
-        headers: { 'Accept': 'application/json' }
-    })
-    .then(response => response.json())
-    .then(data => {
-        const works = data.group;
+fetch(apiURL, {
+    headers: { 'Accept': 'application/json' }
+})
+.then(response => response.json())
+.then(data => {
+    const works = data.group;
 
-        works.sort((a, b) => new Date(b['work-summary'][0]['publication-date'].year.value) - new Date(a['work-summary'][0]['publication-date'].year.value));
+    works.sort((a, b) =>
+        new Date(b['work-summary'][0]['publication-date']?.year?.value || 0) -
+        new Date(a['work-summary'][0]['publication-date']?.year?.value || 0)
+    );
 
-        const latestWorks = works;
+    works.forEach(work => {
+        const summary = work['work-summary'][0];
+        const title = summary.title?.title?.value || 'No title';
+        const year = summary['publication-date']?.year?.value || 'Unknown';
 
-        latestWorks.forEach(work => {
-            const title = work['work-summary'][0].title.title.value;
-            const year = work['work-summary'][0]['publication-date'].year.value;
-
-            const workElement = document.createElement('ul');
-            workElement.innerHTML = `${title} (${year})`;
-            workElement.style.marginBottom = '20px';
-            document.getElementById('publicationsOrchid').appendChild(workElement);
+        // Пытаемся получить DOI (через external-id)
+        let doi = null;
+        const externalIds = summary['external-ids']?.['external-id'] || [];
+        externalIds.forEach(id => {
+            if (id['external-id-type'] === 'doi') {
+                doi = id['external-id-value'];
+            }
         });
-    })
-    .catch(error => {
-        console.error('Error fetching works from ORCID:', error);
+
+        const doiUrl = doi ? `https://doi.org/${doi}` : null;
+
+        // Создаём обёртку публикации
+        const workWrapper = document.createElement('div');
+        workWrapper.style.marginBottom = '15px';
+        workWrapper.style.padding = '10px';
+        workWrapper.style.borderBottom = '1px solid #ccc';
+        workWrapper.style.display = 'flex';
+        workWrapper.style.justifyContent = 'space-between';
+        workWrapper.style.alignItems = 'center';
+
+        const workText = document.createElement('div');
+        workText.innerText = `${title} (${year})`;
+        workText.style.flex = '1';
+
+        const link = document.createElement('a');
+        link.href = doiUrl || '#';
+        link.target = '_blank';
+        link.innerText = '🔗';
+        link.title = doi ? 'Открыть публикацию по DOI' : 'DOI не найден';
+        link.style.fontSize = '18px';
+        link.style.textDecoration = 'none';
+        link.style.marginLeft = '10px';
+        link.style.transition = 'opacity 0.3s';
+        link.style.opacity = doi ? '1' : '0.3'; // Если DOI нет — иконка тусклая
+        link.onmouseover = () => link.style.opacity = doi ? '0.6' : '0.3';
+        link.onmouseout = () => link.style.opacity = doi ? '1' : '0.3';
+
+        workWrapper.appendChild(workText);
+        if (doiUrl) workWrapper.appendChild(link);
+
+        document.getElementById('publicationsOrchid').appendChild(workWrapper);
     });
-    const apiScopusKey = '602846c74bae196c1bc7b877f39029e7';  // вставь сюда свой Scopus API ключ
-    const authorScopusId = '57190487952'; // вставь сюда Scopus ID автора
-    const apiScopusIdUrl = `https://api.elsevier.com/content/search/scopus?query=AU-ID(${authorScopusId})&apiKey=${apiScopusKey}`;
+})
+.catch(error => {
+    console.error('Error fetching works from ORCID:', error);
+});
 
-    fetch(apiScopusIdUrl, {
-        headers: {
-            'Accept': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        const entries = data['search-results'].entry;
+    
+    //---------------------------------Scopus API--------------------------
 
-        // Сортировка по году (если есть)
-        entries.sort((a, b) => parseInt(b.coverDate) - parseInt(a.coverDate));
+const apiScopusKey = '602846c74bae196c1bc7b877f39029e7';  // твой ключ
+const authorScopusId = '57190487952'; // Scopus ID автора
+const apiScopusIdUrl = `https://api.elsevier.com/content/search/scopus?query=AU-ID(${authorScopusId})&apiKey=${apiScopusKey}`;
 
-        const latestPublications = entries;
+fetch(apiScopusIdUrl, {
+    headers: {
+        'Accept': 'application/json'
+    }
+})
+.then(response => response.json())
+.then(data => {
+    const entries = data['search-results'].entry;
 
-        latestPublications.forEach(pub => {
-            const title = pub['dc:title'] || 'No title';
-            const year = pub['prism:coverDate']?.split('-')[0] || 'Unknown';
+    entries.sort((a, b) => parseInt(b.coverDate) - parseInt(a.coverDate));
 
-            const pubElement = document.createElement('ul');
-            pubElement.innerHTML = `${title} (${year})`;
-            pubElement.style.marginBottom = '20px';
-            document.getElementById('publicationsScopus').appendChild(pubElement);
-        });
-    })
-    .catch(error => {
-        console.error('Error fetching data from Scopus API:', error);
+    entries.forEach(pub => {
+        const title = pub['dc:title'] || 'No title';
+        const year = pub['prism:coverDate']?.split('-')[0] || 'Unknown';
+        const eid = pub['eid'];
+        const scopusLink = `https://www.scopus.com/record/display.uri?eid=${eid}&origin=resultslist`;
+
+        // Создание обёртки публикации
+        const pubWrapper = document.createElement('div');
+        pubWrapper.style.marginBottom = '15px';
+        pubWrapper.style.padding = '10px';
+        pubWrapper.style.borderBottom = '1px solid #ccc';
+        pubWrapper.style.display = 'flex';
+        pubWrapper.style.justifyContent = 'space-between';
+        pubWrapper.style.alignItems = 'center';
+
+        // Текст публикации
+        const pubText = document.createElement('div');
+        pubText.innerText = `${title} (${year})`;
+        pubText.style.flex = '1';
+
+        // Ссылка
+        const link = document.createElement('a');
+        link.href = scopusLink;
+        link.target = '_blank';
+        link.innerText = '🔗';
+        link.title = 'Открыть в Scopus';
+        link.style.fontSize = '18px';
+        link.style.textDecoration = 'none';
+        link.style.marginLeft = '10px';
+        link.style.transition = 'opacity 0.3s';
+        link.onmouseover = () => link.style.opacity = '0.6';
+        link.onmouseout = () => link.style.opacity = '1';
+
+        pubWrapper.appendChild(pubText);
+        pubWrapper.appendChild(link);
+
+        document.getElementById('publicationsScopus').appendChild(pubWrapper);
     });
-
-    const apiWoSKey = 'YOUR_WOS_API_KEY'; // вставь свой API-ключ от WoS
-    const orcid = '0000-0001-9548-1959'; // или RID (ResearcherID), если используется он
-    const apiWoSUrl = `https://api.clarivate.com/api/woslite/v1/wos?databaseId=WOS&usrQuery=ORCID:${orcid}&count=10&firstRecord=1`;
-
-    fetch(apiWoSUrl, {
-        headers: {
-            'Accept': 'application/json',
-            'X-ApiKey': apiWoSKey
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        const records = data.Data?.Records?.records || [];
-
-        records.sort((a, b) => {
-            const yearA = parseInt(a.static_data.summary.pub_info.year || '0');
-            const yearB = parseInt(b.static_data.summary.pub_info.year || '0');
-            return yearB - yearA;
-        });
-
-        const latest = records.slice(0, 3);
-
-        latest.forEach(record => {
-            const title = record.static_data.summary?.titles?.title?.find(t => t['type'] === 'item')?.content || 'No title';
-            const year = record.static_data.summary.pub_info?.year || 'Unknown';
-
-            const WebElement = document.createElement('ul');
-            WebElement.innerHTML = `${title} (${year})`;
-            WebElement.style.marginBottom = '20px';
-            document.getElementById('wos-publications').appendChild(WebElement);
-        });
-    })
-    .catch(error => {
-        console.error('Error fetching data from Web of Science API:', error);
-    });
+})
+.catch(error => {
+    console.error('Error fetching data from Scopus API:', error);
+});
     
 });
