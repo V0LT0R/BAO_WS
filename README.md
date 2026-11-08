@@ -1,6 +1,8 @@
 # BAO — academic profile
 
-React 19 + Vite frontend, Express 5 backend, MongoDB / GridFS and server-side sessions. The existing `.html` URLs, assets, Bootstrap styling, English/Ukrainian content and light/dark themes are retained.
+React 19 + Vite academic website with two supported runtime targets: the owner's Cloudflare Workers account (D1, KV and SQLite Durable Objects), and the original Express 5 / MongoDB runtime retained for local work and migration. The existing `.html` URLs, assets, Bootstrap styling, English/Ukrainian content and light/dark themes are retained.
+
+**Cloudflare deployment:** follow the [Russian migration and deployment guide](docs/CLOUDFLARE.md) for account setup, local checks, existing content/admin migration, the first `workers.dev` deployment, GitHub builds and the final `bao-cv.com` DNS switch. Start with `npm run build:cloudflare`. The steps below describe the retained Node.js/MongoDB runtime unless stated otherwise.
 
 ## Local setup
 
@@ -51,7 +53,7 @@ npm run admin:create -- --confirm-database bao_local
 
 The CLI asks for the username and a hidden password; no default credentials are embedded. It refuses existing usernames. A remote database additionally requires `--allow-remote`. Do not run this command against production as a test.
 
-## Deploying the update to the existing service
+## Deploying the retained Node.js runtime to the existing service
 
 This repository does not publish itself or modify the GitHub repository. Before a deliberate deployment, back up the MongoDB database and GridFS and verify restore access. Preserve the existing database name, collections and media. No destructive data migration is required.
 
@@ -85,6 +87,8 @@ The old client code exposed a Scopus API key. Removing that code cannot revoke a
 - `app.js`, `src/`: Express application, validation, authorization, data and image handling.
 - `server.js`: validated configuration, connection lifecycle and startup.
 - `scripts/build.mjs`: Vite build and static React prerendering.
+- `scripts/build-cloudflare.mjs`, `wrangler.jsonc`, `cloudflare/`: Cloudflare static packaging, Worker API, D1 schema and Durable Objects.
+- `docs/CLOUDFLARE.md`: migration and deployment instructions for the owner's Cloudflare account.
 - `scripts/create-admin.js`: explicit administrator bootstrap.
 - `tests/`, `client/**/*.test.*`: isolated server and client regression tests.
 - `public/`: retained images, fonts, CSS and search-engine files; no legacy application scripts.

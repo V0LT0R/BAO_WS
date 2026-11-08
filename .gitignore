@@ -7,3 +7,8 @@ coverage/
 .env.*
 !.env.example
 *.log
+.wrangler/
+.dev.vars
+.dev.vars.*
+.migration/
+.cloudflare/
