@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 
-const ExpSchema = new mongoose.Schema({
-  year: { type: String, required: true },
-  descriptionEn: { type: String, required: true },
-  descriptionUa: { type: String, required: true }
-});
+// Keep the existing model and collection names to preserve stored content.
+const experienceSchema = new mongoose.Schema({
+  year: { type: String, required: true, trim: true, maxlength: 80 },
+  descriptionEn: { type: String, required: true, trim: true, maxlength: 20000 },
+  descriptionUa: { type: String, required: true, trim: true, maxlength: 20000 },
+}, { strict: 'throw', autoIndex: false, autoCreate: false });
 
-module.exports = mongoose.model('Experience', ExpSchema);
+module.exports = mongoose.models.Experience || mongoose.model('Experience', experienceSchema);

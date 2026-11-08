@@ -1,26 +1,56 @@
 {
   "name": "bao_ws",
-  "version": "1.0.0",
-  "description": "- [Project Overview](#project-overview)\r - [Features](#features)\r - [Usage](#usage)\r - [Project Structure](#project-structure)",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Academic profile and secure content administration for Andrii Biloshchytskyi",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite --host 127.0.0.1",
+    "dev:server": "node --watch server.js",
+    "build": "node scripts/build.mjs",
+    "start": "node server.js",
+    "test": "node --test tests/*.test.js",
+    "test:client": "vitest run",
+    "check": "npm run test && npm run test:cloudflare && npm run test:client && npm run build:cloudflare",
+    "admin:create": "node scripts/create-admin.js",
+    "preview:isolated": "node scripts/preview-local.js",
+    "build:cloudflare": "node scripts/build-cloudflare.mjs",
+    "cf": "node scripts/cloudflare.mjs",
+    "dev:cloudflare": "node scripts/cloudflare.mjs dev --local --ip 127.0.0.1 --port 8787 --var PUBLIC_ORIGIN:http://localhost:8787",
+    "db:cloudflare:local": "node scripts/cloudflare.mjs d1 migrations apply DB --local",
+    "test:cloudflare": "node --test tests/cloudflare-*.test.mjs",
+    "deploy:cloudflare": "node scripts/cloudflare.mjs deploy",
+    "migrate:cloudflare": "node scripts/migrate-cloudflare.mjs"
   },
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": ">=24.15.0 <25"
+  },
   "dependencies": {
-    "bcrypt": "^5.1.1",
-    "bcryptjs": "^3.0.2",
-    "body-parser": "^1.20.3",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "ejs": "^3.1.10",
-    "express": "^4.21.2",
-    "express-validator": "^7.2.1",
-    "gridfs-stream": "^1.1.1",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.10.1",
-    "multer-gridfs-storage": "^5.0.2",
-    "multer": "^1.4.2"
+    "bcryptjs": "^3.0.3",
+    "connect-mongo": "^6.0.0",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.3",
+    "express-session": "^1.19.0",
+    "helmet": "^8.3.0",
+    "mongoose": "^9.12.0",
+    "multer": "^2.5.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "sharp": "^0.35.5"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.3.3",
+    "@vitejs/plugin-react": "^6.2.1",
+    "esbuild": "^0.28.2",
+    "jsdom": "^31.0.0",
+    "miniflare": "^5.20261104.0-beta",
+    "mongodb-memory-server": "^11.3.0",
+    "supertest": "^7.3.2",
+    "vite": "^8.3.6",
+    "vitest": "^5.1.0",
+    "wrangler": "^4.158.0"
   }
 }

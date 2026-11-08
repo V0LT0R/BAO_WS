@@ -1,3 +1,14 @@
 .env
 createAdmin.js
 node_modules
+dist/
+.build/
+coverage/
+.env.*
+!.env.example
+*.log
+.wrangler/
+.dev.vars
+.dev.vars.*
+.migration/
+.cloudflare/
