@@ -1,0 +1,20 @@
+/* Behavior and accessibility fixes; the existing page styles retain the visual design. */
+.skip-link { position: fixed; left: 1rem; top: -10rem; z-index: 10000; padding: .6rem 1rem; background: #fff; color: #14213d; }
+.skip-link:focus { top: 1rem; }
+.footer-secondary-text a { color: inherit; }
+.switcher__radio:focus-visible + label, .language__radio:focus-visible + label { outline: 2px solid #fff; outline-offset: -2px; }
+.language-switcher { display: flex; align-items: center; flex-shrink: 0; background-color: #1d1f2b; border-radius: 20px; padding: 2px; position: relative; width: 100px; height: 40px; overflow: hidden; }
+.language-switcher label { flex: 1; text-align: center; cursor: pointer; font-weight: bold; font-size: 14px; color: #b0b3c2; z-index: 2; padding: 8px 0; user-select: none; }
+.language-switcher::before { content: ''; position: absolute; width: 50%; height: 100%; background: #0d6efd; border-radius: 20px; z-index: 1; transition: transform .3s; }
+.language-switcher input[type="radio"] { display: block; position: absolute; width: 1px; height: 1px; opacity: 0; }
+.language-switcher[data-language="ua"]::before { transform: translateX(100%); }
+.language-switcher[data-language="en"] label[for="lang-ua"], .language-switcher[data-language="ua"] label[for="lang-en"] { color: #b0b3c2; }
+.language-switcher[data-language="en"] label[for="lang-en"], .language-switcher[data-language="ua"] label[for="lang-ua"] { color: #fff; }
+.public-data-status { padding: 1rem 0; }
+.public-data-status button { margin-inline-start: .75rem; }
+.public-text { white-space: pre-line; overflow-wrap: anywhere; }
+.publication-row { margin-bottom: 15px; padding: 10px; border-bottom: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.publication-row > div { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.publication-row a { font-size: 18px; text-decoration: none; }
+.publication-profile { margin-bottom: 1.5rem; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; } }

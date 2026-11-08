@@ -1,12 +1,15 @@
 const mongoose = require('mongoose');
 
 const certificateSchema = new mongoose.Schema({
-  date: { type: String, required: true },
-  descriptionEn: { type: String, required: true },
-  descriptionUa: { type: String, required: true },
-  imageUrl: { type: String, required: true }, // тут хранится ссылка вида `/api/certificates/image/filename`
-}, {
-  timestamps: true // автоматически добавляет createdAt и updatedAt
-});
+  date: { type: String, required: true, trim: true, maxlength: 80 },
+  descriptionEn: { type: String, required: true, trim: true, maxlength: 20000 },
+  descriptionUa: { type: String, required: true, trim: true, maxlength: 20000 },
+  imageUrl: {
+    type: String,
+    required: true,
+    maxlength: 2048,
+    match: /^\/api\/certificates\/image\/[^/\\?#\u0000-\u001f\u007f]+$/u,
+  },
+}, { timestamps: true, strict: 'throw', autoIndex: false, autoCreate: false });
 
-module.exports = mongoose.model('Certificate', certificateSchema);
+module.exports = mongoose.models.Certificate || mongoose.model('Certificate', certificateSchema);

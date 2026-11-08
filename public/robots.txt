@@ -1,3 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /admin
+Disallow: /user
+Disallow: /login
 Sitemap: https://bao-cv.com/sitemap.xml
