@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSite } from '../components/SiteContext.jsx';
+import { pagePath } from '../lib/locales.js';
 
 export default function Home() {
   const { t, language } = useSite();
@@ -13,7 +14,7 @@ export default function Home() {
             <h1 className="display-4 index_position"><strong>{t("index_position")}</strong></h1>
           </div>
           <div className="col-lg-5">
-            <img src="/assets/images/photo_header.png" className="mx-auto d-block img-fluid" style={{"marginBottom": "50px"}} alt="Biloshchytskyi Andrii" fetchPriority="high" decoding="async" />
+            <img src="/assets/images/photo_header.png" className="mx-auto d-block img-fluid" style={{"marginBottom": "50px"}} alt={t('index_name')} fetchPriority="high" decoding="async" />
           </div>
         </div>
       </div>
@@ -131,7 +132,7 @@ export default function Home() {
       <div className="container">
         <div className="row row-cols-1" style={{"paddingTop": "50px", "justifyContent": "center"}}>
           <div className="col-md-5 col-11 block-5-square card pb-3">
-            <a style={{"textDecoration": "none"}} href="/experience.html">
+            <a style={{"textDecoration": "none"}} href={pagePath('experience', language)}>
               <div className="card-body">
                 <h2 className="block-5-header-text index_card_experience">{t("index_card_experience")}</h2>
                 <h6 className="block-5-inner-text index_card_experience_desc">{t("index_card_experience_desc")}</h6>
@@ -140,7 +141,7 @@ export default function Home() {
             </a>
           </div>
           <div className="col-md-5 col-11 block-5-square card pb-3">
-            <a style={{"textDecoration": "none"}} href="/certificates.html">
+            <a style={{"textDecoration": "none"}} href={pagePath('certificates', language)}>
               <div className="card-body">
                 <h2 className="block-5-header-text index_card_certificates">{t("index_card_certificates")}</h2>
                 <h6 className="block-5-inner-text index_card_certificates_desc">{t("index_card_certificates_desc")}</h6>
@@ -149,7 +150,7 @@ export default function Home() {
             </a>
           </div>
           <div className="col-md-5 col-11 block-5-square card pb-3">
-            <a style={{"textDecoration": "none"}} href="/activity.html">
+            <a style={{"textDecoration": "none"}} href={pagePath('activity', language)}>
               <div className="card-body">
                 <h2 className="block-5-header-text index_card_activity">{t("index_card_activity")}</h2>
                 <h6 className="block-5-inner-text index_card_activity_desc">{t("index_card_activity_desc")}</h6>
@@ -158,7 +159,7 @@ export default function Home() {
             </a>
           </div>
           <div className="col-md-5 col-11 block-5-square card pb-3">
-            <a style={{"textDecoration": "none"}} href="/projects.html">
+            <a style={{"textDecoration": "none"}} href={pagePath('projects', language)}>
               <div className="card-body">
                 <h2 className="block-5-header-text index_card_projects">{t("index_card_projects")}</h2>
                 <h6 className="block-5-inner-text index_card_projects_desc">{t("index_card_projects_desc")}</h6>

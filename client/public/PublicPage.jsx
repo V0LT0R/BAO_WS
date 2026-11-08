@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { useSite } from '../components/SiteContext.jsx';
 import Home from './Home.jsx';
 import { Timeline, CertificateList, ProjectList, PublicationFeed } from './ContentData.jsx';
+import { pagePath } from '../lib/locales.js';
 
 function Hero({ title, subtitle, titleClass = '', subtitleClass = '', image = '/assets/images/experience_block__1_1.png', reverse = false }) {
   const { t } = useSite();
-  const picture = <div className="col-lg-5"><img src={image} alt="Biloshchytskyi Andrii" className="img-fluid" decoding="async" /></div>;
+  const picture = <div className="col-lg-5"><img src={image} alt={t('index_name')} className="img-fluid" decoding="async" /></div>;
   return <header className="header-content head-bg"><div className="container"><div className="row header-section">
     {!reverse && picture}
     <div className={`${reverse ? 'col-lg-7' : 'col-lg-6'} header-text`}>
@@ -82,7 +83,7 @@ function Certificates() {
 function Publications() {
   const { t } = useSite();
   return <>
-    <Hero title="publication_title" subtitle="publication_subtitle" titleClass="publications-text" subtitleClass="reflection_publications" />
+    <Hero title="publication_hero_title" subtitle="publication_subtitle" titleClass="publications-text" subtitleClass="reflection_publications" />
     <div className="container-fluid block-2-bg" id="block-2-bg"><div className="container block__2">
       <div className="row"><div className="col"><h1 className="block__2_header publications-text">{t('publication_title')}</h1></div></div>
       <hr className="block__2_line my-5" /><Intro description="explore_publications" /><hr className="block__2_line my-5" />
@@ -107,15 +108,21 @@ const faqText = {
     ['Які мови я знаю?', ['Російська', 'Українська', 'Англійська']],
     ['Не знайшли свого запитання?', 'Напишіть мені електронного листа, і я відповім вам.'],
   ],
+  ru: [
+    ['Где я сейчас работаю?', 'Сейчас я работаю в Astana IT University на должности проректора по науке и инновациям.'],
+    ['Как со мной связаться?', 'Перейдите к контактам в нижней части страницы через меню навигации.'],
+    ['Какие языки я знаю?', ['Русский', 'Украинский', 'Английский']],
+    ['Не нашли свой вопрос?', 'Напишите мне по электронной почте, и я отвечу вам.'],
+  ],
 };
 
 function FAQs() {
   const { language, t } = useSite();
   const [open, setOpen] = useState(null);
   return <>
-    <header className="header-content head-bg"><div className="container"><div className="row header-section"><div className="col header-text justify-content-center d-flex"><h1><strong>{t('faqs')}</strong></h1></div></div></div></header>
+    <header className="header-content head-bg"><div className="container"><div className="row header-section"><div className="col header-text justify-content-center d-flex"><h1><strong>{t('faq_title')}</strong></h1></div></div></div></header>
     <div className="container-fluid block-2-bg"><div className="container mt-5">
-      <hr className="block__2_line my-5" /><h2 className="mb-5">{language === 'ua' ? 'Поширені запитання' : 'Frequently asked questions'}</h2>
+      <hr className="block__2_line my-5" /><h2 className="mb-5">{t('faq_heading')}</h2>
       <div id="faqAccordion">{faqText[language].map(([question, answer], index) => <div className="card my-5" key={index}>
         <div className="card-header question-bg" id={`faq-heading-${index}`}><h5 className="mb-0">
           <button type="button" className={`btn d-flex justify-content-left${open === index ? '' : ' collapsed'}`} aria-expanded={open === index} aria-controls={`faq-answer-${index}`} style={{ width: '100%' }} onClick={() => setOpen(value => value === index ? null : index)}>
@@ -123,7 +130,7 @@ function FAQs() {
           </button>
         </h5></div>
         <div id={`faq-answer-${index}`} className={`collapse answer-bg${open === index ? ' show' : ''}`} aria-labelledby={`faq-heading-${index}`} role="region"><div className="card-body">
-          {Array.isArray(answer) ? <ul className="h FAQ-text">{answer.map(item => <li className="my-1" key={item}>{item}</li>)}</ul> : <p className="FAQ-text">{index === 1 ? (language === 'ua' ? <>Перейдіть до нижньої частини сторінки, натиснувши <code>«Контакти»</code> в меню навігації.</> : <>Go to the footer section by clicking on the <code>Contact</code> in the navigation menu.</>) : answer}</p>}
+          {Array.isArray(answer) ? <ul className="h FAQ-text">{answer.map(item => <li className="my-1" key={item}>{item}</li>)}</ul> : <p className="FAQ-text">{index === 1 ? (language === 'ua' ? <>Перейдіть до нижньої частини сторінки, натиснувши <code>«Контакти»</code> в меню навігації.</> : language === 'ru' ? <>Перейдите к контактам в нижней части страницы, нажав <code>«Контакты»</code> в меню навигации.</> : <>Go to the footer section by clicking on the <code>Contact</code> in the navigation menu.</>) : answer}</p>}
         </div></div>
       </div>)}</div>
     </div></div>
@@ -133,8 +140,9 @@ function FAQs() {
 const components = { index: Home, home: Home, experience: Experience, activity: Activity, projects: Projects, certificates: Certificates, publications: Publications, FAQs };
 
 export function PublicPage({ page = 'index' }) {
+  const { t, language } = useSite();
   const Page = components[page];
-  return Page ? <Page /> : <div className="container py-5"><h1>404</h1><a href="/index.html">Home</a></div>;
+  return Page ? <Page /> : <div className="container py-5"><h1>404</h1><a href={pagePath('index', language)}>{t('home')}</a></div>;
 }
 
 export default PublicPage;

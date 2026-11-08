@@ -1,12 +1,14 @@
-import { pageMeta } from './public/pageMeta.js';
+import { localizedPageMeta } from './public/pageMeta.js';
+import { publicPages, privatePages } from './lib/locales.js';
 
-export const pages = [...Object.keys(pageMeta), 'login', 'admin', 'user'];
+export const pages = [...publicPages, ...privatePages];
 export function getPage(pathname) {
-  const value = pathname === '/' ? 'index' : pathname.replace(/^\//, '').replace(/\.html$/, '');
+  const clean = pathname.replace(/^\/(?:uk|ru)(?=\/|$)/, '') || '/';
+  const value = clean === '/' ? 'index' : clean.replace(/^\//, '').replace(/\.html$/, '');
   return pages.includes(value) ? value : 'index';
 }
-export function metadata(page) {
-  return pageMeta[page] || {
+export function metadata(page, language = 'en') {
+  return (localizedPageMeta[language] || localizedPageMeta.en)[page] || {
     title: `${page === 'login' ? 'Sign in' : page === 'admin' ? 'Administration' : 'My account'} — BAO`,
     description: 'Account access for the BAO website.',
     style: page === 'login' ? 'login' : 'admin',

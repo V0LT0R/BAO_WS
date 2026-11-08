@@ -3,8 +3,13 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const projectRoot = fileURLToPath(new URL('..', import.meta.url));
-const htmlPages = new Set(['index', 'experience', 'activity', 'projects', 'certificates', 'publications', 'FAQs', 'login', 'admin', 'user'].map(page => `${page}.html`));
-const publicFiles = new Set(['robots.txt', 'sitemap.xml', 'google0e7611ae15e01a69.html']);
+const publicPages = ['index', 'experience', 'activity', 'certificates', 'projects', 'publications', 'FAQs'];
+const htmlPages = new Set([
+  ...['', 'uk/', 'ru/'].flatMap(locale => publicPages.map(page => `${locale}${page}.html`)),
+  ...['login', 'admin', 'user'].map(page => `${page}.html`),
+]);
+const generatedMetadata = new Set(['robots.txt', 'sitemap.xml']);
+const publicFiles = new Set(['google0e7611ae15e01a69.html']);
 const assetDirectories = new Map([
   ['assets/css', new Set(['.css'])],
   ['assets/fonts', new Set(['.ttf', '.otf', '.woff', '.woff2'])],
@@ -29,6 +34,18 @@ export const staticHeaders = `# Security policy for Cloudflare static assets; AP
   Cache-Control: no-cache
 
 /*.html
+  Cache-Control: no-cache
+
+/uk/
+  Cache-Control: no-cache
+
+/uk/*.html
+  Cache-Control: no-cache
+
+/ru/
+  Cache-Control: no-cache
+
+/ru/*.html
   Cache-Control: no-cache
 
 /admin.html
@@ -80,6 +97,18 @@ async function assertPlainPath(root, filename) {
 async function inspectOutput(root) {
   const dist = path.join(root, 'dist');
   await assertPlainPath(root, dist);
+  // SEO metadata belongs to the current application build. Legacy public files
+  // must never replace its canonical URLs or localized sitemap entries.
+  for (const relative of generatedMetadata) {
+    const filename = path.join(dist, relative);
+    try {
+      await assertPlainPath(root, filename);
+      if (!(await lstat(filename)).isFile()) throw new Error(`Expected a regular generated metadata file: dist/${relative}.`);
+    } catch (error) {
+      if (error.code === 'ENOENT') throw new Error(`React build is missing generated metadata dist/${relative}. Run the application build first.`);
+      throw error;
+    }
+  }
   const files = [];
   async function inspect(directory) {
     for (const entry of await readdir(directory, { withFileTypes: true })) {
@@ -88,7 +117,7 @@ async function inspectOutput(root) {
       if (entry.isSymbolicLink()) throw new Error(`Symbolic links are not allowed in static output: ${relative}`);
       if (entry.isDirectory()) { await inspect(filename); continue; }
       if (!entry.isFile()) throw new Error(`Unsupported static output entry: ${relative}`);
-      const permitted = htmlPages.has(relative) || publicFiles.has(relative) || relative === '_headers' ||
+      const permitted = htmlPages.has(relative) || generatedMetadata.has(relative) || publicFiles.has(relative) || relative === '_headers' ||
         /^build-assets\/[A-Za-z0-9_-]+-[A-Za-z0-9_-]{6,}\.(?:js|css)$/.test(relative) || permittedAsset(relative);
       if (!permitted) throw new Error(`Unexpected file in static output: ${relative}. Rebuild before packaging.`);
       files.push(relative);

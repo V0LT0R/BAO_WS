@@ -33,8 +33,9 @@ function AccountPage({ page }) {
   </PublicLayout>;
 }
 
-export default function App({ page = 'index' }) {
-  return <ErrorBoundary><SiteProvider>
-    {['admin', 'user', 'login'].includes(page) ? <AccountPage page={page} /> : <PublicLayout page={page}><PublicPage page={page} /></PublicLayout>}
+export default function App({ page = 'index', initialLanguage = 'en' }) {
+  const accountPage = ['admin', 'user', 'login'].includes(page);
+  return <ErrorBoundary><SiteProvider initialLanguage={accountPage ? 'en' : initialLanguage} allowLanguagePreference={accountPage}>
+    {accountPage ? <AccountPage page={page} /> : <PublicLayout page={page}><PublicPage page={page} /></PublicLayout>}
   </SiteProvider></ErrorBoundary>;
 }

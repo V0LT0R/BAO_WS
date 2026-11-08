@@ -43,6 +43,14 @@ function createApp({ config, models = defaultModels(), imageStore, sessionStore,
   const loginLimiter = limiter(15 * 60000, rateLimits.login || 10, 'Too many sign-in attempts. Please try again later.');
   const uploadLimiter = limiter(15 * 60000, rateLimits.upload || 30, 'Too many uploads. Please try again later.');
   const imageReadLimiter = limiter(60000, rateLimits.images || 120, 'Too many image requests. Please wait a minute.');
+  app.use('/api', (req, res, next) => {
+    const sendJson = res.json;
+    res.json = function apiJson(body) {
+      this.set('X-Robots-Tag', 'noindex');
+      return sendJson.call(this, body);
+    };
+    next();
+  });
   app.use('/api', globalLimiter);
   app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
   app.use('/api', session({
@@ -70,19 +78,24 @@ function createApp({ config, models = defaultModels(), imageStore, sessionStore,
   }
   const distDir = config.distDir || path.join(__dirname, 'dist');
   app.use('/build-assets', express.static(path.join(distDir, 'build-assets'), { dotfiles: 'deny', index: false, immutable: true, maxAge: '1y' }));
-  for (const file of ['robots.txt', 'sitemap.xml', 'google0e7611ae15e01a69.html']) {
-    app.get(`/${file}`, (req, res, next) => res.sendFile(path.join(publicDir, file), error => error && next(error)));
+  for (const file of ['robots.txt', 'sitemap.xml']) {
+    app.get(`/${file}`, (req, res, next) => res.sendFile(path.join(distDir, file), error => error && next(error)));
   }
-  const pages = ['index', 'experience', 'activity', 'projects', 'certificates', 'publications', 'FAQs', 'login', 'admin', 'user'];
-  for (const page of pages) {
-    const routes = [`/${page}.html`, `/${page}`];
-    if (page === 'index') routes.push('/');
+  app.get('/google0e7611ae15e01a69.html', (req, res, next) => res.sendFile(path.join(publicDir, 'google0e7611ae15e01a69.html'), error => error && next(error)));
+  const publicPages = ['index', 'experience', 'activity', 'projects', 'certificates', 'publications', 'FAQs'];
+  const privatePages = ['login', 'admin', 'user'];
+  const pageRoutes = [
+    ...[...publicPages, ...privatePages].map(page => ({ page, prefix: '', private: privatePages.includes(page) })),
+    ...['uk', 'ru'].flatMap(language => publicPages.map(page => ({ page, prefix: `/${language}`, private: false }))),
+  ];
+  for (const { page, prefix, private: privatePage } of pageRoutes) {
+    const routes = [`${prefix}/${page}.html`, `${prefix}/${page}`];
+    if (page === 'index') routes.push(prefix || '/', ...(prefix ? [`${prefix}/`] : []));
     app.get(routes, (req, res, next) => {
-      const pageFile = path.join(distDir, `${page}.html`);
-      const indexFile = path.join(distDir, 'index.html');
-      const filename = fs.existsSync(pageFile) ? pageFile : indexFile;
+      const filename = path.join(distDir, prefix.slice(1), `${page}.html`);
       if (!fs.existsSync(filename)) return next(new HttpError(503, 'The website build is missing. Run npm run build before starting the server.'));
-      res.set('Cache-Control', 'no-cache');
+      res.set('Cache-Control', privatePage ? 'private, no-store' : 'no-cache');
+      if (privatePage) res.set('X-Robots-Tag', 'noindex, nofollow');
       res.sendFile(filename, error => error && next(error));
     });
   }

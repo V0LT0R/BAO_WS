@@ -5,6 +5,10 @@ import { SiteProvider } from '../components/SiteContext.jsx';
 import { Header, PublicLayout } from '../components/Layout.jsx';
 import PublicPage from './PublicPage.jsx';
 import { CertificateList, ProjectList, safeImageUrl, Timeline } from './ContentData.jsx';
+import { getLanguage } from '../lib/locales.js';
+import { getPage } from '../metadata.js';
+import { renderPage } from '../entry-server.jsx';
+import App from '../App.jsx';
 
 function jsonResponse(data, status = 200) {
   return {
@@ -15,7 +19,7 @@ function jsonResponse(data, status = 200) {
   };
 }
 
-function renderSite(children) { return render(<SiteProvider>{children}</SiteProvider>); }
+function renderSite(children, language = 'en') { return render(<SiteProvider initialLanguage={language}>{children}</SiteProvider>); }
 
 beforeEach(() => {
   localStorage.clear();
@@ -62,15 +66,38 @@ describe('Untrusted public content', () => {
     expect(container.querySelector('svg, img')).toBeNull();
   });
 
-  it('keeps experience content safe and changes its language without reloading the API', async () => {
+  it('labels Russian-page database originals honestly and falls back per field without translating stored data', async () => {
+    fetch.mockImplementation(async path => jsonResponse(path === '/api/projects' ? [{
+      _id: 'bilingual-project', titleUa: 'Український проєкт', titleEn: 'English project',
+      descriptionUa: ' ', descriptionEn: '<img src=x onerror="alert(1)">Original description',
+      imageUrl: '/api/projects/image/original.png',
+    }] : path === '/api/certificates' ? [{
+      _id: 'bilingual-certificate', descriptionUa: 'Сертифікат університету', descriptionEn: 'University certificate', date: '2026',
+    }] : [{ _id: 'bilingual-experience', year: '2026', descriptionEn: 'Original experience' }]));
+    const { container } = renderSite(<><ProjectList /><CertificateList /><Timeline type="experience" /></>, 'ru');
+
+    expect((await screen.findByRole('heading', { name: 'Український проєкт' })).lang).toBe('uk');
+    expect((await screen.findByText('<img src=x onerror="alert(1)">Original description')).lang).toBe('en');
+    expect((await screen.findByText('Сертифікат університету')).lang).toBe('uk');
+    expect((await screen.findByText('Original experience')).lang).toBe('en');
+    expect(screen.queryByText('English project')).toBeNull();
+    expect(container.querySelector('[onerror]')).toBeNull();
+    expect(screen.getByRole('img', { name: 'Український проєкт' }).lang).toBe('uk');
+    expect(screen.getAllByText(/Записи представлены на языке оригинала/)).toHaveLength(3);
+    expect(document.documentElement.lang).toBe('ru');
+  });
+
+  it('keeps experience content safe and declares the language of its selected original', async () => {
     const description = '<iframe srcdoc="<script>alert(1)</script>"></iframe>';
     fetch.mockResolvedValue(jsonResponse([{ _id: 'experience-one', year: '2020–2025', descriptionEn: description, descriptionUa: 'Досвід в університеті' }]));
-    const { container } = renderSite(<><Header page="experience" /><Timeline type="experience" /></>);
+    const children = <><Header page="experience" /><Timeline type="experience" /></>;
+    const { container, rerender } = renderSite(children);
 
     expect(await screen.findByText(description)).toBeTruthy();
     expect(container.querySelector('iframe, script')).toBeNull();
-    fireEvent.click(screen.getByRole('radio', { name: 'Українська' }));
-    expect(await screen.findByText('Досвід в університеті')).toBeTruthy();
+    expect(screen.getByText(description).lang).toBe('en');
+    rerender(<SiteProvider initialLanguage="ua">{children}</SiteProvider>);
+    expect((await screen.findByText('Досвід в університеті')).lang).toBe('uk');
     expect(screen.queryByText(description)).toBeNull();
     expect(fetch).toHaveBeenCalledTimes(1);
   });
@@ -115,27 +142,94 @@ describe('Untrusted public content', () => {
 });
 
 describe('Site preferences and navigation', () => {
-  it('switches EN/UA text, html language, and saved preference using accessible radios', async () => {
-    renderSite(<PublicLayout page="index"><PublicPage page="index" /></PublicLayout>);
-    expect(screen.getByRole('heading', { name: 'Biloshchytskyi Andrii' })).toBeTruthy();
-
-    fireEvent.click(screen.getByRole('radio', { name: 'Українська' }));
-    expect(await screen.findByRole('heading', { name: 'Білощицький Андрій' })).toBeTruthy();
-    expect(document.documentElement.lang).toBe('uk');
+  it.each([
+    ['/', 'en', 'Biloshchytskyi Andrii', 'English', '/'],
+    ['/uk/index.html', 'uk', 'Білощицький Андрій', 'Українська', '/uk/index.html'],
+    ['/ru/index.html', 'ru', 'Белощицкий Андрей', 'Русский', '/ru/index.html'],
+  ])('renders the URL language for %s and exposes crawlable alternatives', (pathname, code, name, current, home) => {
+    localStorage.setItem('language', 'ua');
+    const { container } = renderSite(<PublicLayout page="index"><PublicPage page="index" /></PublicLayout>, getLanguage(pathname));
+    expect(screen.getByRole('heading', { name, exact: true })).toBeTruthy();
+    expect(document.documentElement.lang).toBe(code);
+    expect(screen.getByRole('link', { name: current, exact: true }).getAttribute('aria-current')).toBe('page');
+    expect(screen.getByRole('link', { name: 'English', exact: true }).getAttribute('href')).toBe('/');
+    expect(screen.getByRole('link', { name: 'Українська', exact: true }).getAttribute('href')).toBe('/uk/index.html');
+    expect(screen.getByRole('link', { name: 'Русский', exact: true }).getAttribute('href')).toBe('/ru/index.html');
+    expect(screen.getByRole('link', { name: 'BAO', exact: true }).getAttribute('href')).toBe(home);
+    const prefix = code === 'en' ? '' : `/${code}`;
+    for (const section of ['experience', 'certificates', 'activity', 'projects']) {
+      expect(container.querySelector(`.block-5 a[href="${prefix}/${section}.html"]`)).not.toBeNull();
+      expect(container.querySelector(`footer a[href="${prefix}/${section}.html"]`)).not.toBeNull();
+    }
     expect(localStorage.getItem('language')).toBe('ua');
-    expect(screen.getByRole('radio', { name: 'Українська' }).checked).toBe(true);
-
-    fireEvent.click(screen.getByRole('radio', { name: 'English' }));
-    expect(await screen.findByRole('heading', { name: 'Biloshchytskyi Andrii' })).toBeTruthy();
-    expect(document.documentElement.lang).toBe('en');
-    expect(localStorage.getItem('language')).toBe('en');
     expect(fetch).not.toHaveBeenCalled();
   });
 
-  it('restores a saved language without losing the correctly declared html language', async () => {
+  it('keeps all three language links on the current page, including FAQs', () => {
+    renderSite(<PublicLayout page="FAQs"><PublicPage page="FAQs" /></PublicLayout>, 'ru');
+    const alternatives = [['English', '/FAQs.html', 'en'], ['Українська', '/uk/FAQs.html', 'uk'], ['Русский', '/ru/FAQs.html', 'ru']];
+    for (const [label, href, lang] of alternatives) {
+      const link = screen.getByRole('link', { name: label, exact: true });
+      expect(link.getAttribute('href')).toBe(href);
+      expect(link.hreflang).toBe(lang);
+    }
+    expect(screen.getByRole('button', { name: 'Где я сейчас работаю?' })).toBeTruthy();
+    expect(screen.getByRole('link', { name: 'Войти', exact: true }).getAttribute('href')).toBe('/login.html');
+  });
+
+  it('prerenders all public locale routes with their translated name and navigation without fetching', () => {
+    for (const [prefix, family] of [['', 'Biloshchytskyi'], ['/uk', 'Білощицьк'], ['/ru', 'Белощицк']]) {
+      for (const page of ['index', 'experience', 'activity', 'certificates', 'projects', 'publications', 'FAQs']) {
+        const pathname = `${prefix}/${page}.html`;
+        const markup = renderPage(getPage(pathname), getLanguage(pathname));
+        const document = new DOMParser().parseFromString(markup, 'text/html');
+        expect(document.querySelector('main h1').textContent).toContain(family);
+        expect(document.querySelectorAll('.language-switcher a')).toHaveLength(3);
+        expect(document.querySelector('a.to_exp').getAttribute('href')).toBe(`${prefix}/experience.html`);
+      }
+    }
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it('prerenders private pages in English with EN/UA controls and no localized account links', () => {
     localStorage.setItem('language', 'ua');
-    renderSite(<Header />);
-    expect(await screen.findByRole('link', { name: 'Головна' })).toBeTruthy();
+    const markup = renderPage('login', 'ru');
+    const document = new DOMParser().parseFromString(markup, 'text/html');
+    expect(document.querySelectorAll('.language-switcher input[type="radio"]')).toHaveLength(2);
+    expect(document.querySelector('#lang-en').checked).toBe(true);
+    expect(document.querySelector('#lang-ua').checked).toBe(false);
+    expect(document.querySelector('.language-switcher a')).toBeNull();
+    expect(document.querySelector('a.to_home').getAttribute('href')).toBe('/');
+    expect(document.body.textContent).toContain('Sign in');
+    expect(document.querySelector('a[href^="/ru/"]')).toBeNull();
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it.each(['login', 'admin', 'user'])('restores and persists the account EN/UA preference on %s without changing its URL', async page => {
+    const user = page === 'login' ? null : { _id: 'isolated-user', username: 'isolated-user', role: page === 'admin' ? 'admin' : 'user' };
+    fetch.mockImplementation(async path => jsonResponse(path === '/api/user/session' ? { user, csrfToken: 'isolated-token' } : []));
+    localStorage.setItem('language', 'ua');
+    const pathname = window.location.pathname;
+    const { unmount } = render(<App page={page} />);
+    await waitFor(() => expect(screen.getByRole('radio', { name: 'Українська' }).checked).toBe(true));
+    if (user) await screen.findByRole('button', { name: 'Вийти', exact: true });
+    expect(document.documentElement.lang).toBe('uk');
+    expect(screen.getAllByRole('link', { name: 'Головна', exact: true }).length).toBeGreaterThan(0);
+    expect(screen.queryByRole('link', { name: 'Русский', exact: true })).toBeNull();
+
+    fireEvent.click(screen.getByRole('radio', { name: 'English' }));
+    expect(document.documentElement.lang).toBe('en');
+    expect(localStorage.getItem('language')).toBe('en');
+    fireEvent.click(screen.getByRole('radio', { name: 'Українська' }));
+    expect(document.documentElement.lang).toBe('uk');
+    expect(localStorage.getItem('language')).toBe('ua');
+    expect(window.location.pathname).toBe(pathname);
+    expect(screen.getByRole('link', { name: user ? page === 'admin' ? 'Адміністрування' : user.username : 'Увійти', exact: true }).getAttribute('href')).toBe(`/${page}.html`);
+
+    unmount();
+    render(<App page={page} />);
+    await waitFor(() => expect(screen.getByRole('radio', { name: 'Українська' }).checked).toBe(true));
+    if (user) await screen.findByRole('button', { name: 'Вийти', exact: true });
     expect(document.documentElement.lang).toBe('uk');
   });
 

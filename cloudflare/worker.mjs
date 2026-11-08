@@ -1,10 +1,20 @@
 import { AuthService, getIdentity, requireCsrf } from './auth.mjs';
 import { handleContent } from './content.mjs';
 import { handlePublications } from './publications.mjs';
+import { publicPages, privatePages } from '../client/lib/locales.js';
 
 export { AuthService };
 const safeMethods = new Set(['GET', 'HEAD']);
-const pages = new Set(['index', 'experience', 'activity', 'projects', 'certificates', 'publications', 'FAQs', 'login', 'admin', 'user']);
+const pages = new Set([...publicPages, ...privatePages]);
+const localizedPages = new Set(publicPages);
+const metadataFiles = new Set(['/robots.txt', '/sitemap.xml', '/google0e7611ae15e01a69.html']);
+const staticDirectories = new Map([
+  ['assets/css', new Set(['css'])],
+  ['assets/fonts', new Set(['ttf', 'otf', 'woff', 'woff2'])],
+  ['assets/images', new Set(['png', 'jpg', 'jpeg', 'gif', 'webp', 'avif', 'svg', 'ico'])],
+  ['assets/sound', new Set(['mp3', 'ogg', 'wav', 'm4a'])],
+  ['bootstrap_css/css', new Set(['css'])],
+]);
 const csp = "default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'";
 
 function json(value, status = 200) { return Response.json(value, { status, headers: { 'Cache-Control': 'no-store' } }); }
@@ -16,8 +26,29 @@ function secure(response, request) {
   result.headers.set('Cross-Origin-Resource-Policy', 'same-origin');
   result.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=()');
   if (!result.headers.has('Content-Security-Policy')) result.headers.set('Content-Security-Policy', csp);
+  if (new URL(request.url).pathname.startsWith('/api/') && /^application\/json(?:\s*;|$)/i.test(result.headers.get('Content-Type') || '')) result.headers.set('X-Robots-Tag', 'noindex');
   if (new URL(request.url).protocol === 'https:') result.headers.set('Strict-Transport-Security', 'max-age=31536000');
   return result;
+}
+
+function assetPath(pathname) {
+  if (pathname === '/') return '/index.html';
+  const rootPage = /^\/([^/]+?)(?:\.html)?$/.exec(pathname)?.[1];
+  if (pages.has(rootPage)) return `/${rootPage}.html`;
+  const localized = /^\/(uk|ru)(?:\/([^/]+?)(?:\.html)?)?\/?$/.exec(pathname);
+  if (localized && localizedPages.has(localized[2] || 'index')) return `/${localized[1]}/${localized[2] || 'index'}.html`;
+  if (metadataFiles.has(pathname)) return pathname;
+  if (/^\/build-assets\/[A-Za-z0-9_-]+-[A-Za-z0-9_-]{6,}\.(?:js|css)$/.test(pathname)) return pathname;
+  let decoded;
+  try { decoded = decodeURIComponent(pathname).slice(1); } catch { return null; }
+  if (decoded.split('/').some(part => !part || part.startsWith('.')) || /[\\\u0000-\u001f\u007f]/u.test(decoded)) return null;
+  for (const [directory, extensions] of staticDirectories) {
+    if (!decoded.startsWith(`${directory}/`)) continue;
+    const basename = decoded.split('/').at(-1);
+    const extension = basename.includes('.') ? basename.split('.').at(-1).toLowerCase() : '';
+    if (extensions.has(extension) || directory === 'assets/fonts' && ['LICENSE.txt', 'COPYRIGHT.txt'].includes(basename)) return pathname;
+  }
+  return null;
 }
 function failure(error) {
   const status = Number.isInteger(error?.status) && error.status >= 400 && error.status < 500 ? error.status : 503;
@@ -69,9 +100,12 @@ export default {
       } else {
         if (!safeMethods.has(request.method)) response = json({ message: 'Method not allowed.' }, 405);
         else {
-          if (url.pathname === '/') url.pathname = '/index.html';
-          else if (pages.has(url.pathname.slice(1))) url.pathname += '.html';
-          response = await env.ASSETS.fetch(new Request(url, request));
+          const pathname = assetPath(url.pathname);
+          if (!pathname) response = json({ message: 'Page not found.' }, 404);
+          else {
+            url.pathname = pathname;
+            response = await env.ASSETS.fetch(new Request(url, request));
+          }
         }
       }
       return secure(response, request);

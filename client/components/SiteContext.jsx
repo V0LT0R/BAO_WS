@@ -1,19 +1,27 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { translations } from '../public/translations.js';
+import { languages, languageCode } from '../lib/locales.js';
 
 const SiteContext = createContext(null);
 
-export function SiteProvider({ children }) {
+export function SiteProvider({ children, initialLanguage = 'en', allowLanguagePreference = false }) {
   // The initial render is deterministic so prerendered pages hydrate without a mismatch.
-  const [language, updateLanguage] = useState('en');
+  const [preferredLanguage, updatePreferredLanguage] = useState('en');
+  const language = allowLanguagePreference ? preferredLanguage : languages.includes(initialLanguage) ? initialLanguage : 'en';
   const [theme, updateTheme] = useState('auto');
   const [systemTheme, setSystemTheme] = useState('dark');
 
   useEffect(() => {
+    if (!allowLanguagePreference) return;
     try {
       const savedLanguage = localStorage.getItem('language');
+      if (['en', 'ua'].includes(savedLanguage)) updatePreferredLanguage(savedLanguage);
+    } catch { /* Account language preferences are optional when storage is disabled. */ }
+  }, [allowLanguagePreference]);
+
+  useEffect(() => {
+    try {
       const savedTheme = localStorage.getItem('color-scheme');
-      if (['en', 'ua'].includes(savedLanguage)) updateLanguage(savedLanguage);
       if (['light', 'dark', 'auto'].includes(savedTheme)) updateTheme(savedTheme);
     } catch { /* Preferences are optional when storage is disabled. */ }
     const media = window.matchMedia('(prefers-color-scheme: dark)');
@@ -24,7 +32,7 @@ export function SiteProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    document.documentElement.lang = language === 'ua' ? 'uk' : 'en';
+    document.documentElement.lang = languageCode(language);
   }, [language]);
 
   useEffect(() => {
@@ -37,9 +45,9 @@ export function SiteProvider({ children }) {
   }, [theme]);
 
   function setLanguage(value) {
-    if (!['en', 'ua'].includes(value)) return;
-    updateLanguage(value);
-    try { localStorage.setItem('language', value); } catch { /* Optional preference. */ }
+    if (!allowLanguagePreference || !['en', 'ua'].includes(value)) return;
+    updatePreferredLanguage(value);
+    try { localStorage.setItem('language', value); } catch { /* Optional account preference. */ }
   }
 
   function setTheme(value) {
@@ -52,7 +60,7 @@ export function SiteProvider({ children }) {
     language, setLanguage, theme, setTheme,
     effectiveTheme: theme === 'auto' ? systemTheme : theme,
     t: key => translations[language][key] ?? translations.en[key] ?? key,
-  }), [language, theme, systemTheme]);
+  }), [language, theme, systemTheme, allowLanguagePreference]);
 
   return <SiteContext.Provider value={value}>{children}</SiteContext.Provider>;
 }
