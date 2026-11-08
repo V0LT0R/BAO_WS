@@ -20,6 +20,8 @@
     "db:cloudflare:local": "node scripts/cloudflare.mjs d1 migrations apply DB --local",
     "test:cloudflare": "node --test tests/cloudflare-*.test.mjs",
     "deploy:cloudflare": "node scripts/cloudflare.mjs deploy",
+    "deploy:cloudflare:redirect": "node scripts/cloudflare.mjs deploy --config wrangler.redirect.jsonc",
+    "deploy:cloudflare:all": "npm run deploy:cloudflare && npm run deploy:cloudflare:redirect",
     "migrate:cloudflare": "node scripts/migrate-cloudflare.mjs"
   },
   "author": "",

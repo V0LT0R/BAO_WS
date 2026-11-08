@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bao-cv-redirect",
+  "account_id": "bfb5a94fcae013cf08c8e17373725d58",
+  "main": "cloudflare/redirect-worker.mjs",
+  "compatibility_date": "2026-11-01",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [
+    { "pattern": "www.bao-cv.com", "custom_domain": true }
+  ]
+}

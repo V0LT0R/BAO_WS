@@ -4,8 +4,11 @@
   "account_id": "bfb5a94fcae013cf08c8e17373725d58",
   "main": "cloudflare/worker.mjs",
   "compatibility_date": "2026-11-01",
-  "workers_dev": true,
+  "workers_dev": false,
   "preview_urls": false,
+  "routes": [
+    { "pattern": "bao-cv.com", "custom_domain": true }
+  ],
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
@@ -14,7 +17,7 @@
     "run_worker_first": ["/api/*"]
   },
   "vars": {
-    "PUBLIC_ORIGIN": "https://bao-ws.bya20102005.workers.dev"
+    "PUBLIC_ORIGIN": "https://bao-cv.com"
   },
   "d1_databases": [
     {
